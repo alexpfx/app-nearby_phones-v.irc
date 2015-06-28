@@ -1,5 +1,6 @@
 package br.com.alexpfx.irctest.app;
 
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -10,16 +11,21 @@ import org.jibble.pircbot.IrcException;
 import java.io.IOException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements WifiListener.WifiNetworkInfoReceiveListener {
 
     MyBot bot;
+    private WifiListener wifiListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this, this);
+
         bot = new MyBot();
-        AsyncTask <Void, Void, Void> a = new AsyncTask<Void, Void, Void>() {
+
+        AsyncTask<Void, Void, Void> a = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 connect();
@@ -32,6 +38,18 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        wifiListener.registerReceiver();
+        wifiListener.scan();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        wifiListener.unregisterReceiver();
+        super.onPause();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,22 +73,20 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void connect (){
+    public void connect() {
         try {
-            bot.connect("irc.freenode.net");
+            bot.connect("irc.brasirc.org");
         } catch (IOException e) {
             e.printStackTrace();
         } catch (IrcException e) {
             e.printStackTrace();
         }
-        bot.joinChannel("#math");
-        bot.joinChannel("#networking");
-        bot.joinChannel("#programming");
-        bot.joinChannel("#android");
-        bot.joinChannel("#bitcoin");
-        bot.joinChannel("#haskel");
 
 
     }
 
+    @Override
+    public void receive(String bssid, String ssid) {
+        bot.addToPool(ssid, bssid);
+    }
 }
