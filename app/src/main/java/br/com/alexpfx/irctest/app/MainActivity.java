@@ -1,40 +1,51 @@
 package br.com.alexpfx.irctest.app;
 
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import org.jibble.pircbot.IrcException;
+import android.widget.TextView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-import java.io.IOException;
+import static br.com.alexpfx.irctest.app.TextStringUtils.logConcat;
 
+public class MainActivity extends ActionBarActivity implements WifiListener.WifiNetworkInfoReceiveListener, IrcBotListener {
 
-public class MainActivity extends ActionBarActivity implements WifiListener.WifiNetworkInfoReceiveListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String IRC_SERVER = "irc.freenode.org";
+    private static final String CHANNEL = "#msggroupexample";
 
-    MyBot bot;
     private WifiListener wifiListener;
+
+    @Bind(R.id.tvCountPvt)
+    TextView tvCount;
+
+    @Bind(R.id.tvMsgs)
+    TextView tvMsg;
+
+    private ListenerBot listenerBot;
+    private WalkerBot walkerBot;
+
+    private BotStarter listenerStarter;
+    private BotStarter walkerStarter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this, this);
 
-        bot = new MyBot();
+        walkerBot = new WalkerBot(this);
+        walkerStarter = new BotStarter(walkerBot);
 
-        AsyncTask<Void, Void, Void> a = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                connect();
-                return null;
-            }
-        };
+        listenerBot = new ListenerBot(this);
+        listenerStarter = new BotStarter(listenerBot);
 
-        a.execute();
-
+        ButterKnife.bind(this);
 
     }
 
@@ -73,20 +84,29 @@ public class MainActivity extends ActionBarActivity implements WifiListener.Wifi
         return super.onOptionsItemSelected(item);
     }
 
-    public void connect() {
-        try {
-            bot.connect("irc.brasirc.org");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (IrcException e) {
-            e.printStackTrace();
-        }
-
-
+    @Override
+    public void receive(String bssid, String ssid) {
     }
 
     @Override
-    public void receive(String bssid, String ssid) {
-        bot.addToPool(ssid, bssid);
+    public void onIrcBotConnect(String tag) {
+        Log.i(TAG, logConcat(" ", tag, "connected"));
     }
+
+    @Override
+    public void onIrcBotDisconnect(String tag) {
+        Log.i(TAG, logConcat(" ", tag, "disconnected", "try to reconnect"));
+        listenerStarter.connect(IRC_SERVER);
+    }
+
+    @OnClick(R.id.btnListener)
+    void onListenerClick() {
+        listenerStarter.connect(IRC_SERVER);
+    }
+
+    @OnClick(R.id.btnWalker)
+    void onWalkerClick() {
+        walkerStarter.connect(IRC_SERVER);
+    }
+
 }

@@ -30,7 +30,7 @@ public class WifiListener {
         if (wifiManager.isWifiEnabled()) {
             return;
         }
-//        wifiManager.setWifiEnabled(true);
+        wifiManager.setWifiEnabled(true);
     }
 
     public void registerReceiver() {
