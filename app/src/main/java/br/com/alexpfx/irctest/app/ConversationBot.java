@@ -16,7 +16,7 @@ import java.util.List;
 public class ConversationBot extends PircBot {
     public static final int nr_pessoas_canal = 150;
     public static final String server_url = "irc.brasirc.org";
-    public static final String nick = "LoiraMaquira";
+    public static final String nick = "maq";
     public static final String userLogin = "spoor";
 
     String tag = ConversationBot.class.getName();
@@ -42,42 +42,11 @@ public class ConversationBot extends PircBot {
         return server_url;
     }
 
-    private String[] msgs = new String[]{
-            "yes", "no", "maybe", "heheeheh", "where are you talking?", "how old are you?", "hi", "hello!"
-    };
-
-    private String[] msgGeral = new String[]{
-            "sim", "nao", "talvez", "heheeheh", "tc de onde?", "qtos anos?", "oi", "oi, tudo bem?!", "ahaahah", "legal :)"
-    };
-
-    private String[] msgAns = new String[]{
-            "sim =)", "nao :)", "talvez ;)"
-    };
-
-    private String[] msgAnsIdade = new String[]{
-            "19", "19 anos"
-    };
-
-    private String[] msgAnsNr = new String[]{
-            "legal", "velho", "novo", "experiente heehhehe"
-    };
-
-    private String[] msgAnsOi = new String[]{
-            "ola", "ola tudo bem?"
-    };
-
-    private String[] msgAnsTcDeOnde = new String[]{
-            "Mg", "Mg e vc"
-    };
-
-    private String[] msgAnsSolteir = new String[]{
-            "Solteira e vc", "Solteira"
-    };
 
     @Override
     protected void onMessage(String channel, String sender, String login, String hostname, String message) {
         countMsgs++;
-        String moreInfo = sender + ", voce é o " + countMsgs + " a mandar mensagem para os canais q eu estou.";
+        String moreInfo = sender + ", voce e o " + countMsgs + " a mandar mensagem para os canais q eu estou.";
         final String backMsg = getMessage(moreInfo);
         Log.i(tag, "" + countMsgs + " " + channel + " " + sender);
         if (countMsgs % 100 == 0) {
@@ -150,21 +119,7 @@ public class ConversationBot extends PircBot {
                 .containsAny(message, "vinda", "vindo", "#", "canal", "VirtuaLife", "www", "visite", "proibido")) {
             return "";
         }
-        if (StringUtils.containsAny(message, "oi", "ola", "tudo bem", "bom dia")) {
-            return getRandomFrom(msgAnsOi);
-        } else if (StringUtils.containsAny(message, "idade", "anos")) {
-            return getRandomFrom(msgAnsIdade);
-        } else if (StringUtils.containsAny(message, "onde", "tc de", "tecla")) {
-            return getRandomFrom(msgAnsTcDeOnde);
-        } else if (StringUtils.containsAny(message, "solteira", "namorado")) {
-            return getRandomFrom(msgAnsSolteir);
-        } else if (StringUtils.containsAny(message, "?")) {
-            return getRandomFrom(msgAns);
-        } else if (StringUtils.isAlphanumeric(message)) {
-            return getRandomFrom(msgAnsNr);
-        } else {
-            return getRandomFrom(msgGeral);
-        }
+        return "";
     }
 
     public synchronized String getFromPool() {

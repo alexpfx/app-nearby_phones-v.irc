@@ -36,9 +36,10 @@ public class BotStarter {
                     bot.connect(ircServer);
                 }
             } catch (IOException e) {
-                throw new RuntimeException(e);
+
+                e.printStackTrace();
             } catch (IrcException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
             return true;
         }

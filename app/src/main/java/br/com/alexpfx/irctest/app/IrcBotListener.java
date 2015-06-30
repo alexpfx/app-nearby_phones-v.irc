@@ -5,20 +5,20 @@ package br.com.alexpfx.irctest.app;
  */
 public interface IrcBotListener {
 
-    public void onIrcBotConnect(String tag);
+    public void onIrcBotConnect(IrcBot ircBot);
 
-    void onIrcBotDisconnect(String tag);
+    void onIrcBotDisconnect(IrcBot ircBot);
 
     public static class NullListerner implements IrcBotListener{
 
 
         @Override
-        public void onIrcBotConnect(String tag) {
+        public void onIrcBotConnect(IrcBot ircBot) {
 
         }
 
         @Override
-        public void onIrcBotDisconnect(String tag) {
+        public void onIrcBotDisconnect(IrcBot ircBot) {
 
         }
 

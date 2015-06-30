@@ -4,59 +4,70 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alexandre on 27/06/15.
  */
-public class WifiListener {
+public class WifiListener extends BroadcastReceiver {
+    public static final String TAG = WifiListener.class.getSimpleName();
     private WifiManager wifiManager;
     private final Handler handler = new Handler();
     private Context context;
-    private WifiBroadcastReceiver receiver;
-    private WifiNetworkInfoReceiveListener listener;
+    private List<WifiNetworkInfoReceiveListener> listeners;
+    private static final int LOOP_INTERVAL = 10000;
 
-    public WifiListener(WifiManager wifiManager, Context context, WifiNetworkInfoReceiveListener listener) {
+    public WifiListener(WifiManager wifiManager, Context context) {
         this.wifiManager = wifiManager;
         this.context = context;
-        this.listener = listener;
-    }
-
-
-    private void enableWifi() {
-        if (wifiManager.isWifiEnabled()) {
-            return;
-        }
-        wifiManager.setWifiEnabled(true);
+        this.listeners = new ArrayList<WifiNetworkInfoReceiveListener>();
     }
 
     public void registerReceiver() {
-        if (receiver == null) {
-            receiver = new WifiBroadcastReceiver(wifiManager, listener);
-        }
-        context.registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        context.registerReceiver(this, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
     }
 
     public void unregisterReceiver() {
-        context.unregisterReceiver(receiver);
+        context.unregisterReceiver(this);
     }
 
     public void scan() {
-        enableWifi();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 wifiManager.startScan();
+                handler.postDelayed(this, LOOP_INTERVAL);
             }
         }, 1000);
     }
 
-    public static interface WifiNetworkInfoReceiveListener {
-        void receive(String bssid, String ssid);
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        final List<ScanResult> scanResults = wifiManager.getScanResults();
+        for (ScanResult scanResult : scanResults) {
+            for (WifiNetworkInfoReceiveListener l : listeners) {
+                l.receive(scanResult.BSSID, scanResult.SSID, scanResult.level);
+            }
+        }
     }
 
+    public void addListener(WifiNetworkInfoReceiveListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(WifiNetworkInfoReceiveListener listener) {
+        listeners.remove(listener);
+    }
+
+    public static interface WifiNetworkInfoReceiveListener {
+        void receive(String bssid, String ssid, int rssid);
+    }
 
 }

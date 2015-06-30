@@ -1,23 +1,22 @@
 package br.com.alexpfx.irctest.app;
 
+import java.util.UUID;
+
 /**
  * Created by alexandre on 28/06/15.
  */
 public class UserIdentity {
     private final String name;
     private final String login;
-    private final String messagePrefix;
+    private final UUID uuid = UUID.randomUUID();
 
-    public UserIdentity(String name, String login, String messagePrefix) {
+    private UserIdentity(String name, String login) {
         this.name = name;
         this.login = login;
-        this.messagePrefix = messagePrefix;
     }
 
-    public UserIdentity(String name, String login) {
-        this.name = name;
-        this.login = login;
-        messagePrefix = "$$$$";
+    public static UserIdentity newInstance(String name, String login) {
+        return new UserIdentity(name, login);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class UserIdentity {
         return login;
     }
 
-    public String getMessagePrefix() {
-        return messagePrefix;
+    public UUID getUuid() {
+        return uuid;
     }
 }

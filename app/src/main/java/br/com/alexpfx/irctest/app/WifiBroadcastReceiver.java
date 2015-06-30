@@ -1,13 +1,10 @@
 package br.com.alexpfx.irctest.app;
 
-import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import android.util.Log;
-import org.apache.http.conn.routing.BasicRouteDirector;
 
 import java.util.List;
 
@@ -31,7 +28,7 @@ public class WifiBroadcastReceiver extends BroadcastReceiver {
         }
         final List<ScanResult> scanResults = wifiManager.getScanResults();
         for (ScanResult scanResult : scanResults) {
-            listener.receive(scanResult.BSSID, scanResult.SSID);
+            listener.receive(scanResult.BSSID, scanResult.SSID, scanResult.level);
         }
     }
 }

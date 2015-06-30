@@ -11,15 +11,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static br.com.alexpfx.irctest.app.TextStringUtils.logConcat;
+import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
-public class MainActivity extends ActionBarActivity implements WifiListener.WifiNetworkInfoReceiveListener, IrcBotListener {
+public class MainActivity extends ActionBarActivity implements IrcBotListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String IRC_SERVER = "irc.freenode.org";
-    private static final String CHANNEL = "#msggroupexample";
-
-    private WifiListener wifiListener;
+    private static final String CHANNEL = "#paparapapa";
 
     @Bind(R.id.tvCountPvt)
     TextView tvCount;
@@ -27,9 +25,9 @@ public class MainActivity extends ActionBarActivity implements WifiListener.Wifi
     @Bind(R.id.tvMsgs)
     TextView tvMsg;
 
-    private ListenerBot listenerBot;
+    private ReceiverBot receiverBot;
     private WalkerBot walkerBot;
-
+    private WifiListener wifiListener;
     private BotStarter listenerStarter;
     private BotStarter walkerStarter;
 
@@ -37,22 +35,28 @@ public class MainActivity extends ActionBarActivity implements WifiListener.Wifi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this, this);
 
         walkerBot = new WalkerBot(this);
         walkerStarter = new BotStarter(walkerBot);
 
-        listenerBot = new ListenerBot(this);
-        listenerStarter = new BotStarter(listenerBot);
+        receiverBot = new ReceiverBot();
+        receiverBot.setIrcBotListener(this);
+
+        walkerBot.addWalkerListener(receiverBot.getUserIdentity());
+
+        listenerStarter = new BotStarter(receiverBot);
 
         ButterKnife.bind(this);
+        wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this);
+        wifiListener.scan();
 
+        Log.i(TAG, "onCreate");
     }
 
     @Override
     protected void onResume() {
+        Log.i(TAG, "onResume");
         wifiListener.registerReceiver();
-        wifiListener.scan();
         super.onResume();
     }
 
@@ -85,18 +89,18 @@ public class MainActivity extends ActionBarActivity implements WifiListener.Wifi
     }
 
     @Override
-    public void receive(String bssid, String ssid) {
+    public void onIrcBotConnect(IrcBot ircBot) {
+        Log.i(TAG, concat(" ", "connected"));
+        ircBot.joinChannel(CHANNEL);
+        wifiListener.addListener((WifiListener.WifiNetworkInfoReceiveListener) ircBot);
     }
 
     @Override
-    public void onIrcBotConnect(String tag) {
-        Log.i(TAG, logConcat(" ", tag, "connected"));
-    }
+    public void onIrcBotDisconnect(IrcBot ircBot) {
+        Log.i(TAG, concat(" ", "disconnected", "try to reconnect"));
+        new BotStarter(ircBot).connect(IRC_SERVER);
+        wifiListener.removeListener((WifiListener.WifiNetworkInfoReceiveListener) ircBot);
 
-    @Override
-    public void onIrcBotDisconnect(String tag) {
-        Log.i(TAG, logConcat(" ", tag, "disconnected", "try to reconnect"));
-        listenerStarter.connect(IRC_SERVER);
     }
 
     @OnClick(R.id.btnListener)

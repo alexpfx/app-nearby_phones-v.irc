@@ -8,14 +8,12 @@ import org.jibble.pircbot.PircBot;
 public abstract class IrcBot extends PircBot {
 
     private IrcBotListener ircBotListener = new IrcBotListener.NullListerner();
-    private final String tag;
-    private UserIdentity representativeUser;
+    protected final UserIdentity userIdentity;
 
-    public IrcBot(String name, String login, String tag) {
+    public IrcBot(String name, String login) {
         setName(name);
         setLogin(login);
-        this.tag = tag;
-        representativeUser = new UserIdentity(name, login);
+        userIdentity = UserIdentity.newInstance(name, login);
     }
 
     public void setIrcBotListener(IrcBotListener ircBotListener) {
@@ -24,15 +22,15 @@ public abstract class IrcBot extends PircBot {
 
     @Override
     protected void onConnect() {
-        ircBotListener.onIrcBotConnect(tag);
+        ircBotListener.onIrcBotConnect(this);
     }
 
     @Override
     protected void onDisconnect() {
-        ircBotListener.onIrcBotDisconnect(tag);
+        ircBotListener.onIrcBotDisconnect(this);
     }
 
-    public UserIdentity getRepresentativeUser() {
-        return representativeUser;
+    public UserIdentity getUserIdentity() {
+        return userIdentity;
     }
 }
