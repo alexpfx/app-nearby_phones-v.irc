@@ -4,16 +4,22 @@ package br.com.alexpfx.irctest.app;
  * Created by alexandre on 28/06/15.
  */
 public class WifiInfo {
-    private String bssid;
+    private final String bssid;
     private String ssid;
     private int rssid;
 
-    public String getBssid() {
-        return bssid;
+    private WifiInfo(String bssid, String ssid, int rssid) {
+        this.bssid = bssid;
+        this.ssid = ssid;
+        this.rssid = rssid;
     }
 
-    public void setBssid(String bssid) {
-        this.bssid = bssid;
+    public static WifiInfo newInstance(String bssid, String ssid, int rssid) {
+        return new WifiInfo(bssid, ssid, rssid);
+    }
+
+    public String getBssid() {
+        return bssid;
     }
 
     public String getSsid() {

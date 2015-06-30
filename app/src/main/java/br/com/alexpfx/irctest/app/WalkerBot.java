@@ -21,7 +21,7 @@ public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoRec
     public WalkerBot(IrcBotListener listener) {
         super(NAME, LOGIN);
         setIrcBotListener(listener);
-        setVerbose(true);
+        setVerbose(false);
     }
 
     @Override
@@ -29,9 +29,8 @@ public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoRec
         if (walkerListeners.isEmpty()){
             return;
         }
-        Log.i(TAG, "received");
         for (UserIdentity u:walkerListeners){
-            sendAction(u.getName(), "action");
+            sendAction(u.getName(), bssid);
         }
     }
 

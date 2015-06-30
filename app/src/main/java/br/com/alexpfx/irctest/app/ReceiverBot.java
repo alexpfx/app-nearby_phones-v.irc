@@ -2,8 +2,6 @@ package br.com.alexpfx.irctest.app;
 
 import android.util.Log;
 
-import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
-
 /**
  * Created by alexandre on 28/06/15.
  */
@@ -17,7 +15,7 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
 
     public ReceiverBot() {
         super(USER_NAME, USER_LOGIN);
-        setVerbose(true);
+        setVerbose(false);
     }
 
     @Override
@@ -40,18 +38,25 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
 
     @Override
     protected void onAction(String sender, String login, String hostname, String target, String action) {
-        Log.i(TAG,
-                concat(" : ", "sender", sender, "login", login, "hostname", hostname, "target", target, "action", action));
+        if (!NetAddressUtils.isValidMACAddress(action)) {
+            return;
+        }
+        final WifiInfo byBssid = wifiList.getByBssid(action);
+        if (byBssid == null) {
+            return;
+        }
+        Log.i(TAG, TextLogUtils.concat(" : ", "ssid", byBssid.getSsid(), "rssid", String.valueOf(byBssid.getRssid())));
     }
 
     @Override
     public void receive(String bssid, String ssid, int rssid) {
-        wifiList.contains(bssid);
-        WifiInfo w = new WifiInfo();
-        w.setBssid(bssid);
-        w.setSsid(ssid);
-        w.setRssid(rssid);
-        wifiList.add(w);
+        final WifiInfo byBssid = wifiList.getByBssid(bssid);
+        if (bssid == null) {
+            wifiList.add(WifiInfo.newInstance(bssid, ssid, rssid));
+        } else {
+            byBssid.setRssid(rssid);
+            byBssid.setSsid(ssid);
+        }
     }
 
 }
