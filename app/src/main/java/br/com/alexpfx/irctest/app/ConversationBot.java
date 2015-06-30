@@ -20,14 +20,12 @@ public class ConversationBot extends PircBot {
     public static final String userLogin = "spoor";
 
     String tag = ConversationBot.class.getName();
-
-    public static interface BotListener {
-        void receiveBotMessage(String msg, String count);
-    }
-
+    StringBuilder sb = new StringBuilder();
+    int countPrivate = 0;
+    int countMsgs = 0;
     private BotListener listener;
-
     private List<String> pool = new ArrayList<String>();
+    private SecureRandom random = new SecureRandom();
 
     public ConversationBot(BotListener listener) {
         setVersion("v5");
@@ -41,7 +39,6 @@ public class ConversationBot extends PircBot {
     public static String getServer_url() {
         return server_url;
     }
-
 
     @Override
     protected void onMessage(String channel, String sender, String login, String hostname, String message) {
@@ -87,8 +84,6 @@ public class ConversationBot extends PircBot {
         }
     }
 
-    private SecureRandom random = new SecureRandom();
-
     @Override
     protected void onConnect() {
         Log.i(tag, "connected");
@@ -108,11 +103,6 @@ public class ConversationBot extends PircBot {
         Log.i(tag, "resposta: " + privateMessage);
         sendMessage(sender, privateMessage);
     }
-
-    StringBuilder sb = new StringBuilder();
-
-    int countPrivate = 0;
-    int countMsgs = 0;
 
     private String getPrivateMessage(String message, String moreInfo) {
         if (StringUtils
@@ -142,6 +132,10 @@ public class ConversationBot extends PircBot {
     String getRandomFrom(String msg[]) {
         final int n = random.nextInt(msg.length);
         return msg[n];
+    }
+
+    public static interface BotListener {
+        void receiveBotMessage(String msg, String count);
     }
 
 }

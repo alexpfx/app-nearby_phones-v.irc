@@ -7,8 +7,6 @@ import android.content.IntentFilter;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +16,11 @@ import java.util.List;
  */
 public class WifiListener extends BroadcastReceiver {
     public static final String TAG = WifiListener.class.getSimpleName();
-    private WifiManager wifiManager;
+    private static final int LOOP_INTERVAL = 10000;
     private final Handler handler = new Handler();
+    private WifiManager wifiManager;
     private Context context;
     private List<WifiNetworkInfoReceiveListener> listeners;
-    private static final int LOOP_INTERVAL = 10000;
 
     public WifiListener(WifiManager wifiManager, Context context) {
         this.wifiManager = wifiManager;

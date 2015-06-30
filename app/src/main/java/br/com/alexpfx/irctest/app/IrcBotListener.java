@@ -9,8 +9,7 @@ public interface IrcBotListener {
 
     void onIrcBotDisconnect(IrcBot ircBot);
 
-    public static class NullListerner implements IrcBotListener{
-
+    public static class NullListerner implements IrcBotListener {
 
         @Override
         public void onIrcBotConnect(IrcBot ircBot) {
@@ -23,7 +22,5 @@ public interface IrcBotListener {
         }
 
     }
-
-
 
 }

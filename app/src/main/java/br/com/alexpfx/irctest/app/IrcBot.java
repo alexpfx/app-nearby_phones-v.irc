@@ -7,8 +7,8 @@ import org.jibble.pircbot.PircBot;
  */
 public abstract class IrcBot extends PircBot {
 
-    private IrcBotListener ircBotListener = new IrcBotListener.NullListerner();
     protected final UserIdentity userIdentity;
+    private IrcBotListener ircBotListener = new IrcBotListener.NullListerner();
 
     public IrcBot(String name, String login) {
         setName(name);

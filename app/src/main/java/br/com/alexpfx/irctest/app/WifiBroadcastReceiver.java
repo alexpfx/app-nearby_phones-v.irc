@@ -12,9 +12,9 @@ import java.util.List;
  * Created by alexandre on 27/06/15.
  */
 public class WifiBroadcastReceiver extends BroadcastReceiver {
-    private WifiManager wifiManager;
-    private final WifiListener.WifiNetworkInfoReceiveListener listener;
     private static final String tag = WifiBroadcastReceiver.class.getName();
+    private final WifiListener.WifiNetworkInfoReceiveListener listener;
+    private WifiManager wifiManager;
 
     public WifiBroadcastReceiver(WifiManager wifiManager, WifiListener.WifiNetworkInfoReceiveListener listener) {
         this.wifiManager = wifiManager;

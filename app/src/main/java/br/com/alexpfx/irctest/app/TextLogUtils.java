@@ -5,7 +5,6 @@ package br.com.alexpfx.irctest.app;
  */
 public class TextLogUtils {
 
-
     public static final String concat(String sep, String... msgs) {
         StringBuilder sb = new StringBuilder();
         final int length = msgs.length;

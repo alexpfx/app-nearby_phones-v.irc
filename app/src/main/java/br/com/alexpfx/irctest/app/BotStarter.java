@@ -32,7 +32,7 @@ public class BotStarter {
         @Override
         protected Boolean doInBackground(String... params) {
             try {
-                if (!bot.isConnected()){
+                if (!bot.isConnected()) {
                     bot.connect(ircServer);
                 }
             } catch (IOException e) {

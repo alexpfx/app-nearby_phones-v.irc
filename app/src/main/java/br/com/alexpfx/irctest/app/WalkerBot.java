@@ -1,11 +1,7 @@
 package br.com.alexpfx.irctest.app;
 
-import android.os.ParcelUuid;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by alexandre on 28/06/15.

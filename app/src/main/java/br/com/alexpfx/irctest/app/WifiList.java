@@ -22,7 +22,7 @@ public class WifiList {
                 clear();
                 cleaner.postDelayed(this, LOOP_INTERVAL);
             }
-        },1000);
+        }, 1000);
 
     }
 
