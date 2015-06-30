@@ -1,7 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import android.util.Log;
-
 /**
  * Created by alexandre on 28/06/15.
  */
@@ -12,29 +10,13 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
     public static final String TAG = ReceiverBot.class.getSimpleName();
 
     private WifiList wifiList = new WifiList();
+    private ReceiverBotListener receiverBotListener;
 
     public ReceiverBot() {
         super(USER_NAME, USER_LOGIN);
         setVerbose(false);
     }
 
-    @Override
-    protected void onPrivateMessage(String sender, String login, String hostname, String message) {
-        if (!isFromWalker(sender, login)) {
-            return;
-        }
-        if (isEncodedMessage(message)) {
-
-        }
-    }
-
-    private boolean isEncodedMessage(String message) {
-        return true;
-    }
-
-    private boolean isFromWalker(String sender, String login) {
-        return true;
-    }
 
     @Override
     protected void onAction(String sender, String login, String hostname, String target, String action) {
@@ -45,7 +27,13 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
         if (byBssid == null) {
             return;
         }
-        Log.i(TAG, TextLogUtils.concat(" : ", "ssid", byBssid.getSsid(), "rssid", String.valueOf(byBssid.getRssid())));
+        match(byBssid.getSsid(), byBssid.getRssid());
+    }
+
+    private void match(String ssid, int rssid) {
+        if (receiverBotListener != null) {
+            receiverBotListener.onMatch(ssid, rssid * -1);
+        }
     }
 
     @Override
@@ -57,6 +45,10 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
             byBssid.setRssid(rssid);
             byBssid.setSsid(ssid);
         }
+    }
+
+    public void setReceiverBotListener(ReceiverBotListener receiverBotListener) {
+        this.receiverBotListener = receiverBotListener;
     }
 
 }

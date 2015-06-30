@@ -13,11 +13,11 @@ import butterknife.OnClick;
 
 import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
-public class MainActivity extends ActionBarActivity implements IrcBotListener {
+public class MainActivity extends ActionBarActivity implements IrcBotListener, ReceiverBotListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String IRC_SERVER = "irc.freenode.org";
-    private static final String CHANNEL = "#paparapapa";
+    private static final String CHANNEL = "#garbil";
 
     @Bind(R.id.tvCountPvt)
     TextView tvCount;
@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements IrcBotListener {
 
         receiverBot = new ReceiverBot();
         receiverBot.setIrcBotListener(this);
+        receiverBot.setReceiverBotListener(this);
 
         walkerBot.addWalkerListener(receiverBot.getUserIdentity());
 
@@ -113,4 +114,9 @@ public class MainActivity extends ActionBarActivity implements IrcBotListener {
         walkerStarter.connect(IRC_SERVER);
     }
 
+    @Override
+    public void onMatch(String ssid, int rssid) {
+        tvMsg.setText(ssid);
+        tvCount.setText(rssid);
+    }
 }

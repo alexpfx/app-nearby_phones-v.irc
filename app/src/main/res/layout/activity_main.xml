@@ -36,7 +36,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Listener"
+        android:text="Receiver"
         android:id="@+id/btnListener"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -45,7 +45,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Walker"
+        android:text="Sender"
         android:id="@+id/btnWalker"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
