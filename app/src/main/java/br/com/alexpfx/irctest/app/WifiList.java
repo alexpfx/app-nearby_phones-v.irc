@@ -10,7 +10,7 @@ import java.util.List;
  * Created by alexandre on 28/06/15.
  */
 public class WifiList {
-    private static final long LOOP_INTERVAL = 59000L;
+    private static final long LOOP_INTERVAL = 30000L;
     private List<WifiInfo> wifiInfoList = Collections.synchronizedList(new ArrayList<WifiInfo>());
 
     private Handler cleaner = new Handler();

@@ -17,7 +17,6 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
         setVerbose(false);
     }
 
-
     @Override
     protected void onAction(String sender, String login, String hostname, String target, String action) {
         if (!NetAddressUtils.isValidMACAddress(action)) {
@@ -25,6 +24,7 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
         }
         final WifiInfo byBssid = wifiList.getByBssid(action);
         if (byBssid == null) {
+            match(" - ", 0);
             return;
         }
         match(byBssid.getSsid(), byBssid.getRssid());

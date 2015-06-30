@@ -115,8 +115,13 @@ public class MainActivity extends ActionBarActivity implements IrcBotListener, R
     }
 
     @Override
-    public void onMatch(String ssid, int rssid) {
-        tvMsg.setText(tvMsg.getText() + " " + ssid);
-        tvCount.setText(String.valueOf(rssid));
+    public void onMatch(final String ssid, final int rssid) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvMsg.setText(tvMsg.getText() + " " + ssid);
+                tvCount.setText(String.valueOf(rssid));
+            }
+        });
     }
 }
