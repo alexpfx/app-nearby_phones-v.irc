@@ -51,7 +51,7 @@ public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoR
     @Override
     public void receive(String bssid, String ssid, int rssid) {
         final WifiInfo byBssid = wifiList.getByBssid(bssid);
-        if (bssid == null) {
+        if (byBssid == null) {
             wifiList.add(WifiInfo.newInstance(bssid, ssid, rssid));
         } else {
             byBssid.setRssid(rssid);

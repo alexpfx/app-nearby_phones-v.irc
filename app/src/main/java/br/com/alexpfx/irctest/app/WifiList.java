@@ -10,6 +10,7 @@ import java.util.List;
 public class WifiList {
     private List<WifiInfo> wifiInfoList = Collections.synchronizedList(new ArrayList<WifiInfo>());
 
+
     public synchronized void add(WifiInfo info) {
         final WifiInfo byBssid = getByBssid(info.getBssid());
         if (byBssid != null) {

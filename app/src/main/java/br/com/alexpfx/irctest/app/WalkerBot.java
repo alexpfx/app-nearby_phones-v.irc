@@ -26,10 +26,10 @@ public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoRec
 
     @Override
     public void receive(String bssid, String ssid, int rssid) {
-        if (walkerListeners.isEmpty()){
+        if (walkerListeners.isEmpty()) {
             return;
         }
-        for (UserIdentity u:walkerListeners){
+        for (UserIdentity u : walkerListeners) {
             sendAction(u.getName(), bssid);
         }
     }
