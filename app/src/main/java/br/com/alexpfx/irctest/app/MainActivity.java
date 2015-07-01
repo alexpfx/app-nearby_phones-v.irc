@@ -1,11 +1,13 @@
 package br.com.alexpfx.irctest.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.btnOpenReceiverActivity)
+    void onOpenReceiverClick (){
+        startActivity(new Intent(MainActivity.this, ReceiverBotActivity.class));
+    }
+
+    @OnClick(R.id.btnOpenWalkerActivity)
+    void onOpenWalkerClick (){
+        startActivity(new Intent(MainActivity.this, WalkerBotActivity.class));
     }
 
 }
