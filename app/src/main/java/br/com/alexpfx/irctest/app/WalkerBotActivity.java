@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener {
 
@@ -18,6 +20,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
     private WalkerBot walkerBot;
 
     private WifiListener wifiListener;
+    private String tag = WalkerBotActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,14 +66,36 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
     @Override
     public void onIrcBotConnect(IrcBot ircBot) {
-        tvServerStatus.setText("Connected");
-        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setText("Connected");
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
+            }
+        });
     }
 
     @Override
     public void onIrcBotDisconnect(IrcBot ircBot) {
-        tvServerStatus.setText("Disconnect");
-        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setText("Disconnect");
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
+            }
+        });
     }
+
+
+    @OnClick(R.id.btnConnect)
+    public void btnConnectClick() {
+
+        Log.i(tag, "try connect");
+        if (walkerBot.isConnected()) {
+            walkerBot.disconnect();
+        } else {
+            walkerBot.connect();
+        }
+    }
+
 }

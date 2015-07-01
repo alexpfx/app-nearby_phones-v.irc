@@ -60,14 +60,24 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     @Override
     public void onIrcBotConnect(IrcBot ircBot) {
-        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
-        tvServerStatus.setText("Connected");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
+                tvServerStatus.setText("Connected");
+            }
+        });
     }
 
     @Override
     public void onIrcBotDisconnect(IrcBot ircBot) {
-        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
-        tvServerStatus.setText("Disconneced");
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
+                tvServerStatus.setText("Disconneced");
+            }
+        });
 
     }
 
