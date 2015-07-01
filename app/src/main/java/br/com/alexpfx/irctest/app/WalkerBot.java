@@ -8,15 +8,10 @@ import java.util.List;
  */
 public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoReceiveListener {
 
-    public static final String NAME = "WalkerClientX";
-    public static final String LOGIN = "WalkerNameX";
-    public static final String TAG = WalkerBot.class.getSimpleName();
-
     private List<UserIdentity> walkerListeners = new ArrayList<UserIdentity>();
 
-    public WalkerBot(IrcBotListener listener) {
-        super(NAME, LOGIN);
-        setIrcBotListener(listener);
+    public WalkerBot(String userName, String login, String server) {
+        super(userName, login, server);
         setVerbose(false);
     }
 

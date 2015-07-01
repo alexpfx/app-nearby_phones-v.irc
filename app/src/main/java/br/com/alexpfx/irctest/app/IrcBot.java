@@ -9,11 +9,17 @@ public abstract class IrcBot extends PircBot {
 
     protected final UserIdentity userIdentity;
     private IrcBotListener ircBotListener = new IrcBotListener.NullListerner();
+    private BotStarter starter;
 
-    public IrcBot(String name, String login) {
+    public IrcBot(String name, String login, String server) {
         setName(name);
         setLogin(login);
         userIdentity = UserIdentity.newInstance(name, login);
+        starter = new BotStarter(this, server);
+    }
+
+    public void connect() {
+        starter.connect();
     }
 
     public void setIrcBotListener(IrcBotListener ircBotListener) {

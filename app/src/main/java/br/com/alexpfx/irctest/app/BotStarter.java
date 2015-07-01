@@ -12,13 +12,15 @@ import java.io.IOException;
 public class BotStarter {
 
     private PircBot bot;
+    private String server;
 
-    public BotStarter(PircBot bot) {
+    public BotStarter(PircBot bot, String server) {
         this.bot = bot;
+        this.server = server;
     }
 
-    public void connect(String ircServer) {
-        StartBotTask task = new StartBotTask(ircServer);
+    public void connect() {
+        StartBotTask task = new StartBotTask(server);
         task.execute();
     }
 
@@ -36,7 +38,6 @@ public class BotStarter {
                     bot.connect(ircServer);
                 }
             } catch (IOException e) {
-
                 e.printStackTrace();
             } catch (IrcException e) {
                 e.printStackTrace();

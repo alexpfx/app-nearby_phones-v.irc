@@ -1,70 +1,26 @@
 package br.com.alexpfx.irctest.app;
 
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
-
-public class MainActivity extends ActionBarActivity implements IrcBotListener, ReceiverBotListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String IRC_SERVER = "irc.freenode.org";
     private static final String CHANNEL = "#garbil";
-
-    @Bind(R.id.tvCountPvt)
-    TextView tvCount;
-
-    @Bind(R.id.tvMsgs)
-    TextView tvMsg;
-
-    private ReceiverBot receiverBot;
-    private WalkerBot walkerBot;
-    private WifiListener wifiListener;
-    private BotStarter listenerStarter;
-    private BotStarter walkerStarter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        walkerBot = new WalkerBot(this);
-        walkerStarter = new BotStarter(walkerBot);
-
-        receiverBot = new ReceiverBot();
-        receiverBot.setIrcBotListener(this);
-        receiverBot.setReceiverBotListener(this);
-
-        walkerBot.addWalkerListener(receiverBot.getUserIdentity());
-
-        listenerStarter = new BotStarter(receiverBot);
-
         ButterKnife.bind(this);
-        wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this);
-        wifiListener.scan();
 
         Log.i(TAG, "onCreate");
-    }
-
-    @Override
-    protected void onResume() {
-        Log.i(TAG, "onResume");
-        wifiListener.registerReceiver();
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        wifiListener.unregisterReceiver();
-        super.onPause();
     }
 
     @Override
@@ -89,39 +45,4 @@ public class MainActivity extends ActionBarActivity implements IrcBotListener, R
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onIrcBotConnect(IrcBot ircBot) {
-        Log.i(TAG, concat(" ", "connected"));
-        ircBot.joinChannel(CHANNEL);
-        wifiListener.addListener((WifiListener.WifiNetworkInfoReceiveListener) ircBot);
-    }
-
-    @Override
-    public void onIrcBotDisconnect(IrcBot ircBot) {
-        Log.i(TAG, concat(" ", "disconnected", "try to reconnect"));
-        new BotStarter(ircBot).connect(IRC_SERVER);
-        wifiListener.removeListener((WifiListener.WifiNetworkInfoReceiveListener) ircBot);
-
-    }
-
-    @OnClick(R.id.btnListener)
-    void onListenerClick() {
-        listenerStarter.connect(IRC_SERVER);
-    }
-
-    @OnClick(R.id.btnWalker)
-    void onWalkerClick() {
-        walkerStarter.connect(IRC_SERVER);
-    }
-
-    @Override
-    public void onMatch(final String ssid, final int rssid) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvMsg.setText(tvMsg.getText() + " " + ssid);
-                tvCount.setText(String.valueOf(rssid));
-            }
-        });
-    }
 }
