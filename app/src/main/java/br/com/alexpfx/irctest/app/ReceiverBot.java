@@ -4,16 +4,14 @@ package br.com.alexpfx.irctest.app;
  * Created by alexandre on 28/06/15.
  */
 public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoReceiveListener {
-    public static final String USER_NAME = "xapifafapofa";
-    public static final String USER_LOGIN = "fajfpafoap";
 
     public static final String TAG = ReceiverBot.class.getSimpleName();
 
     private WifiList wifiList = new WifiList();
     private ReceiverBotListener receiverBotListener;
 
-    public ReceiverBot() {
-        super(USER_NAME, USER_LOGIN);
+    public ReceiverBot(String userName, String userLogin, String server) {
+        super(userName, userLogin, server);
         setVerbose(false);
     }
 
