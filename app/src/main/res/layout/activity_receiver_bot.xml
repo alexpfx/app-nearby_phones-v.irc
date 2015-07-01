@@ -13,19 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <include layout="@layout/server_status"/>
 
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/tvIrcServerStatus"
-        android:text="disconnected"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@color/md_red_600"
-        />
 
 </RelativeLayout>
