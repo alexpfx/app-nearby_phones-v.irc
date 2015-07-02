@@ -1,5 +1,8 @@
 package br.com.alexpfx.irctest.app;
 
+import br.com.alexpfx.irctest.app.irc.ConnectionAttemptListener;
+import br.com.alexpfx.irctest.app.irc.IRCStateHolder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,11 +11,21 @@ import java.util.List;
  */
 public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoReceiveListener {
 
+    private static WalkerBot instance;
+
     private List<UserIdentity> walkerListeners = new ArrayList<UserIdentity>();
 
-    public WalkerBot(String userName, String login, String server) {
+    private WalkerBot(String userName, String login, String server) {
         super(userName, login, server);
         setVerbose(true);
+    }
+
+    public static synchronized WalkerBot getInstance(String userName, String login, String server) {
+        if (instance == null) {
+            instance = new WalkerBot(userName, login, server);
+        }
+        return instance;
+
     }
 
     @Override

@@ -42,4 +42,6 @@ dependencies {
     compile 'pircbot:pircbot:1.5.0'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'com.jakewharton:butterknife:7.0.0'
+    compile 'com.ircclouds.irc:irc-api:1.0-0014'
+
 }

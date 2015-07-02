@@ -1,5 +1,6 @@
 package br.com.alexpfx.irctest.app;
 
+import android.os.Parcelable;
 import org.jibble.pircbot.PircBot;
 
 /**
@@ -39,4 +40,5 @@ public abstract class IrcBot extends PircBot {
     public UserIdentity getUserIdentity() {
         return userIdentity;
     }
+
 }

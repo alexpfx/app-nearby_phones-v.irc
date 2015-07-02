@@ -2,22 +2,25 @@ package br.com.alexpfx.irctest.app;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import br.com.alexpfx.irctest.app.irc.*;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener {
+public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback <IRCStateHolder>{
+
+    private IRCService ircService = new IRCServiceImpl();
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
 
-    private WalkerBot walkerBot;
+    private static WalkerBot walkerBot;
 
     private WifiListener wifiListener;
     private String tag = WalkerBotActivity.class.getSimpleName();
@@ -26,8 +29,9 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walker_bot);
-
-        walkerBot = new WalkerBot("walkerBotWalker", "walkerLogin", "irc.freenode.org");
+        if (walkerBot == null) {
+            walkerBot = WalkerBot.getInstance("walkerBotWalker", "walkerLogin", "irc.freenode.org");
+        }
         walkerBot.setIrcBotListener(this);
 
         wifiListener = new WifiListener((WifiManager) getSystemService(Context.WIFI_SERVICE), this);
@@ -66,6 +70,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
     @Override
     public void onIrcBotConnect(IrcBot ircBot) {
+        walkerBot.joinChannel("#libgdx");
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -86,16 +92,36 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         });
     }
 
-
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                IRCConnParameters p = new IRCConnParameters.Builder ("irc.freenode.org", "alexpfx", "alexpfbh").build();
+                ircService.connect(p, WalkerBotActivity.this);
 
-        Log.i(tag, "try connect");
-        if (walkerBot.isConnected()) {
-            walkerBot.disconnect();
-        } else {
-            walkerBot.connect();
-        }
+                return null;
+            }
+        }.execute();
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onConnect(IRCStateHolder ircState) {
+        System.out.println(ircState);
+
+    }
+
+    @Override
+    public void onSuccess(IRCStateHolder ircState) {
+        ircService.join("#libgdx", new AttemptCallback.LOG_ONLY_CALLBACK());
+    }
+
+    public void onFailure(Exception exception) {
+        exception.printStackTrace();
+
+    }
 }
