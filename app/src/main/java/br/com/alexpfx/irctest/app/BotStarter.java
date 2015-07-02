@@ -11,12 +11,13 @@ import java.io.IOException;
  */
 public class BotStarter {
 
+    private final String server;
     private PircBot bot;
-    private String server;
 
     public BotStarter(PircBot bot, String server) {
         this.bot = bot;
         this.server = server;
+
     }
 
     public void connect() {
@@ -38,6 +39,7 @@ public class BotStarter {
                     bot.connect(ircServer);
                 }
             } catch (IOException e) {
+
                 e.printStackTrace();
             } catch (IrcException e) {
                 e.printStackTrace();

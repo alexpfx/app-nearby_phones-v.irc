@@ -12,7 +12,7 @@ public class WalkerBot extends IrcBot implements WifiListener.WifiNetworkInfoRec
 
     public WalkerBot(String userName, String login, String server) {
         super(userName, login, server);
-        setVerbose(false);
+        setVerbose(true);
     }
 
     @Override

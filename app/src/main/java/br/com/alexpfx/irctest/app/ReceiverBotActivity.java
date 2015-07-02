@@ -3,11 +3,13 @@ package br.com.alexpfx.irctest.app;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ReceiverBotActivity extends AppCompatActivity implements IrcBotListener, ReceiverBotListener {
 
@@ -17,6 +19,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
     private ReceiverBot receiverBot;
 
     private WifiListener wifiListener;
+    private String tag = ReceiverBotActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,4 +88,16 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
     public void onMatch(String ssid, int rssid) {
 
     }
+
+    @OnClick(R.id.btnConnect)
+    public void btnConnectClick() {
+
+        Log.i(tag, "try connect");
+        if (receiverBot.isConnected()) {
+            receiverBot.disconnect();
+        } else {
+            receiverBot.connect();
+        }
+    }
+
 }
