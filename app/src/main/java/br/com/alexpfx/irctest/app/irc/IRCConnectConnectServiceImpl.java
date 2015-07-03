@@ -10,7 +10,7 @@ import com.ircclouds.irc.api.state.IIRCState;
 /**
  * Created by alexandre on 01/07/15.
  */
-public final class IRCServiceImpl implements IRCService {
+public final class IRCConnectConnectServiceImpl implements IRCConnectService {
 
     private IRCApi api = new IRCApiImpl(false);
 
@@ -19,6 +19,7 @@ public final class IRCServiceImpl implements IRCService {
         final IServerParameters parameters = IRCServiceUtils
                 .getServerParameters(ircConnParameters.getHostname(), ircConnParameters.getIdent(), ircConnParameters
                         .getLogin(), ircConnParameters.getNickName(), ircConnParameters.getAlternativeNickName());
+
         api.connect(parameters, new Callback<IIRCState>() {
             @Override
             public void onSuccess(IIRCState state) {
@@ -32,19 +33,10 @@ public final class IRCServiceImpl implements IRCService {
         });
     }
 
-    @Override
-    public void join(String channel, final AttemptCallback<IRCChannelHolder> callback) {
-        api.joinChannel(channel, new Callback<IRCChannel>() {
-            @Override
-            public void onSuccess(IRCChannel aObject) {
-                callback.onSuccess(new IRCChannelHolder(aObject));
-            }
 
-            @Override
-            public void onFailure(Exception ex) {
-                callback.onFailure(ex);
-            }
-        });
-
+//    @Override
+    public void sendMessage(String target, String message) {
+        api.message(target, message);
     }
+
 }

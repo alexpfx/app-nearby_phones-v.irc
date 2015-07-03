@@ -5,6 +5,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,9 +14,13 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback <IRCStateHolder>{
+import java.util.List;
 
-    private IRCService ircService = new IRCServiceImpl();
+import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
+
+public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder> {
+
+    private IRCConnectService ircConnectService = new IRCConnectConnectServiceImpl();
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
@@ -97,8 +102,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                IRCConnParameters p = new IRCConnParameters.Builder ("irc.freenode.org", "alexpfx", "alexpfbh").build();
-                ircService.connect(p, WalkerBotActivity.this);
+                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "alexpfx", "alexpfbh").build();
+                ircConnectService.connect(p, WalkerBotActivity.this);
 
                 return null;
             }
@@ -117,11 +122,29 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
     @Override
     public void onSuccess(IRCStateHolder ircState) {
-        ircService.join("#libgdx", new AttemptCallback.LOG_ONLY_CALLBACK());
+        ircConnectService.join("#libgdx", joinChannelCallback);
     }
 
     public void onFailure(Exception exception) {
         exception.printStackTrace();
 
     }
+
+    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
+        @Override
+        public void onSuccess(ChannelObject channel) {
+            Log.i(tag, concat("channel: ", channel.getName()));
+            final List<String> users = channel.getUsers();
+            for (String user : users) {
+                Log.i(tag, user);
+            }
+
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+
+        }
+    };
+
 }
