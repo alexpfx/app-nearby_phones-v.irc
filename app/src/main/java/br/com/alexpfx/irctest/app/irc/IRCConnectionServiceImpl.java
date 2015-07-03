@@ -4,15 +4,14 @@ import com.ircclouds.irc.api.Callback;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.IRCApiImpl;
 import com.ircclouds.irc.api.IServerParameters;
-import com.ircclouds.irc.api.domain.IRCChannel;
 import com.ircclouds.irc.api.state.IIRCState;
 
 /**
  * Created by alexandre on 01/07/15.
  */
-public final class IRCConnectConnectServiceImpl implements IRCConnectService {
+public final class IRCConnectionServiceImpl implements IRCConnectionService {
 
-    private IRCApi api = new IRCApiImpl(false);
+    private IRCApi api = IRCApiSingleton.INSTANCE.get();
 
     @Override
     public void connect(IRCConnParameters ircConnParameters, final AttemptCallback<IRCStateHolder> callback) {
@@ -34,9 +33,5 @@ public final class IRCConnectConnectServiceImpl implements IRCConnectService {
     }
 
 
-//    @Override
-    public void sendMessage(String target, String message) {
-        api.message(target, message);
-    }
 
 }

@@ -18,9 +18,11 @@ import java.util.List;
 
 import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
-public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder> {
+public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder>, MessageListener {
 
-    private IRCConnectService ircConnectService = new IRCConnectConnectServiceImpl();
+    private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
+    private IRCChannelService ircChannelService = new IRCChannelServiceImpl();
+    private IRCMessageService ircMessageService = new IRCMessageServiceImpl();
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
@@ -35,7 +37,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walker_bot);
         if (walkerBot == null) {
-            walkerBot = WalkerBot.getInstance("walkerBotWalker", "walkerLogin", "irc.freenode.org");
+            walkerBot = WalkerBot.getInstance("walkerBotWalkerx", "walkerLoginx", "irc.freenode.org");
         }
         walkerBot.setIrcBotListener(this);
 
@@ -102,8 +104,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "alexpfx", "alexpfbh").build();
-                ircConnectService.connect(p, WalkerBotActivity.this);
+                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "monwalker", "alexpfbhx").build();
+                ircConnectionService.connect(p, WalkerBotActivity.this);
 
                 return null;
             }
@@ -122,7 +124,9 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
     @Override
     public void onSuccess(IRCStateHolder ircState) {
-        ircConnectService.join("#libgdx", joinChannelCallback);
+        ircChannelService.join("#codepete", joinChannelCallback);
+        ircMessageService.registerListener(this);
+
     }
 
     public void onFailure(Exception exception) {
@@ -133,12 +137,11 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
     private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
         @Override
         public void onSuccess(ChannelObject channel) {
-            Log.i(tag, concat("channel: ", channel.getName()));
+            Log.i(tag, concat(": ", "channel: ", channel.getName()));
             final List<String> users = channel.getUsers();
             for (String user : users) {
                 Log.i(tag, user);
             }
-
         }
 
         @Override
@@ -146,5 +149,15 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
         }
     };
+
+    @Override
+    public void onPrivateMessage(String user, String message) {
+
+    }
+
+    @Override
+    public void onMessage(String channel, String user, String message) {
+
+    }
 
 }

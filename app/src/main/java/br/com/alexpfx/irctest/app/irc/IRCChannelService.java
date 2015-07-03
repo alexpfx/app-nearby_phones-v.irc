@@ -7,4 +7,5 @@ public interface IRCChannelService {
 
     void join(String channe, AttemptCallback<ChannelObject> callback);
 
+    void leave(String channel);
 }

@@ -2,7 +2,6 @@ package br.com.alexpfx.irctest.app.irc;
 
 import com.ircclouds.irc.api.Callback;
 import com.ircclouds.irc.api.IRCApi;
-import com.ircclouds.irc.api.IRCApiImpl;
 import com.ircclouds.irc.api.domain.IRCChannel;
 
 /**
@@ -10,7 +9,7 @@ import com.ircclouds.irc.api.domain.IRCChannel;
  */
 public class IRCChannelServiceImpl implements IRCChannelService {
 
-    private IRCApi api = new IRCApiImpl(false);
+    private IRCApi api = IRCApiSingleton.INSTANCE.get();
 
     @Override
     public void join(String channel, final AttemptCallback<ChannelObject> callback) {
@@ -28,7 +27,9 @@ public class IRCChannelServiceImpl implements IRCChannelService {
         });
     }
 
-
-
+    @Override
+    public void leave(String channel) {
+        api.leaveChannel(channel);
+    }
 
 }
