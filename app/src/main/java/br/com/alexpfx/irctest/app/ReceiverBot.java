@@ -1,7 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import android.os.Parcel;
-
 /**
  * Created by alexandre on 28/06/15.
  */

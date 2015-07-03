@@ -20,17 +20,29 @@ import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
 public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder>, MessageListener {
 
+    private static WalkerBot walkerBot;
+    @Bind(value = R.id.tvIrcServerStatus)
+    TextView tvServerStatus;
     private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
     private IRCChannelService ircChannelService = new IRCChannelServiceImpl();
     private IRCMessageService ircMessageService = new IRCMessageServiceImpl();
-
-    @Bind(value = R.id.tvIrcServerStatus)
-    TextView tvServerStatus;
-
-    private static WalkerBot walkerBot;
-
     private WifiListener wifiListener;
     private String tag = WalkerBotActivity.class.getSimpleName();
+    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
+        @Override
+        public void onSuccess(ChannelObject channel) {
+            Log.i(tag, concat(": ", "channel: ", channel.getName()));
+            final List<String> users = channel.getUsers();
+            for (String user : users) {
+                Log.i(tag, user);
+            }
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +116,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
-                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "monwalker", "alexpfbhx").build();
+                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "monwalker", "alexpfbhx")
+                        .build();
                 ircConnectionService.connect(p, WalkerBotActivity.this);
 
                 return null;
@@ -133,22 +146,6 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         exception.printStackTrace();
 
     }
-
-    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
-        @Override
-        public void onSuccess(ChannelObject channel) {
-            Log.i(tag, concat(": ", "channel: ", channel.getName()));
-            final List<String> users = channel.getUsers();
-            for (String user : users) {
-                Log.i(tag, user);
-            }
-        }
-
-        @Override
-        public void onFailure(Exception exception) {
-
-        }
-    };
 
     @Override
     public void onPrivateMessage(String user, String message) {

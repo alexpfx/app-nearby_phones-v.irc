@@ -6,6 +6,7 @@ package br.com.alexpfx.irctest.app.irc;
 public interface MessageListener {
 
     void onPrivateMessage(String user, String message);
-    void onMessage (String channel, String user, String message);
+
+    void onMessage(String channel, String user, String message);
 
 }

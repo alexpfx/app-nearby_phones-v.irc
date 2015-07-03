@@ -1,8 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import br.com.alexpfx.irctest.app.irc.ConnectionAttemptListener;
-import br.com.alexpfx.irctest.app.irc.IRCStateHolder;
-
 import java.util.ArrayList;
 import java.util.List;
 

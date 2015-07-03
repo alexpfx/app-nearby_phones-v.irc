@@ -1,6 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import android.os.Parcelable;
 import org.jibble.pircbot.PircBot;
 
 /**

@@ -19,6 +19,26 @@ public class IRCConnParameters {
         alternativeNickName = builder.alternativeNickName != null ? builder.alternativeNickName : alternativeNickName;
     }
 
+    public String getHostname() {
+        return hostname;
+    }
+
+    public String getIdent() {
+        return ident;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getAlternativeNickName() {
+        return alternativeNickName;
+    }
+
     public static final class Builder {
         private String hostname;
         private String ident;
@@ -45,25 +65,5 @@ public class IRCConnParameters {
         public IRCConnParameters build() {
             return new IRCConnParameters(this);
         }
-    }
-
-    public String getHostname() {
-        return hostname;
-    }
-
-    public String getIdent() {
-        return ident;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public String getAlternativeNickName() {
-        return alternativeNickName;
     }
 }

@@ -11,14 +11,23 @@ import com.ircclouds.irc.api.listeners.IMessageListener;
  */
 public class IRCMessageServiceImpl implements IRCMessageService {
 
-    private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private final String tag = IRCMessageServiceImpl.class.getSimpleName();
+    private IRCApi api = IRCApiSingleton.INSTANCE.get();
+    private MessageListenerWrapper messageListenerWrapper = new MessageListenerWrapper();
 
     public IRCMessageServiceImpl() {
         api.addListener(messageListenerWrapper);
     }
 
-    private MessageListenerWrapper messageListenerWrapper = new MessageListenerWrapper();
+    @Override
+    public void registerListener(MessageListener m) {
+        messageListenerWrapper.addMessageListener(m);
+    }
+
+    @Override
+    public void sendMessage(String target, String message) {
+        api.message(target, message);
+    }
 
     //TODO: mover
     private class MessageListenerWrapper implements IMessageListener {
@@ -49,16 +58,6 @@ public class IRCMessageServiceImpl implements IRCMessageService {
             listeners.notifyPrivateMessage(message.getSource().getNick(), message.getText());
         }
 
-    }
-
-    @Override
-    public void registerListener(MessageListener m) {
-        messageListenerWrapper.addMessageListener(m);
-    }
-
-    @Override
-    public void sendMessage(String target, String message) {
-        api.message(target, message);
     }
 
 }

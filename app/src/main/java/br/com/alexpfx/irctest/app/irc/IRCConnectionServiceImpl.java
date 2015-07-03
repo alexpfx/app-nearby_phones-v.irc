@@ -2,7 +2,6 @@ package br.com.alexpfx.irctest.app.irc;
 
 import com.ircclouds.irc.api.Callback;
 import com.ircclouds.irc.api.IRCApi;
-import com.ircclouds.irc.api.IRCApiImpl;
 import com.ircclouds.irc.api.IServerParameters;
 import com.ircclouds.irc.api.state.IIRCState;
 
@@ -31,7 +30,5 @@ public final class IRCConnectionServiceImpl implements IRCConnectionService {
             }
         });
     }
-
-
 
 }

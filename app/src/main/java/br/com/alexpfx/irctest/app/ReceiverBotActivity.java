@@ -86,7 +86,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     @Override
     public void onMatch(String ssid, int rssid) {
-        
+
     }
 
     @OnClick(R.id.btnConnect)
