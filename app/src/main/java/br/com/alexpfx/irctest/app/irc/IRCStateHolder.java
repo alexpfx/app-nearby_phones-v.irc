@@ -16,4 +16,8 @@ public class IRCStateHolder {
     public String toString() {
         return state == null ? "" : state.getServer().toString();
     }
+
+    public IIRCState getState() {
+        return state;
+    }
 }

@@ -2,7 +2,9 @@ package br.com.alexpfx.irctest.app.irc;
 
 import com.ircclouds.irc.api.Callback;
 import com.ircclouds.irc.api.IRCApi;
+import com.ircclouds.irc.api.IRCApiImpl;
 import com.ircclouds.irc.api.IServerParameters;
+import com.ircclouds.irc.api.listeners.VariousMessageListenerAdapter;
 import com.ircclouds.irc.api.state.IIRCState;
 
 /**
@@ -29,6 +31,17 @@ public final class IRCConnectionServiceImpl implements IRCConnectionService {
                 callback.onFailure(ex);
             }
         });
+    }
+
+    @Override
+    public void disconnect(){
+        api.disconnect();
+        api = new IRCApiImpl(false);
+    }
+
+    @Override
+    public boolean isConnected() {
+        return false;
     }
 
 }

@@ -21,7 +21,16 @@ public class MessageListeners {
         }
     }
 
+    public void notifyQuit (String message){
+        for (MessageListener listener:messageListeners){
+            listener.onQuit(message);
+        }
+    }
+
     public void add(MessageListener listener) {
         messageListeners.add(listener);
     }
+
+
+
 }

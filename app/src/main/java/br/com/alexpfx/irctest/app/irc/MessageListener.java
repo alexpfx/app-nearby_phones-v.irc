@@ -9,4 +9,6 @@ public interface MessageListener {
 
     void onMessage(String channel, String user, String message);
 
+    void onQuit(String message);
+
 }

@@ -6,4 +6,8 @@ package br.com.alexpfx.irctest.app.irc;
 public interface IRCConnectionService {
     void connect(IRCConnParameters ircConnParameters, AttemptCallback<IRCStateHolder> callback);
 
+    void disconnect();
+
+    boolean isConnected ();
+
 }

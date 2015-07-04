@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -18,30 +19,17 @@ import java.util.List;
 
 import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
-public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder>, MessageListener {
+public class WalkerBotActivity extends AppCompatActivity implements AttemptCallback<IRCStateHolder>, MessageListener {
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
+
     private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
     private IRCChannelService ircChannelService = new IRCChannelServiceImpl();
     private IRCMessageService ircMessageService = new IRCMessageServiceImpl();
     private WifiListener wifiListener;
     private String tag = WalkerBotActivity.class.getSimpleName();
-    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
-        @Override
-        public void onSuccess(ChannelObject channel) {
-            Log.i(tag, concat(": ", "channel: ", channel.getName()));
-            final List<String> users = channel.getUsers();
-            for (String user : users) {
-                Log.i(tag, user);
-            }
-        }
-
-        @Override
-        public void onFailure(Exception exception) {
-
-        }
-    };
+    private Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,41 +67,34 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onIrcBotConnect(IrcBot ircBot) {
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvServerStatus.setText("Connected");
-                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
-            }
-        });
-    }
-
-    @Override
-    public void onIrcBotDisconnect(IrcBot ircBot) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvServerStatus.setText("Disconnect");
-                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
-            }
-        });
-    }
+    private boolean isClicked = false;
 
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
-        new AsyncTask<Void, Void, Void>() {
+        if (isClicked) {
+            return;
+        }
+        isClicked = true;
+        final AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
+
+
+
                 IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "monwalker", "alexpfbhx")
                         .build();
                 ircConnectionService.connect(p, WalkerBotActivity.this);
 
+
+
+
                 return null;
             }
-        }.execute();
+        };
+
+        asyncTask.execute();
+        isClicked = false;
+
     }
 
     @Override
@@ -121,31 +102,62 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
         super.onSaveInstanceState(outState);
     }
 
-    public void onConnect(IRCStateHolder ircState) {
-        System.out.println(ircState);
-
-    }
+    private IRCStateHolder state;
 
     @Override
     public void onSuccess(IRCStateHolder ircState) {
+        state = ircState;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setText("Connected");
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
+            }
+        });
+
         ircChannelService.join("#codepete", joinChannelCallback);
         ircMessageService.registerListener(this);
-
     }
+
+    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
+        @Override
+        public void onSuccess(ChannelObject channel) {
+            Log.i(tag, concat(": ", "channel: ", channel.getName()));
+            final List<String> users = channel.getUsers();
+            for (String user : users) {
+                Log.i(tag, user);
+            }
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+
+        }
+    };
 
     public void onFailure(Exception exception) {
         exception.printStackTrace();
-
     }
 
     @Override
     public void onPrivateMessage(String user, String message) {
-
+        ircConnectionService.disconnect();
     }
 
     @Override
     public void onMessage(String channel, String user, String message) {
+        Log.i(tag, message);
+    }
 
+    @Override
+    public void onQuit(String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvServerStatus.setText("Disconnect");
+                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
+            }
+        });
     }
 
 }
