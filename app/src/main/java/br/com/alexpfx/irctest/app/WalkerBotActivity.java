@@ -20,7 +20,6 @@ import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
 
 public class WalkerBotActivity extends AppCompatActivity implements IrcBotListener, AttemptCallback<IRCStateHolder>, MessageListener {
 
-    private static WalkerBot walkerBot;
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
     private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
@@ -48,11 +47,6 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walker_bot);
-        if (walkerBot == null) {
-            walkerBot = WalkerBot.getInstance("walkerBotWalkerx", "walkerLoginx", "irc.freenode.org");
-        }
-        walkerBot.setIrcBotListener(this);
-
         wifiListener = new WifiListener((WifiManager) getSystemService(Context.WIFI_SERVICE), this);
         ButterKnife.bind(this);
     }
@@ -60,14 +54,12 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
     @Override
     protected void onResume() {
         wifiListener.registerReceiver();
-        wifiListener.addListener(walkerBot);
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         wifiListener.unregisterReceiver();
-        wifiListener.removeListener(walkerBot);
         super.onPause();
     }
 
@@ -89,7 +81,6 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcBotListen
 
     @Override
     public void onIrcBotConnect(IrcBot ircBot) {
-        walkerBot.joinChannel("#libgdx");
 
         runOnUiThread(new Runnable() {
             @Override

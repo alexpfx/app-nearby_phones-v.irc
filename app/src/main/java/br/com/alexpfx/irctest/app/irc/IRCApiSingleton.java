@@ -6,6 +6,7 @@ import com.ircclouds.irc.api.IRCApiImpl;
 /**
  * Created by alexandre on 02/07/15.
  */
+//TODO: usar injeção de dependencia.
 public enum IRCApiSingleton {
     INSTANCE;
 
