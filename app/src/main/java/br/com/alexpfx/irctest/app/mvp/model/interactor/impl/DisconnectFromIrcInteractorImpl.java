@@ -3,6 +3,8 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.DisconnectFromIrcInteractor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
 import com.ircclouds.irc.api.ApiException;
 import com.ircclouds.irc.api.IRCApi;
@@ -14,6 +16,7 @@ import static br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExe
  */
 public class DisconnectFromIrcInteractorImpl implements DisconnectFromIrcInteractor, Interactor {
 
+    private MainThread mainThread = MainThreadImpl.MainThreadSingleton.INSTANCE.get();
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor executor = ThreadExecutorSingleton.INSTANCE.get();
     private String quitMessage;
@@ -30,10 +33,30 @@ public class DisconnectFromIrcInteractorImpl implements DisconnectFromIrcInterac
     public void run() {
         try {
             ircApi.disconnect(quitMessage);
-            callback.onSucess();
+            notifySuccess();
         } catch (ApiException e) {
-            callback.onFailure(e);
+            notifyFailure(e);
 
         }
+    }
+
+    private void notifyFailure(final ApiException e) {
+        mainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onFailure(e);
+            }
+        });
+    }
+
+    private void notifySuccess() {
+
+        mainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onSuccess();
+            }
+        });
+
     }
 }

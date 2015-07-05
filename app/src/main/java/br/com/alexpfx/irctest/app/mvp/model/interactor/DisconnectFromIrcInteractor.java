@@ -6,11 +6,10 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor;
 public interface DisconnectFromIrcInteractor {
     void execute(String quitMessage, Callback callback);
 
-
     interface Callback {
-        void onSucess ();
-        void onFailure (Throwable e);
-    }
+        void onSuccess();
 
+        void onFailure(Throwable e);
+    }
 
 }

@@ -65,20 +65,19 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
-        toast ("Connection");
+        toast("Connection");
         final UserIdentify user = new UserIdentify.Builder().name("alexandre").email("alexinternet@gmail.com")
                                                             .nickname("alexpfx")
                                                             .alternative("alexpfx2").build();
         ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();
         ircConnectionPresenter.connect(user, server);
 
-
     }
 
-
-    public void toast (String msg){
+    public void toast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
     @OnClick(R.id.btnDisconnect)
     public void btnDisconnect() {
         toast("Disconnecting");
@@ -90,19 +89,24 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     public void showConnectedToIrc() {
         tvServerStatus.setText("Connected");
         tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
-        toast ("Connected");
-    }
-
-    @Override
-    public void showDisconnectedFromIrc() {
-        tvServerStatus.setText("Disconnect");
-        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
-        toast ("Disconnected");
-
+        toast("Connected");
     }
 
     @Override
     public void showConnectionError(String message) {
         Toast.makeText(this, "Erro ao conectar ao servidor de irc", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showDisconnected() {
+        tvServerStatus.setText("Disconnected");
+        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
+        toast("Disconnected");
+    }
+
+    @Override
+    public void showNotConnected() {
+        toast("Not Connected");
+
     }
 }

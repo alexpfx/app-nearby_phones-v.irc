@@ -9,12 +9,23 @@ import android.os.Looper;
 public class MainThreadImpl implements MainThread {
     private Handler handler;
 
-    public MainThreadImpl() {
+    private MainThreadImpl() {
         this.handler = new Handler(Looper.getMainLooper());
     }
 
     @Override
     public void post(Runnable runnable) {
         handler.post(runnable);
+    }
+
+    public enum MainThreadSingleton {
+        INSTANCE;
+
+        private MainThread instance = new MainThreadImpl();
+
+        public MainThread get() {
+            return instance;
+        }
+
     }
 }

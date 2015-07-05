@@ -12,23 +12,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadExecutor implements Executor {
 
-    public enum ThreadExecutorSingleton {
-        INSTANCE;
-
-        private ThreadExecutor instance = new ThreadExecutor();
-
-        public ThreadExecutor get() {
-            return instance;
-        }
-
-    }
-
     public static final int MAX_POOL_SIZE = 4;
     public static final int CORE_POOL_SIZE = 2;
     public static final int KEEP_ALIVE_TIME = 120;
     public static final LinkedBlockingDeque<Runnable> WORK_QUEUE = new LinkedBlockingDeque<Runnable>();
     private ThreadPoolExecutor threadPoolExecutor;
-
     private ThreadExecutor() {
         int corePoolSize = CORE_POOL_SIZE;
         int maxPoolSize = MAX_POOL_SIZE;
@@ -46,5 +34,16 @@ public class ThreadExecutor implements Executor {
                 interactor.run();
             }
         });
+    }
+
+    public enum ThreadExecutorSingleton {
+        INSTANCE;
+
+        private ThreadExecutor instance = new ThreadExecutor();
+
+        public ThreadExecutor get() {
+            return instance;
+        }
+
     }
 }

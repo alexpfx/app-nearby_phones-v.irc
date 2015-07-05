@@ -7,8 +7,10 @@ public interface IrcConnectionView {
 
     void showConnectedToIrc();
 
-    void showDisconnectedFromIrc();
-
     void showConnectionError(String message);
+
+    void showDisconnected();
+
+    void showNotConnected();
 
 }

@@ -20,7 +20,8 @@ public class ConnectToIrcInteractorImpl implements Interactor, ConnectToIrcInter
 
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
 
-    private MainThread mainThread;
+    //TODO: injectar.
+    private MainThread mainThread = MainThreadImpl.MainThreadSingleton.INSTANCE.get();
 
     //TODO: injectar.
     private ThreadExecutor executor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
@@ -31,7 +32,6 @@ public class ConnectToIrcInteractorImpl implements Interactor, ConnectToIrcInter
     private String tag = ConnectToIrcInteractorImpl.class.getSimpleName();
 
     public ConnectToIrcInteractorImpl() {
-        mainThread = new MainThreadImpl();
     }
 
     @Override
