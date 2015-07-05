@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import org.apache.log4j.BasicConfigurator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        BasicConfigurator.configure();
 
         Log.i(TAG, "onCreate");
     }
