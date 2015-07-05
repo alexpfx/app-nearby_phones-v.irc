@@ -16,6 +16,8 @@ public class ConnectToIrcInteractor implements Interactor, ConnectToIrc {
 
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
 
+    private MainThread mainThread;
+
     //TODO: injectar.
     private Executor executor;
 
@@ -25,6 +27,7 @@ public class ConnectToIrcInteractor implements Interactor, ConnectToIrc {
 
     public ConnectToIrcInteractor() {
         this.executor = new ThreadExecutor();
+        mainThread = new MainThreadImpl();
     }
 
     @Override
@@ -43,12 +46,32 @@ public class ConnectToIrcInteractor implements Interactor, ConnectToIrc {
                         .getAlternative()), new com.ircclouds.irc.api.Callback<IIRCState>() {
             @Override
             public void onSuccess(IIRCState aObject) {
-                callback.onSuccess();
+                notifySucess();
             }
 
             @Override
             public void onFailure(Exception aExc) {
+                notifyFailure(aExc);
+            }
+        });
+
+    }
+
+    private void notifyFailure(final Exception aExc) {
+        mainThread.post(new Runnable() {
+            @Override
+            public void run() {
                 callback.onFailure(aExc);
+            }
+        });
+
+    }
+
+    private void notifySucess() {
+        mainThread.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onSuccess();
             }
         });
 

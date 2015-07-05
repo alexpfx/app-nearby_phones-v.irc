@@ -4,18 +4,23 @@ import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrc;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrcInteractor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.MainThread;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**
  * Created by alexandre on 05/07/15.
  */
 public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
+
     private IrcConnectionView ircConnectionView;
     private ConnectToIrcInteractor connectToIrcInteractor;
 
     public IrcConnectionPresenterImpl(IrcConnectionView ircConnectionView) {
         this.ircConnectionView = ircConnectionView;
         this.connectToIrcInteractor = new ConnectToIrcInteractor();
+
+
     }
 
     @Override
@@ -24,11 +29,13 @@ public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
             @Override
             public void onSuccess() {
                 ircConnectionView.showConnectedToIrc();
+
             }
 
             @Override
-            public void onFailure(Throwable exception) {
+            public void onFailure(final Throwable exception) {
                 ircConnectionView.showConnectionError(exception.getMessage());
+
             }
         });
     }
