@@ -2,24 +2,19 @@ package br.com.alexpfx.irctest.app;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import br.com.alexpfx.irctest.app.irc.*;
+import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import java.util.List;
-
-import static br.com.alexpfx.irctest.app.TextLogUtils.concat;
-
-public class WalkerBotActivity extends AppCompatActivity implements AttemptCallback<IRCStateHolder>, MessageListener {
+public class WalkerBotActivity extends AppCompatActivity implements IrcConnectionView {
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
@@ -30,6 +25,7 @@ public class WalkerBotActivity extends AppCompatActivity implements AttemptCallb
     private WifiListener wifiListener;
     private String tag = WalkerBotActivity.class.getSimpleName();
     private Handler handler = new Handler();
+    private boolean isClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,46 +63,15 @@ public class WalkerBotActivity extends AppCompatActivity implements AttemptCallb
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean isClicked = false;
+
 
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
-        if (isClicked) {
-            return;
-        }
-        isClicked = true;
-        final AsyncTask<Void, Void, Void> asyncTask = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-
-
-
-                IRCConnParameters p = new IRCConnParameters.Builder("irc.freenode.org", "monwalker", "alexpfbhx")
-                        .build();
-                ircConnectionService.connect(p, WalkerBotActivity.this);
-
-
-
-
-                return null;
-            }
-        };
-
-        asyncTask.execute();
-        isClicked = false;
 
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    private IRCStateHolder state;
-
-    @Override
-    public void onSuccess(IRCStateHolder ircState) {
-        state = ircState;
+    public void showConnectedToIrc() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -114,43 +79,10 @@ public class WalkerBotActivity extends AppCompatActivity implements AttemptCallb
                 tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
             }
         });
-
-        ircChannelService.join("#codepete", joinChannelCallback);
-        ircMessageService.registerListener(this);
-    }
-
-    private AttemptCallback<ChannelObject> joinChannelCallback = new AttemptCallback<ChannelObject>() {
-        @Override
-        public void onSuccess(ChannelObject channel) {
-            Log.i(tag, concat(": ", "channel: ", channel.getName()));
-            final List<String> users = channel.getUsers();
-            for (String user : users) {
-                Log.i(tag, user);
-            }
-        }
-
-        @Override
-        public void onFailure(Exception exception) {
-
-        }
-    };
-
-    public void onFailure(Exception exception) {
-        exception.printStackTrace();
     }
 
     @Override
-    public void onPrivateMessage(String user, String message) {
-        ircConnectionService.disconnect();
-    }
-
-    @Override
-    public void onMessage(String channel, String user, String message) {
-        Log.i(tag, message);
-    }
-
-    @Override
-    public void onQuit(String message) {
+    public void showDisconnectedFromIrc() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -158,6 +90,6 @@ public class WalkerBotActivity extends AppCompatActivity implements AttemptCallb
                 tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
             }
         });
-    }
 
+    }
 }

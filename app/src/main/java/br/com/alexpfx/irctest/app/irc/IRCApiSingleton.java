@@ -13,9 +13,6 @@ public enum IRCApiSingleton {
     private IRCApi internal = new IRCApiImpl(false);
 
     public IRCApi get() {
-        if (internal == null) {
-            internal = new IRCApiImpl(false);
-        }
         return internal;
     }
 
