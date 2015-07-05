@@ -5,5 +5,5 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor;
  */
 public interface MainThread {
 
-    void post (final Runnable runnable);
+    void post(final Runnable runnable);
 }

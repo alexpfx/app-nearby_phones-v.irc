@@ -19,6 +19,26 @@ public class UserIdentify implements Identity {
         email = builder.email;
     }
 
+    @NonNull
+    public String getNickname() {
+        return nickname;
+    }
+
+    @Nullable
+    public String getAlternative() {
+        return alternative;
+    }
+
+    @NonNull
+    public String getName() {
+        return name;
+    }
+
+    @Nullable
+    public String getEmail() {
+        return email;
+    }
+
     public static final class Builder {
         private String nickname;
         private String alternative;
@@ -51,25 +71,5 @@ public class UserIdentify implements Identity {
         public UserIdentify build() {
             return new UserIdentify(this);
         }
-    }
-
-    @NonNull
-    public String getNickname() {
-        return nickname;
-    }
-
-    @Nullable
-    public String getAlternative() {
-        return alternative;
-    }
-
-    @NonNull
-    public String getName() {
-        return name;
-    }
-
-    @Nullable
-    public String getEmail() {
-        return email;
     }
 }

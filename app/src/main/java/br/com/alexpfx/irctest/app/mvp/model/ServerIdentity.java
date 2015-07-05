@@ -16,6 +16,19 @@ public class ServerIdentity implements Identity {
         password = builder.password;
     }
 
+    @NonNull
+    public String getIrcServer() {
+        return ircServer;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     public static final class Builder {
         private String ircServer;
         private String port;
@@ -42,18 +55,5 @@ public class ServerIdentity implements Identity {
         public ServerIdentity build() {
             return new ServerIdentity(this);
         }
-    }
-
-    @NonNull
-    public String getIrcServer() {
-        return ircServer;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

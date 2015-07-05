@@ -5,7 +5,6 @@ package br.com.alexpfx.irctest.app.irc;
  */
 public interface IrcInteractor extends IRCMessageService, IRCChannelService, IRCConnectionService {
 
-
 }
 
 

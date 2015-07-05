@@ -1,20 +1,15 @@
 package br.com.alexpfx.irctest.app.irc;
 
-import br.com.alexpfx.irctest.app.IrcBot;
 import com.ircclouds.irc.api.Callback;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.IRCApiImpl;
 import com.ircclouds.irc.api.IServerParameters;
-import com.ircclouds.irc.api.listeners.VariousMessageListenerAdapter;
 import com.ircclouds.irc.api.state.IIRCState;
-import org.jibble.pircbot.PircBot;
 
 /**
  * Created by alexandre on 01/07/15.
  */
 public final class IRCConnectionServiceImpl implements IRCConnectionService {
-
-
 
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
 
@@ -38,7 +33,7 @@ public final class IRCConnectionServiceImpl implements IRCConnectionService {
     }
 
     @Override
-    public void disconnect(){
+    public void disconnect() {
         api.disconnect();
         api = new IRCApiImpl(false);
     }

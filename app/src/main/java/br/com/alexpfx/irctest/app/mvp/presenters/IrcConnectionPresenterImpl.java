@@ -4,8 +4,6 @@ import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrc;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrcInteractor;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.MainThread;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**
@@ -19,7 +17,6 @@ public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
     public IrcConnectionPresenterImpl(IrcConnectionView ircConnectionView) {
         this.ircConnectionView = ircConnectionView;
         this.connectToIrcInteractor = new ConnectToIrcInteractor();
-
 
     }
 
