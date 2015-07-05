@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.mvp.model.interactor;
+package br.com.alexpfx.irctest.app.mvp.model.interactor.executor;
 
 import android.os.Handler;
 import android.os.Looper;

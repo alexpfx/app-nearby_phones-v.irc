@@ -2,8 +2,10 @@ package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrc;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrcInteractor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.ConnectToIrcInteractorImpl;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.DisconnectFromIrcInteractor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.DisconnectFromIrcInteractorImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**
@@ -12,17 +14,19 @@ import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
 
     private IrcConnectionView ircConnectionView;
-    private ConnectToIrcInteractor connectToIrcInteractor;
+    private ConnectToIrcInteractor connectToIrcInteractorImpl;
+    private DisconnectFromIrcInteractor disconnectFromIrcInteractor;
 
     public IrcConnectionPresenterImpl(IrcConnectionView ircConnectionView) {
         this.ircConnectionView = ircConnectionView;
-        this.connectToIrcInteractor = new ConnectToIrcInteractor();
+        this.connectToIrcInteractorImpl = new ConnectToIrcInteractorImpl();
+        this.disconnectFromIrcInteractor = new DisconnectFromIrcInteractorImpl();
 
     }
 
     @Override
     public void connect(UserIdentify userIdentity, ServerIdentity serverIdentity) {
-        connectToIrcInteractor.execute(userIdentity, serverIdentity, new ConnectToIrc.Callback() {
+        connectToIrcInteractorImpl.execute(userIdentity, serverIdentity, new ConnectToIrcInteractor.Callback() {
             @Override
             public void onSuccess() {
                 ircConnectionView.showConnectedToIrc();
@@ -39,6 +43,6 @@ public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
 
     @Override
     public void disconnect() {
-
+        disconnectFromIrcInteractor.execute("bye bye");
     }
 }

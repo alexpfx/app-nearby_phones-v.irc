@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.mvp.model.interactor;
+package br.com.alexpfx.irctest.app.mvp.model.interactor.executor;
 
 /**
  * Created by alexandre on 05/07/15.
