@@ -1,14 +1,16 @@
 package br.com.alexpfx.irctest.app;
 
-import android.content.Context;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 import br.com.alexpfx.irctest.app.irc.*;
+import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -22,28 +24,26 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
     private IRCChannelService ircChannelService = new IRCChannelServiceImpl();
     private IRCMessageService ircMessageService = new IRCMessageServiceImpl();
-    private WifiListener wifiListener;
-    private String tag = WalkerBotActivity.class.getSimpleName();
-    private Handler handler = new Handler();
-    private boolean isClicked = false;
+
+    private IrcConnectionPresenter ircConnectionPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walker_bot);
-        wifiListener = new WifiListener((WifiManager) getSystemService(Context.WIFI_SERVICE), this);
         ButterKnife.bind(this);
+
+        ircConnectionPresenter = new IrcConnectionPresenterImpl(this);
+
     }
 
     @Override
     protected void onResume() {
-        wifiListener.registerReceiver();
         super.onResume();
     }
 
     @Override
     protected void onPause() {
-        wifiListener.unregisterReceiver();
         super.onPause();
     }
 
@@ -63,33 +63,31 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
         return super.onOptionsItemSelected(item);
     }
 
-
-
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
+        final UserIdentify user = new UserIdentify.Builder().name("alexandre").email("alexinternet@gmail.com")
+                                                            .nickname("alexpfx")
+                                                            .alternative("alexpfx2").build();
+        ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();
+        ircConnectionPresenter.connect(user, server);
 
     }
 
     @Override
     public void showConnectedToIrc() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvServerStatus.setText("Connected");
-                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
-            }
-        });
+        tvServerStatus.setText("Connected");
+        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
     }
 
     @Override
     public void showDisconnectedFromIrc() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                tvServerStatus.setText("Disconnect");
-                tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
-            }
-        });
+        tvServerStatus.setText("Disconnect");
+        tvServerStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
 
+    }
+
+    @Override
+    public void showConnectionError(String message) {
+        Toast.makeText(this, "Erro ao conectar ao servidor de irc", Toast.LENGTH_SHORT).show();
     }
 }

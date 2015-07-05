@@ -8,6 +8,6 @@ public interface IRCConnectionService {
 
     void disconnect();
 
-    boolean isConnected ();
+    boolean isConnected();
 
 }

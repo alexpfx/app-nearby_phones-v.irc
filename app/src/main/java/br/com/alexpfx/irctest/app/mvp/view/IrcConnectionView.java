@@ -9,4 +9,6 @@ public interface IrcConnectionView {
 
     void showDisconnectedFromIrc();
 
+    void showConnectionError(String message);
+
 }
