@@ -57,7 +57,7 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
             @Override
             public void run() {
                 callback.onSuccess(new ChannelInfo() {
-                    
+
                 });
             }
         });
