@@ -2,10 +2,10 @@ package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrcInteractor;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.DisconnectFromIrcInteractor;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.ConnectToIrcInteractorImpl;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.DisconnectFromIrcInteractorImpl;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.IrcConnectUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.IrcDisconnectUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**
@@ -14,19 +14,19 @@ import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
 
     private IrcConnectionView ircConnectionView;
-    private ConnectToIrcInteractor connectToIrcInteractorImpl;
-    private DisconnectFromIrcInteractor disconnectFromIrcInteractor;
+    private IrcConnectUseCase ircConnectUseCaseImpl;
+    private IrcDisconnectUseCase ircDisconnectUseCase;
 
     public IrcConnectionPresenterImpl(IrcConnectionView ircConnectionView) {
         this.ircConnectionView = ircConnectionView;
-        this.connectToIrcInteractorImpl = new ConnectToIrcInteractorImpl();
-        this.disconnectFromIrcInteractor = new DisconnectFromIrcInteractorImpl();
+        this.ircConnectUseCaseImpl = new IrcConnectUseCaseImpl();
+        this.ircDisconnectUseCase = new IrcDisconnectUseCaseImpl();
 
     }
 
     @Override
     public void connect(UserIdentify userIdentity, ServerIdentity serverIdentity) {
-        connectToIrcInteractorImpl.execute(userIdentity, serverIdentity, new ConnectToIrcInteractor.Callback() {
+        ircConnectUseCaseImpl.execute(userIdentity, serverIdentity, new IrcConnectUseCase.Callback() {
             @Override
             public void onSuccess() {
                 ircConnectionView.showConnectedToIrc();
@@ -43,7 +43,7 @@ public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
 
     @Override
     public void disconnect() {
-        disconnectFromIrcInteractor.execute("bye bye", new DisconnectFromIrcInteractor.Callback() {
+        ircDisconnectUseCase.execute("bye bye", new IrcDisconnectUseCase.Callback() {
             @Override
             public void onSuccess() {
                 ircConnectionView.showDisconnected();

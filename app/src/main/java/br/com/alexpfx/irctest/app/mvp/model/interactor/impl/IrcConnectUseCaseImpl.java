@@ -5,8 +5,8 @@ import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.irc.IRCServiceUtils;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.ConnectToIrcInteractor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
@@ -16,7 +16,7 @@ import com.ircclouds.irc.api.state.IIRCState;
 /**
  * Created by alexandre on 05/07/15.
  */
-public class ConnectToIrcInteractorImpl implements Interactor, ConnectToIrcInteractor {
+public class IrcConnectUseCaseImpl implements Interactor, IrcConnectUseCase {
 
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
 
@@ -29,9 +29,9 @@ public class ConnectToIrcInteractorImpl implements Interactor, ConnectToIrcInter
     private UserIdentify userIdentity;
     private ServerIdentity serverIdentity;
     private Callback callback;
-    private String tag = ConnectToIrcInteractorImpl.class.getSimpleName();
+    private String tag = IrcConnectUseCaseImpl.class.getSimpleName();
 
-    public ConnectToIrcInteractorImpl() {
+    public IrcConnectUseCaseImpl() {
     }
 
     @Override

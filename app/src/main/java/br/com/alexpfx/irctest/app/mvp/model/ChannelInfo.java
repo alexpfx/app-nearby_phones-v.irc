@@ -5,5 +5,4 @@ package br.com.alexpfx.irctest.app.mvp.model;
  */
 public interface ChannelInfo {
 
-
 }

@@ -17,6 +17,7 @@ public class ThreadExecutor implements Executor {
     public static final int KEEP_ALIVE_TIME = 120;
     public static final LinkedBlockingDeque<Runnable> WORK_QUEUE = new LinkedBlockingDeque<Runnable>();
     private ThreadPoolExecutor threadPoolExecutor;
+
     private ThreadExecutor() {
         int corePoolSize = CORE_POOL_SIZE;
         int maxPoolSize = MAX_POOL_SIZE;

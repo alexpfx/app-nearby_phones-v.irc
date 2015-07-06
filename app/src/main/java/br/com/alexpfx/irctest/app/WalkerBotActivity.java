@@ -2,30 +2,37 @@ package br.com.alexpfx.irctest.app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.irc.*;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
+import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class WalkerBotActivity extends AppCompatActivity implements IrcConnectionView {
+public class WalkerBotActivity extends AppCompatActivity implements IrcConnectionView, ChannelView {
 
     @Bind(value = R.id.tvIrcServerStatus)
     TextView tvServerStatus;
 
-    private IRCConnectionService ircConnectionService = new IRCConnectionServiceImpl();
-    private IRCChannelService ircChannelService = new IRCChannelServiceImpl();
-    private IRCMessageService ircMessageService = new IRCMessageServiceImpl();
+    @Bind(value = R.id.tvChannelStatus)
+    TextView tvChannelStatus;
+
+    @Bind(value = R.id.edtChannelName)
+    EditText edtChannelName;
 
     private IrcConnectionPresenter ircConnectionPresenter;
+    private IrcChannelPresenter ircChannelPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
         ButterKnife.bind(this);
 
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this);
+        ircChannelPresenter = new IrcChannelPresenterImpl(this);
 
     }
 
@@ -85,6 +93,15 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     }
 
+    @OnClick(R.id.btnJoinChannel)
+    public void btnJoinChannel() {
+        toast("Joining");
+        final Editable text = edtChannelName.getText();
+        if (!text.equals("")) {
+            ircChannelPresenter.join(text.toString());
+        }
+    }
+
     @Override
     public void showConnectedToIrc() {
         tvServerStatus.setText("Connected");
@@ -107,6 +124,17 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     @Override
     public void showNotConnected() {
         toast("Not Connected");
+    }
 
+    @Override
+    public void showChannelJoined(String channel) {
+        tvChannelStatus.setText("joined");
+        tvChannelStatus.setBackgroundColor(getResources().getColor(R.color.md_green_600));
+    }
+
+    @Override
+    public void showChannelJoinError(String message) {
+        tvChannelStatus.setText("not joined");
+        tvChannelStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
     }
 }

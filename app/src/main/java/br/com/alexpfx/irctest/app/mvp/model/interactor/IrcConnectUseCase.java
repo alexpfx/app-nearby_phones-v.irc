@@ -6,7 +6,7 @@ import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 /**
  * Created by alexandre on 05/07/15.
  */
-public interface ConnectToIrcInteractor {
+public interface IrcConnectUseCase {
 
     void execute(UserIdentify userIdentity, ServerIdentity serverIdentity, Callback callback);
 

@@ -96,8 +96,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:hint="Join Channel"
+            android:id="@+id/edtChannelName"
+            android:hint="Channel Name"
             android:layout_gravity="center"
             android:layout_weight="1"
 
@@ -109,6 +109,7 @@
             android:src="@drawable/ic_input_white_48dp"
             android:scaleType="fitXY"
             android:layout_gravity="center"
+            android:id="@+id/btnJoinChannel"
             />
 
 

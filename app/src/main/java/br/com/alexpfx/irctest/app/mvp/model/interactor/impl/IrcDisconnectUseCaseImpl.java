@@ -1,8 +1,8 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.DisconnectFromIrcInteractor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
@@ -14,7 +14,7 @@ import static br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExe
 /**
  * Created by alexandre on 05/07/15.
  */
-public class DisconnectFromIrcInteractorImpl implements DisconnectFromIrcInteractor, Interactor {
+public class IrcDisconnectUseCaseImpl implements IrcDisconnectUseCase, Interactor {
 
     private MainThread mainThread = MainThreadImpl.MainThreadSingleton.INSTANCE.get();
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
