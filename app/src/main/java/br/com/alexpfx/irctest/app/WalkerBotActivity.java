@@ -134,7 +134,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     @Override
     public void showChannelJoinError(String message) {
-        tvChannelStatus.setText("not joined");
+        tvChannelStatus.setText(message);
         tvChannelStatus.setBackgroundColor(getResources().getColor(R.color.md_red_600));
     }
 }
