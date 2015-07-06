@@ -3,7 +3,7 @@ package br.com.alexpfx.irctest.app;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class ReceiverBot extends IrcBot implements WifiListener.WifiNetworkInfoReceiveListener {
+public class ReceiverBot extends IrcBot implements WifiScanBroadcastReceiver.WifiNetworkInfoReceiveListener {
 
     public static final String TAG = ReceiverBot.class.getSimpleName();
 

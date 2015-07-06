@@ -1,5 +1,6 @@
 package br.com.alexpfx.irctest.app;
 
+import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +19,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     private ReceiverBot receiverBot;
 
-    private WifiListener wifiListener;
+    private WifiScanBroadcastReceiver wifiScanBroadcastReceiver;
     private String tag = ReceiverBotActivity.class.getSimpleName();
 
     @Override
@@ -27,7 +28,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
         setContentView(R.layout.activity_receiver_bot);
         receiverBot = new ReceiverBot("receiverBotName", "botLogin", "irc.freenode.org");
         receiverBot.setIrcBotListener(this);
-        wifiListener = new WifiListener((WifiManager) getSystemService(WIFI_SERVICE), this);
+        wifiScanBroadcastReceiver = new WifiScanBroadcastReceiver();
         ButterKnife.bind(this);
 
     }
@@ -40,15 +41,13 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     @Override
     protected void onResume() {
-        wifiListener.addListener(receiverBot);
-        wifiListener.registerReceiver();
+        registerReceiver(wifiScanBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
     }
 
     @Override
     protected void onStop() {
-        wifiListener.removeListener(receiverBot);
-        wifiListener.unregisterReceiver();
+        unregisterReceiver(wifiScanBroadcastReceiver);
         super.onStop();
     }
 
