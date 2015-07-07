@@ -8,7 +8,7 @@ import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 /**
  * Created by alexandre on 05/07/15.
  */
-public class IrcChannelPresenterImpl implements IrcChannelPresenter {
+public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannelUseCase.Callback {
     private JoinChannelUseCase joinChannelUseCase = new JoinChannelUseCaseImpl();
     private ChannelView channelView;
 
@@ -18,22 +18,21 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter {
 
     @Override
     public void join(final String channel) {
-        joinChannelUseCase.execute(channel, new JoinChannelUseCase.Callback() {
-            @Override
-            public void onSuccess(ChannelInfo channelInfo) {
-                channelView.showChannelJoined(channelInfo.getChannelName() + channelInfo.getUsers().size());
-                //find specific user and send action?
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                channelView.showChannelJoinError(t.getMessage());
-            }
-        });
+        joinChannelUseCase.execute(channel, this);
     }
 
     @Override
     public void unJoin(String channel) {
 
+    }
+
+    @Override
+    public void onJoinChannelSuccess(ChannelInfo channelInfo) {
+        channelView.showChannelJoined(channelInfo.getChannelName() + channelInfo.getUsers().size());
+    }
+
+    @Override
+    public void onJoinChannelFail(Throwable t) {
+        channelView.showChannelJoinError(t.getMessage());
     }
 }

@@ -51,7 +51,7 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onFailure(aExc);
+                callback.onJoinChannelFail(aExc);
             }
         });
 
@@ -61,7 +61,7 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onSuccess(new ChannelInfo() {
+                callback.onJoinChannelSuccess(new ChannelInfo() {
 
                     @Override
                     public String getChannelName() {
