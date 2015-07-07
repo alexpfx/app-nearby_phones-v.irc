@@ -2,6 +2,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
@@ -9,6 +10,10 @@ import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.domain.IRCChannel;
+import com.ircclouds.irc.api.domain.IRCUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alexandre on 05/07/15.
@@ -32,7 +37,7 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
         ircApi.joinChannel(channel, new com.ircclouds.irc.api.Callback<IRCChannel>() {
             @Override
             public void onSuccess(IRCChannel aObject) {
-                notifySuccess();
+                notifySuccess(aObject);
             }
 
             @Override
@@ -52,13 +57,30 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
 
     }
 
-    private void notifySuccess() {
+    private void notifySuccess(final IRCChannel ircChannel) {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
                 callback.onSuccess(new ChannelInfo() {
 
+                    @Override
+                    public String getChannelName() {
+                        return ircChannel.getName();
+                    }
+
+                    @Override
+                    public List<UserIdentify> getUsers() {
+                        final List<IRCUser> ircUsers = ircChannel.getUsers();
+
+                        List<UserIdentify> userList = new ArrayList<UserIdentify>();
+                        for (IRCUser ircUser : ircUsers) {
+                            final UserIdentify user = new UserIdentify.Builder().name(ircUser.getIdent()).build();
+                            userList.add(user);
+                        }
+                        return userList;
+                    }
                 });
+
             }
         });
 
