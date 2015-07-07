@@ -2,13 +2,13 @@ package br.com.alexpfx.irctest.app;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.apache.log4j.BasicConfigurator;
@@ -18,10 +18,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private static final String IRC_SERVER = "irc.freenode.org";
-    private static final String CHANNEL = "#garbil";
     AlarmManager alarmManager;
     private PendingIntent pendingIntent;
+    private BroadcastReceiver wifiBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,34 +28,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
-
         BasicConfigurator.configure();
+
         Intent intent = new Intent(getApplicationContext(), PerformWifiScanBroadcastReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Log.i(TAG, "onCreate");
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        wifiBroadcastReceiver = new WifiScanBroadcastReceiver();
     }
 
     @OnClick(R.id.btnOpenReceiverActivity)
@@ -71,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnStartWifiAlarm)
     void onStartWifiAlarmClick() {
-        final long interval = TimeUnit.SECONDS.toMillis(5);
+        final long interval = TimeUnit.SECONDS.toMillis(60);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
 //        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
@@ -81,4 +59,15 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 
+    @Override
+    protected void onResume() {
+        registerReceiver(wifiBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        unregisterReceiver(wifiBroadcastReceiver);
+        super.onStop();
+    }
 }
