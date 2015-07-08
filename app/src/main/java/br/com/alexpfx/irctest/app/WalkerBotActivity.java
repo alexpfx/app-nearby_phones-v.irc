@@ -74,9 +74,9 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
         toast("Connection");
-        final UserIdentify user = new UserIdentify.Builder().name("alexandre").email("alexinternet@gmail.com")
-                                                            .nickname("alexpfx")
-                                                            .alternative("alexpfx2").build();
+        final UserIdentify user = new UserIdentify.Builder().name("axnd").email("eays@com.com")
+                                                            .nickname("bellairind")
+                                                            .alternative("bellair").build();
         ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();
         ircConnectionPresenter.connect(user, server);
 

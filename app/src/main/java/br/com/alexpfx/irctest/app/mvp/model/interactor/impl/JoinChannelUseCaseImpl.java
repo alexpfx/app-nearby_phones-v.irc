@@ -74,7 +74,7 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
 
                         List<UserIdentify> userList = new ArrayList<UserIdentify>();
                         for (IRCUser ircUser : ircUsers) {
-                            final UserIdentify user = new UserIdentify.Builder().name(ircUser.getIdent()).build();
+                            final UserIdentify user = new UserIdentify.Builder().name(ircUser.getIdent()).nickname(ircUser.getNick()).email(ircUser.getHostname()).build();
                             userList.add(user);
                         }
                         return userList;
