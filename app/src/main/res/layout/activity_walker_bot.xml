@@ -10,139 +10,139 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/pnlActionBar"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:orientation="horizontal"
-        >
-
-        <FrameLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/pnlActionBar"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
             >
 
-            <ImageButton
-                android:id="@+id/btnConnect"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:src="@drawable/ic_flight_takeoff_white_48dp"
-                android:scaleType="fitXY"
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
 
-                />
+            <ImageButton
+                    android:id="@+id/btnConnect"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_flight_takeoff_white_48dp"
+                    android:scaleType="fitXY"
+
+                    />
 
 
         </FrameLayout>
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ircStatus"
-            android:layout_alignParentRight="true">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ircStatus"
+                android:layout_alignParentRight="true">
 
             <ImageButton
-                android:id="@+id/btnDisconnect"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:src="@drawable/ic_flight"
-                android:scaleType="fitXY"
-                android:layout_gravity="top"
-                />
+                    android:id="@+id/btnDisconnect"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:src="@drawable/ic_flight"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="top"
+                    />
         </FrameLayout>
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pnlActionBar"
-        android:id="@+id/pnlServerStatus">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pnlActionBar"
+            android:id="@+id/pnlServerStatus">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/lblServerStatus"
-            android:text="Server Status: "
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="left"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/lblServerStatus"
+                android:text="Server Status: "
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="left"
+                />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/tvIrcServerStatus"
-            android:text="disconnected"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:background="@color/md_red_600"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvIrcServerStatus"
+                android:text="disconnected"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:background="@color/md_red_600"
+                />
 
     </FrameLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pnlServerStatus"
-        android:id="@+id/pnlChannelToolbar"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pnlServerStatus"
+            android:id="@+id/pnlChannelToolbar"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            >
 
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edtChannelName"
-            android:hint="Channel Name"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtChannelName"
+                android:hint="Channel Name"
+                android:layout_gravity="center"
+                android:layout_weight="1"
 
-            />
+                />
 
         <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_input_white_48dp"
-            android:scaleType="fitXY"
-            android:layout_gravity="center"
-            android:id="@+id/btnJoinChannel"
-            />
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_input_white_48dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:id="@+id/btnJoinChannel"
+                />
 
 
     </LinearLayout>
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/pnlChannelToolbar"
-        android:id="@+id/pnlChannelStatus"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pnlChannelToolbar"
+            android:id="@+id/pnlChannelStatus"
+            >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Channel Status: "
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_gravity="left"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Channel Status: "
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_gravity="left"
+                />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/tvChannelStatus"
-            android:text="Joined"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="right"
-            android:background="@color/md_red_600"
-            />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/tvChannelStatus"
+                android:text="Joined"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="right"
+                android:background="@color/md_red_600"
+                />
 
     </FrameLayout>
 

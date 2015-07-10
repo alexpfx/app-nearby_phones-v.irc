@@ -7,9 +7,9 @@ import java.util.List;
 /**
  * Created by alexandre on 07/07/15.
  */
-public interface NotifyUsersUseCase extends Interactor{
+public interface NotifyUsersUseCase extends Interactor {
 
-    void execute (List<UserIdentify> userList, Callback callback);
+    void execute(List<UserIdentify> userList, Callback callback);
 
     interface Callback {
 

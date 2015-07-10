@@ -9,23 +9,23 @@
                 tools:context="br.com.alexpfx.irctest.app.ReceiverBotActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/hello_world"/>
 
     <include
-        android:id="@+id/ircStatus"
-        layout="@layout/server_status"
-        />
+            android:id="@+id/ircStatus"
+            layout="@layout/server_status"
+            />
 
     <ImageButton
-        android:id="@+id/btnConnect"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/ircStatus"
-        />
+            android:id="@+id/btnConnect"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ircStatus"
+            />
 
 
 </RelativeLayout>
