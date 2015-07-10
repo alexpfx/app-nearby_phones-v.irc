@@ -20,9 +20,14 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
             public boolean catchMessage(String searchString) {
                 return searchString.contains(filterString);
             }
+
         };
         ircApi.addListener(new MessageListener(filter, callback));
 
+    }
+
+    interface MessageFilter {
+        boolean catchMessage(String searchString);
     }
 
     class MessageListener extends VariousMessageListenerAdapter {
@@ -42,10 +47,6 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
             }
             callback.onPrivateMessage(aMsg.getSource().getNick(), aMsg.getText());
         }
-    }
-
-    interface MessageFilter {
-        boolean catchMessage(String searchString);
     }
 
 }
