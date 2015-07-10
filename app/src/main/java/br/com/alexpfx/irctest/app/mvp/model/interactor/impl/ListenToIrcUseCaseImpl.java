@@ -12,37 +12,35 @@ import com.ircclouds.irc.api.listeners.VariousMessageListenerAdapter;
 public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
 
-    public void register() {
-        ircApi.addListener(new MessageListener(null));
-    }
-
-    public void unregister() {
-        ircApi.deleteListener(new MessageListener(null));
-    }
 
     @Override
-    public void run() {
-
-    }
-
-    @Override
-    public void registerListener(String filter, Callback callback) {
+    public void registerListener(final String filterString, Callback callback) {
+        MessageFilter filter = new MessageFilter() {
+            @Override
+            public boolean catchMessage(String searchString) {
+                return searchString.contains(filterString);
+            }
+        };
+        ircApi.addListener(new MessageListener(filter, callback));
 
     }
 
     class MessageListener extends VariousMessageListenerAdapter {
         private MessageFilter filter;
+        private Callback callback;
 
-        public MessageListener(MessageFilter filter) {
+        public MessageListener(MessageFilter filter, Callback callback) {
             this.filter = filter;
+            this.callback = callback;
         }
+
 
         @Override
         public void onUserPrivMessage(UserPrivMsg aMsg) {
             if (!filter.catchMessage(aMsg.getText())) {
                 return;
             }
-
+            callback.onPrivateMessage(aMsg.getSource().getNick(), aMsg.getText());
         }
     }
 
