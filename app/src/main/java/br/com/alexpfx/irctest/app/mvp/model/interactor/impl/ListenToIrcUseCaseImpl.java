@@ -25,6 +25,11 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
 
     }
 
+    @Override
+    public void registerListener(String filter, Callback callback) {
+
+    }
+
     class MessageListener extends VariousMessageListenerAdapter {
         private MessageFilter filter;
 
@@ -34,12 +39,15 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
 
         @Override
         public void onUserPrivMessage(UserPrivMsg aMsg) {
-            super.onUserPrivMessage(aMsg);
+            if (!filter.catchMessage(aMsg.getText())) {
+                return;
+            }
+
         }
     }
 
     interface MessageFilter {
-        boolean pass();
+        boolean catchMessage(String searchString);
     }
 
 }
