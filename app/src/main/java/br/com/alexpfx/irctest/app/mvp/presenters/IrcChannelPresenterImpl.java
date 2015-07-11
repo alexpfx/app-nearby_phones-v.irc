@@ -6,9 +6,11 @@ import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ListenToIrcUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.SendMessageUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.JoinChannelUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.ListenToIrcUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.NotifyUsersUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.SendMessageUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 
 /**
@@ -39,9 +41,8 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
     @Override
     public void onJoinChannelSuccess(ChannelInfo channelInfo) {
         channelView.showChannelJoined(channelInfo.getChannelName() + channelInfo.getUsers().size());
-        listenToIrcUseCase.registerListener("handshake", this);
+        listenToIrcUseCase.registerListener("cachorro quente", this);
         notifyUsersUseCase.execute(channelInfo.getUsers(), this);
-
 
     }
 
@@ -52,6 +53,9 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
 
     @Override
     public void onPrivateMessage(String sender, String message) {
-        Log.d(tag, TextLogUtils.concat(":", sender, message));
+        if (message.contains("cachorro quente")){
+            new SendMessageUseCaseImpl().execute(sender, "com mostarda...");
+        }
+
     }
 }

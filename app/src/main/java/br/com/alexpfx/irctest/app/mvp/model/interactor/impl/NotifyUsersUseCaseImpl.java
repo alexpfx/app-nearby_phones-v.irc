@@ -32,9 +32,8 @@ public class NotifyUsersUseCaseImpl implements NotifyUsersUseCase {
 
     @Override
     public void run() {
-        System.out.println(userList.size());
         for (UserIdentify u : userList) {
-            ircApi.message(u.getNickname(), ":handshake:");
+            ircApi.message(u.getNickname(), "cachorro quente...? ");
         }
     }
 }
