@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Created by alexandre on 05/07/15.
  */
+/* todo mundo que esta no canal recebe as notificacoes */
 public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
     private Executor executor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
