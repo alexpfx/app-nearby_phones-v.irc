@@ -44,5 +44,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.0'
     compile 'com.ircclouds.irc:irc-api:1.0-0014'
     compile 'org.slf4j:slf4j-log4j12:1.7.12'
-
+    compile 'com.squareup:otto:1.3.8'
 }
