@@ -8,10 +8,11 @@ import com.squareup.otto.Bus;
 public enum BusProvider {
     INSTANCE;
 
-    private static Bus bus = new Bus();
+    private Bus bus = new Bus();
 
-    public static Bus get() {
+    public Bus get() {
         return bus;
     }
+
 
 }

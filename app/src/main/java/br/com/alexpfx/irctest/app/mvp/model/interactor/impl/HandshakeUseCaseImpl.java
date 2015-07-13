@@ -1,7 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
+import android.util.Log;
+import br.com.alexpfx.irctest.app.BusProvider;
+import br.com.alexpfx.irctest.app.irc.WifiReceived;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.*;
+import com.squareup.otto.Subscribe;
 
 /**
  * Created by alex on 12/07/2015.
@@ -23,6 +27,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
         notifyUsersUseCase = new NotifyUsersUseCaseImpl();
         sendMessageUseCase = new SendMessageUseCaseImpl();
         listenToIrcUseCase = new ListenToIrcUseCaseImpl();
+        BusProvider.INSTANCE.get().register(this);
     }
 
     @Override
@@ -37,6 +42,13 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
 
     @Override
     public void onJoinChannelFail(Throwable t) {
+
+    }
+
+    @Subscribe
+    public void onWifiReceived (WifiReceived wifiReceived){
+
+        Log.d("wifiReceived", wifiReceived.toString());
 
     }
 }

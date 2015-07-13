@@ -1,16 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import android.util.Log;
-import br.com.alexpfx.irctest.app.TextLogUtils;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.HandshakeUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ListenToIrcUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.SendMessageUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.JoinChannelUseCaseImpl;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.ListenToIrcUseCaseImpl;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.NotifyUsersUseCaseImpl;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.SendMessageUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 
 /**
@@ -20,6 +15,7 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
     private JoinChannelUseCase joinChannelUseCase = new JoinChannelUseCaseImpl();
     private NotifyUsersUseCase notifyUsersUseCase = new NotifyUsersUseCaseImpl();
     private ListenToIrcUseCase listenToIrcUseCase = new ListenToIrcUseCaseImpl();
+    private HandshakeUseCase handshakeUseCase = new HandshakeUseCaseImpl();
 
     private ChannelView channelView;
     private String tag = IrcChannelPresenterImpl.class.getSimpleName();
@@ -30,7 +26,8 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
 
     @Override
     public void join(final String channel) {
-        joinChannelUseCase.execute(channel, this);
+        handshakeUseCase.execute(channel, new HandshakeUseCase.Callback() {
+        });
     }
 
     @Override
@@ -53,7 +50,7 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
 
     @Override
     public void onPrivateMessage(String sender, String message) {
-        if (message.contains("cachorro quente")){
+        if (message.contains("cachorro quente")) {
             new SendMessageUseCaseImpl().execute(sender, "com mostarda...");
         }
 

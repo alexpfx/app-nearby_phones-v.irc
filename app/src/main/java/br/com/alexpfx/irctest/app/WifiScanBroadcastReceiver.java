@@ -7,6 +7,8 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.util.Log;
 import android.widget.Toast;
+import br.com.alexpfx.irctest.app.irc.WifiReceived;
+import com.squareup.otto.Bus;
 
 import java.util.List;
 
@@ -16,15 +18,19 @@ import java.util.List;
 public class WifiScanBroadcastReceiver extends BroadcastReceiver {
 
     private String tag = WifiNetworkInfoReceiveListener.class.getSimpleName();
+    private Bus bus = BusProvider.INSTANCE.get();
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         final List<ScanResult> scanResults = wifiManager.getScanResults();
+        WifiList list = new WifiList();
         for (ScanResult scanResult : scanResults) {
-            Log.d(tag, scanResult.SSID);
+            WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.frequency);
+            list.add(wifiInfo);
         }
+        bus.post(new WifiReceived(list));
     }
 
     public interface WifiNetworkInfoReceiveListener {

@@ -3,6 +3,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ListenToIrcUseCase;
 import com.ircclouds.irc.api.IRCApi;
+import com.ircclouds.irc.api.domain.messages.ChanPartMessage;
 import com.ircclouds.irc.api.domain.messages.UserPrivMsg;
 import com.ircclouds.irc.api.listeners.VariousMessageListenerAdapter;
 
@@ -46,6 +47,11 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
                 return;
             }
             callback.onPrivateMessage(aMsg.getSource().getNick(), aMsg.getText());
+        }
+
+        @Override
+        public void onChannelPart(ChanPartMessage aMsg) {
+            super.onChannelPart(aMsg);
         }
     }
 
