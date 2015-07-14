@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.irc.WifiReceived;
+import br.com.alexpfx.irctest.app.irc.WifiReceivedEvent;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class WifiScanBroadcastReceiver extends BroadcastReceiver {
             WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.frequency);
             list.add(wifiInfo);
         }
-        bus.post(new WifiReceived(list));
+        bus.post(new WifiReceivedEvent(list));
     }
 
     public interface WifiNetworkInfoReceiveListener {

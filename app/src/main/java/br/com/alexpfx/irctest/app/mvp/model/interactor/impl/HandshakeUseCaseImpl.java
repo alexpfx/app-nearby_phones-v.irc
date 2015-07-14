@@ -2,7 +2,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import android.util.Log;
 import br.com.alexpfx.irctest.app.BusProvider;
-import br.com.alexpfx.irctest.app.irc.WifiReceived;
+import br.com.alexpfx.irctest.app.irc.WifiReceivedEvent;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.HandshakeUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
@@ -49,7 +49,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     }
 
     @Subscribe
-    public void onWifiReceived(WifiReceived wifiReceived) {
+    public void onWifiReceived(WifiReceivedEvent wifiReceived) {
 
         Log.d("wifiReceived", wifiReceived.toString());
 

@@ -5,11 +5,11 @@ import br.com.alexpfx.irctest.app.WifiList;
 /**
  * Created by alex on 12/07/2015.
  */
-public class WifiReceived {
+public class WifiReceivedEvent {
 
     private WifiList wifiList;
 
-    public WifiReceived(WifiList wifiList) {
+    public WifiReceivedEvent(WifiList wifiList) {
         this.wifiList = wifiList;
     }
 
