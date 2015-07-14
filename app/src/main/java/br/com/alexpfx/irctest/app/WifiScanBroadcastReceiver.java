@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 import android.widget.Toast;
 import br.com.alexpfx.irctest.app.irc.WifiReceived;
 import com.squareup.otto.Bus;

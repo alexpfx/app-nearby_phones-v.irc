@@ -4,7 +4,10 @@ import android.util.Log;
 import br.com.alexpfx.irctest.app.BusProvider;
 import br.com.alexpfx.irctest.app.irc.WifiReceived;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.*;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.HandshakeUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.interactor.SendMessageUseCase;
 import com.squareup.otto.Subscribe;
 
 /**
@@ -46,7 +49,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     }
 
     @Subscribe
-    public void onWifiReceived (WifiReceived wifiReceived){
+    public void onWifiReceived(WifiReceived wifiReceived) {
 
         Log.d("wifiReceived", wifiReceived.toString());
 

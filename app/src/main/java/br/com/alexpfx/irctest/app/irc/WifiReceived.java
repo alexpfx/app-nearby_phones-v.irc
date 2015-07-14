@@ -7,15 +7,14 @@ import br.com.alexpfx.irctest.app.WifiList;
  */
 public class WifiReceived {
 
+    private WifiList wifiList;
+
     public WifiReceived(WifiList wifiList) {
         this.wifiList = wifiList;
     }
 
-    private WifiList wifiList;
-
-
     @Override
     public String toString() {
-       return wifiList.toString();
+        return wifiList.toString();
     }
 }

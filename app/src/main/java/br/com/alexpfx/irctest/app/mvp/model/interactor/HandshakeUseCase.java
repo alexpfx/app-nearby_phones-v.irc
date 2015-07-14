@@ -5,7 +5,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor;
  */
 public interface HandshakeUseCase extends Interactor {
 
-    void execute (String canal, Callback callback);
+    void execute(String canal, Callback callback);
 
     public interface Callback {
 
