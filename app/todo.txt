@@ -1,0 +1,1 @@
+criar onCreate para classes do tipo Interactor.
