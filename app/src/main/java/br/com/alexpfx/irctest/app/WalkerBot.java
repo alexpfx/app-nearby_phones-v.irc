@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class WalkerBot extends IrcBot implements WifiScanBroadcastReceiver.WifiNetworkInfoReceiveListener {
+public class WalkerBot extends IrcBot implements WifiScanResultBroadcastReceiver.WifiNetworkInfoReceiveListener {
 
     private static WalkerBot instance;
 

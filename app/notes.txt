@@ -1,0 +1,6 @@
+ao entrar no canal:
+ registrar listener.
+ enviar mensagem a todos os usuarios do canal quando receber redes.
+ao sair do canal
+ desregistrar
+ parar de enviar mensagens.

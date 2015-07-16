@@ -14,13 +14,14 @@ import java.util.List;
 /**
  * Created by alexandre on 27/06/15.
  */
-public class WifiScanBroadcastReceiver extends BroadcastReceiver {
+public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
 
     private String tag = WifiNetworkInfoReceiveListener.class.getSimpleName();
     private Bus bus = BusProvider.INSTANCE.get();
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         final List<ScanResult> scanResults = wifiManager.getScanResults();

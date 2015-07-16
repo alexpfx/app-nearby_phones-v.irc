@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         BasicConfigurator.configure();
 
-        Intent intent = new Intent(getApplicationContext(), PerformWifiScanBroadcastReceiver.class);
+        Intent intent = new Intent(getApplicationContext(), WifiScanScheduleBroadcastReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        wifiBroadcastReceiver = new WifiScanBroadcastReceiver();
+        wifiBroadcastReceiver = new WifiScanResultBroadcastReceiver();
     }
 
     @OnClick(R.id.btnOpenReceiverActivity)

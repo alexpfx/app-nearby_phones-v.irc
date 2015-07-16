@@ -19,7 +19,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     private ReceiverBot receiverBot;
 
-    private WifiScanBroadcastReceiver wifiScanBroadcastReceiver;
+    private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
     private String tag = ReceiverBotActivity.class.getSimpleName();
 
     @Override
@@ -28,7 +28,7 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
         setContentView(R.layout.activity_receiver_bot);
         receiverBot = new ReceiverBot("receiverBotName", "botLogin", "irc.freenode.org");
         receiverBot.setIrcBotListener(this);
-        wifiScanBroadcastReceiver = new WifiScanBroadcastReceiver();
+        wifiScanResultBroadcastReceiver = new WifiScanResultBroadcastReceiver();
         ButterKnife.bind(this);
 
     }
@@ -41,13 +41,13 @@ public class ReceiverBotActivity extends AppCompatActivity implements IrcBotList
 
     @Override
     protected void onResume() {
-        registerReceiver(wifiScanBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
     }
 
     @Override
     protected void onStop() {
-        unregisterReceiver(wifiScanBroadcastReceiver);
+        unregisterReceiver(wifiScanResultBroadcastReceiver);
         super.onStop();
     }
 

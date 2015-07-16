@@ -16,12 +16,12 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
 
-        <receiver android:name=".PerformWifiScanBroadcastReceiver" android:enabled="true">
+        <receiver android:name=".WifiScanScheduleBroadcastReceiver" android:enabled="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
-
         </receiver>
+
         <activity
                 android:name=".MainActivity"
                 android:configChanges="orientation|keyboardHidden"
