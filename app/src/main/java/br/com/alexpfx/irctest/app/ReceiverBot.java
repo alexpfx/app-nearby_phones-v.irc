@@ -3,7 +3,7 @@ package br.com.alexpfx.irctest.app;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class ReceiverBot extends IrcBot implements WifiScanResultBroadcastReceiver.WifiNetworkInfoReceiveListener {
+public class ReceiverBot extends IrcBot  {
 
     public static final String TAG = ReceiverBot.class.getSimpleName();
 
@@ -34,16 +34,6 @@ public class ReceiverBot extends IrcBot implements WifiScanResultBroadcastReceiv
         }
     }
 
-    @Override
-    public void receive(String bssid, String ssid, int rssid) {
-        final WifiInfo byBssid = wifiList.getByBssid(bssid);
-        if (byBssid == null) {
-            wifiList.add(WifiInfo.newInstance(bssid, ssid, rssid));
-        } else {
-            byBssid.setRssid(rssid);
-            byBssid.setSsid(ssid);
-        }
-    }
 
     public void setReceiverBotListener(ReceiverBotListener receiverBotListener) {
         this.receiverBotListener = receiverBotListener;

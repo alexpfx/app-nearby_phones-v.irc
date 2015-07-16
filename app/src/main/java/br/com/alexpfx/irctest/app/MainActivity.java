@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     AlarmManager alarmManager;
     private PendingIntent pendingIntent;
-    private BroadcastReceiver wifiBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        wifiBroadcastReceiver = new WifiScanResultBroadcastReceiver();
     }
 
     @OnClick(R.id.btnOpenReceiverActivity)
@@ -59,15 +57,4 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
     }
 
-    @Override
-    protected void onResume() {
-        registerReceiver(wifiBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        super.onResume();
-    }
-
-    @Override
-    protected void onStop() {
-        unregisterReceiver(wifiBroadcastReceiver);
-        super.onStop();
-    }
 }

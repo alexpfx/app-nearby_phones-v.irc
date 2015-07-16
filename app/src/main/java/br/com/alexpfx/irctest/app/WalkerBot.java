@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class WalkerBot extends IrcBot implements WifiScanResultBroadcastReceiver.WifiNetworkInfoReceiveListener {
+public class WalkerBot extends IrcBot  {
 
     private static WalkerBot instance;
 
@@ -25,17 +25,7 @@ public class WalkerBot extends IrcBot implements WifiScanResultBroadcastReceiver
 
     }
 
-    @Override
-    public void receive(String bssid, String ssid, int rssid) {
-        if (walkerListeners.isEmpty()) {
-            return;
-        }
-        for (UserIdentity u : walkerListeners) {
-            sendAction(u.getName(), bssid);
-        }
-    }
-
-    @Override
+        @Override
     protected void onConnect() {
         super.onConnect();
     }

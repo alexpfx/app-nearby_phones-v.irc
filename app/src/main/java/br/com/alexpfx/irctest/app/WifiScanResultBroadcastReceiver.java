@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
 
-    private String tag = WifiNetworkInfoReceiveListener.class.getSimpleName();
     private Bus bus = BusProvider.INSTANCE.get();
 
     @Override
@@ -33,8 +32,5 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
         bus.post(new WifiReceivedEvent(list));
     }
 
-    public interface WifiNetworkInfoReceiveListener {
-        void receive(String bssid, String ssid, int rssid);
-    }
 
 }
