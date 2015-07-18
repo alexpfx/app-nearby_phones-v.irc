@@ -1,7 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import android.os.Handler;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

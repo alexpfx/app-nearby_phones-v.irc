@@ -1,7 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor;
 
 import br.com.alexpfx.irctest.app.WifiList;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
 
 import java.util.Date;
 

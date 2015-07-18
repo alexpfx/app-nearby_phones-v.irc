@@ -3,7 +3,7 @@ package br.com.alexpfx.irctest.app;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class ReceiverBot extends IrcBot  {
+public class ReceiverBot extends IrcBot {
 
     public static final String TAG = ReceiverBot.class.getSimpleName();
 

@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class WalkerBot extends IrcBot  {
+public class WalkerBot extends IrcBot {
 
     private static WalkerBot instance;
 
@@ -25,7 +25,7 @@ public class WalkerBot extends IrcBot  {
 
     }
 
-        @Override
+    @Override
     protected void onConnect() {
         super.onConnect();
     }

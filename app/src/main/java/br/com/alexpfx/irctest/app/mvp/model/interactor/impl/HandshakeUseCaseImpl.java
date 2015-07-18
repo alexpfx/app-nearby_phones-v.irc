@@ -23,6 +23,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
     private String channel;
     private Callback callback;
+
     {
         BusProvider.INSTANCE.get().register(this);
     }
@@ -56,7 +57,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
 
     @Subscribe
     public void onWifiReceived(WifiReceivedEvent wifiReceived) {
-        if (postResultsUseCase == null){
+        if (postResultsUseCase == null) {
             return;
         }
         postResultsUseCase.execute("appid", channel, wifiReceived.getWifiList(), new Date());

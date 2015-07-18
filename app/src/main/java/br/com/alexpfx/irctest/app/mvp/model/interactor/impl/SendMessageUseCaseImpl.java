@@ -30,6 +30,5 @@ public class SendMessageUseCaseImpl implements SendMessageUseCase {
     public void run() {
 
 
-
     }
 }
