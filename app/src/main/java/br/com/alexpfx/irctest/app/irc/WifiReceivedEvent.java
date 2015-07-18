@@ -13,6 +13,11 @@ public class WifiReceivedEvent {
         this.wifiList = wifiList;
     }
 
+
+    public WifiList getWifiList() {
+        return wifiList;
+    }
+
     @Override
     public String toString() {
         return wifiList.toString();

@@ -6,7 +6,6 @@ import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
-import com.google.code.chatterbotapi.*;
 import com.ircclouds.irc.api.IRCApi;
 
 /**

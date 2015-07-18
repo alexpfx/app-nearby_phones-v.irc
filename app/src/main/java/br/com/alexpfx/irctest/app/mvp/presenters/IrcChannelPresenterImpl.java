@@ -53,6 +53,5 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
         if (message.contains("cachorro quente")) {
             new SendMessageUseCaseImpl().execute(sender, "com mostarda...");
         }
-
     }
 }

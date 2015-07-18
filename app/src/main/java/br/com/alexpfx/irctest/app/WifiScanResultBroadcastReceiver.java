@@ -26,7 +26,7 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
         final List<ScanResult> scanResults = wifiManager.getScanResults();
         WifiList list = new WifiList();
         for (ScanResult scanResult : scanResults) {
-            WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.frequency);
+            WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.level);
             list.add(wifiInfo);
         }
         bus.post(new WifiReceivedEvent(list));
