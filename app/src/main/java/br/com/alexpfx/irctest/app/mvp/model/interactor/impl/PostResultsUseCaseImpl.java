@@ -31,8 +31,6 @@ public class PostResultsUseCaseImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
-
-
         for (WifiInfo wifiInfo : list.getWifiInfoList()) {
             StringBuilder sb = new StringBuilder();
             sb.append(id).append(";");
