@@ -4,9 +4,12 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
+import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.apache.log4j.BasicConfigurator;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
+    private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
+        wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
+
+    }
+
+    @Override
+    protected void onStart() {
+        registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        super.onStart();
     }
 
     @OnClick(R.id.btnInitialize)
@@ -49,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         alarmManager.cancel(pendingIntent);
+        unregisterReceiver(wifiScanResultBroadcastReceiver);
         super.onDestroy();
     }
 }

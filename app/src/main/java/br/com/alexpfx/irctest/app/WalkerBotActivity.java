@@ -1,7 +1,5 @@
 package br.com.alexpfx.irctest.app;
 
-import android.content.IntentFilter;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -18,7 +16,6 @@ import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
-import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,7 +33,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     private IrcConnectionPresenter ircConnectionPresenter;
     private IrcChannelPresenter ircChannelPresenter;
-    private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,20 +44,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this);
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
 
-        wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
 
-    }
 
-    @Override
-    protected void onResume() {
-        registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        unregisterReceiver(wifiScanResultBroadcastReceiver);
-        super.onPause();
     }
 
     @Override

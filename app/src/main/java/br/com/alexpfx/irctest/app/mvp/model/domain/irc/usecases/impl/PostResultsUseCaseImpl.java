@@ -3,6 +3,8 @@ package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.domain.json.Json;
+import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonJsonImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import com.ircclouds.irc.api.IRCApi;
@@ -19,6 +21,7 @@ public class PostResultsUseCaseImpl implements PostResultsUseCase {
     private Date eventTime;
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
+    private Json json = new GsonJsonImpl();
 
     @Override
     public void execute(String id, String channel, WifiList list, Date eventTime) {
@@ -31,15 +34,9 @@ public class PostResultsUseCaseImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
+        final String jsonString = this.json.toJson(list.getWifiInfoList());
         StringBuilder sb = new StringBuilder();
-        sb.append("x");
-        for (WifiInfo wifiInfo : list.getWifiInfoList()) {
-            sb.append(id).append(";");
-            sb.append(wifiInfo.getBssid()).append(";");
-            sb.append(wifiInfo.getRssid()).append(";");
-            sb.append(wifiInfo.getSsid()).append(";");
-        }
-        sb.append("x");
+        sb.append(jsonString);
         api.message("#" + channel, sb.toString());
 
     }
