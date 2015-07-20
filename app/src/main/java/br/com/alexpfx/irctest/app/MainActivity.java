@@ -16,7 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    AlarmManager alarmManager;
+    public static final int DURATION = 60;
+    private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
 
     @Override
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        /* Log4j */
         BasicConfigurator.configure();
 
         Intent intent = new Intent(getApplicationContext(), WifiScanScheduleBroadcastReceiver.class);
@@ -34,16 +37,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.btnOpenWalkerActivity)
-    void onOpenWalkerClick() {
-        startActivity(new Intent(MainActivity.this, WalkerBotActivity.class));
+    @OnClick(R.id.btnInitialize)
+    void initializeApp (){
+        setupScanAlarm();
+
     }
 
-    @OnClick(R.id.btnStartWifiAlarm)
-    void onStartWifiAlarmClick() {
-        final long interval = TimeUnit.SECONDS.toMillis(60);
+    void setupScanAlarm() {
+        final long interval = TimeUnit.SECONDS.toMillis(DURATION);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
-//        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
 
     @OnClick(R.id.btnCancelWifiAlarm)
