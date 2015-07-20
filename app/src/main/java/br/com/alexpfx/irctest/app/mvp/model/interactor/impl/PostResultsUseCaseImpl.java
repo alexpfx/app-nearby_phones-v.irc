@@ -31,14 +31,16 @@ public class PostResultsUseCaseImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("x");
         for (WifiInfo wifiInfo : list.getWifiInfoList()) {
-            StringBuilder sb = new StringBuilder();
             sb.append(id).append(";");
             sb.append(wifiInfo.getBssid()).append(";");
             sb.append(wifiInfo.getRssid()).append(";");
             sb.append(wifiInfo.getSsid()).append(";");
-            api.message("#" + channel, sb.toString());
         }
+        sb.append("x");
+        api.message("#" + channel, sb.toString());
 
     }
 }
