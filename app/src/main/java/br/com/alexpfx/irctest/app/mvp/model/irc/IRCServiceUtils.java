@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.irc;
+package br.com.alexpfx.irctest.app.mvp.model.irc;
 
 import com.ircclouds.irc.api.IServerParameters;
 import com.ircclouds.irc.api.domain.IRCServer;

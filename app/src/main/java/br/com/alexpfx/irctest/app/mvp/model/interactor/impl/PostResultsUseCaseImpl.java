@@ -2,7 +2,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import br.com.alexpfx.irctest.app.WifiInfo;
 import br.com.alexpfx.irctest.app.WifiList;
-import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
 import com.ircclouds.irc.api.IRCApi;

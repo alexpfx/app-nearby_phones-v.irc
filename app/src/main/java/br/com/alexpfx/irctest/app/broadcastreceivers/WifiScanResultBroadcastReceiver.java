@@ -9,7 +9,7 @@ import android.widget.Toast;
 import br.com.alexpfx.irctest.app.BusProvider;
 import br.com.alexpfx.irctest.app.WifiInfo;
 import br.com.alexpfx.irctest.app.WifiList;
-import br.com.alexpfx.irctest.app.irc.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.mvp.model.irc.WifiReceivedEvent;
 import com.squareup.otto.Bus;
 
 import java.util.List;

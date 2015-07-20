@@ -1,8 +1,8 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import android.util.Log;
-import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
-import br.com.alexpfx.irctest.app.irc.IRCServiceUtils;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCServiceUtils;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;

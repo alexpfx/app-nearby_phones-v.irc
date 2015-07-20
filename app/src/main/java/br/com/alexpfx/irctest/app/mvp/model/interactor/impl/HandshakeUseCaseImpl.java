@@ -2,7 +2,7 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import android.util.Log;
 import br.com.alexpfx.irctest.app.BusProvider;
-import br.com.alexpfx.irctest.app.irc.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.mvp.model.irc.WifiReceivedEvent;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.*;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;

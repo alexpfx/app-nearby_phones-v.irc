@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;

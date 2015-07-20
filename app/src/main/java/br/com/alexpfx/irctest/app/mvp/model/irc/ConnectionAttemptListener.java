@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.irc;
+package br.com.alexpfx.irctest.app.mvp.model.irc;
 
 /**
  * Created by alexandre on 01/07/15.

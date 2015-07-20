@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
