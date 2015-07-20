@@ -1,7 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
-import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
@@ -20,11 +20,11 @@ public class NotifyUsersUseCaseImpl implements NotifyUsersUseCase {
     private MainThread mainThread = MainThreadImpl.MainThreadSingleton.INSTANCE.get();
     private Executor executor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
 
-    private List<UserIdentify> userList;
+    private List<UserIdentity> userList;
     private Callback callback;
 
     @Override
-    public void execute(List<UserIdentify> userList, Callback callback) {
+    public void execute(List<UserIdentity> userList, Callback callback) {
         this.userList = userList;
         this.callback = callback;
         executor.run(this);
@@ -32,7 +32,7 @@ public class NotifyUsersUseCaseImpl implements NotifyUsersUseCase {
 
     @Override
     public void run() {
-        for (UserIdentify u : userList) {
+        for (UserIdentity u : userList) {
             ircApi.message(u.getNickname(), "cachorro quente...? ");
         }
     }

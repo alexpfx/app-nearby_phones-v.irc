@@ -1,7 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.IrcConnectUseCaseImpl;
@@ -25,7 +25,7 @@ public class IrcConnectionPresenterImpl implements IrcConnectionPresenter {
     }
 
     @Override
-    public void connect(UserIdentify userIdentity, ServerIdentity serverIdentity) {
+    public void connect(UserIdentity userIdentity, ServerIdentity serverIdentity) {
         ircConnectUseCaseImpl.execute(userIdentity, serverIdentity, new IrcConnectUseCase.Callback() {
             @Override
             public void onSuccess() {

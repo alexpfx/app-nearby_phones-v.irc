@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import br.com.alexpfx.irctest.app.broadcastreceivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
@@ -84,7 +84,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     @OnClick(R.id.btnConnect)
     public void btnConnectClick() {
         toast("Connection");
-        final UserIdentify user = new UserIdentify.Builder().name("axnd").email("eays@com.com")
+        final UserIdentity user = new UserIdentity.Builder().name("axnd").email("eays@com.com")
                 .nickname("bellairind")
                 .alternative("bellair").build();
         ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();

@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 /**
  * Created by alexandre on 04/07/15.
  */
-public class UserIdentify implements Identity {
+public class UserIdentity implements Identity {
     private String nickname;
     private String alternative;
     private String name;
     private String email;
 
-    private UserIdentify(Builder builder) {
+    private UserIdentity(Builder builder) {
         nickname = builder.nickname;
         alternative = builder.alternative;
         name = builder.name;
@@ -68,8 +68,8 @@ public class UserIdentify implements Identity {
             return this;
         }
 
-        public UserIdentify build() {
-            return new UserIdentify(this);
+        public UserIdentity build() {
+            return new UserIdentity(this);
         }
     }
 }

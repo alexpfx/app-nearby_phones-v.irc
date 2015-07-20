@@ -4,7 +4,7 @@ import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.irc.IRCServiceUtils;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.UserIdentify;
+import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
@@ -26,7 +26,7 @@ public class IrcConnectUseCaseImpl implements Interactor, IrcConnectUseCase {
     //TODO: injectar.
     private ThreadExecutor executor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
 
-    private UserIdentify userIdentity;
+    private UserIdentity userIdentity;
     private ServerIdentity serverIdentity;
     private Callback callback;
     private String tag = IrcConnectUseCaseImpl.class.getSimpleName();
@@ -35,7 +35,7 @@ public class IrcConnectUseCaseImpl implements Interactor, IrcConnectUseCase {
     }
 
     @Override
-    public void execute(UserIdentify userIdentity, ServerIdentity serverIdentity, Callback callback) {
+    public void execute(UserIdentity userIdentity, ServerIdentity serverIdentity, Callback callback) {
         this.userIdentity = userIdentity;
         this.serverIdentity = serverIdentity;
         this.callback = callback;

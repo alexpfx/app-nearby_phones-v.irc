@@ -8,6 +8,6 @@ import java.util.List;
 public interface ChannelInfo {
     String getChannelName();
 
-    List<UserIdentify> getUsers();
+    List<UserIdentity> getUsers();
 
 }
