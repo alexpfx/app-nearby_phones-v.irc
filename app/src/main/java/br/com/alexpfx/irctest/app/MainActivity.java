@@ -32,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.btnOpenReceiverActivity)
-    void onOpenReceiverClick() {
-        startActivity(new Intent(MainActivity.this, ReceiverBotActivity.class));
-    }
 
     @OnClick(R.id.btnOpenWalkerActivity)
     void onOpenWalkerClick() {

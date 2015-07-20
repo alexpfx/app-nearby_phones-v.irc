@@ -34,10 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".ReceiverBotActivity"
-                android:label="@string/title_activity_receiver_bot" android:launchMode="singleTop">
-        </activity>
-        <activity
                 android:name=".WalkerBotActivity"
                 android:label="@string/title_activity_walker_bot" android:launchMode="singleTop">
         </activity>
