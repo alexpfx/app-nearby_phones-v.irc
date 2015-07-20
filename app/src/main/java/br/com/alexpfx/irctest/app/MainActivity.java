@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import br.com.alexpfx.irctest.app.broadcastreceivers.WifiScanScheduleBroadcastReceiver;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.apache.log4j.BasicConfigurator;

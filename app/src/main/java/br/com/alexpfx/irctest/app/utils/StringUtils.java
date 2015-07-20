@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app;
+package br.com.alexpfx.irctest.app.utils;
 
 /**
  * Created by alexandre on 28/06/15.

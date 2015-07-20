@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.base;
+package br.com.alexpfx.irctest.app;
 
 import android.content.Context;
 

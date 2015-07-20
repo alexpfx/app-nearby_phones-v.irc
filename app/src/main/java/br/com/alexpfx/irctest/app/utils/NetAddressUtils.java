@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app;
+package br.com.alexpfx.irctest.app.utils;
 
 import java.util.regex.Pattern;
 

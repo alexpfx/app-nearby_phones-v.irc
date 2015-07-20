@@ -1,7 +1,6 @@
 package br.com.alexpfx.irctest.app;
 
 import android.app.Application;
-import br.com.alexpfx.irctest.app.base.AppIdentity;
 
 /**
  * Created by alexandre on 06/07/15.
