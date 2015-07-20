@@ -1,12 +1,12 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;
 
 import java.util.List;

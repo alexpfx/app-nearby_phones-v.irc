@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app;
+package br.com.alexpfx.irctest.app.mvp.model.wifi;
 
 /**
  * Created by alexandre on 28/06/15.

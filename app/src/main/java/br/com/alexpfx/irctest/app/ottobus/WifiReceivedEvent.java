@@ -1,6 +1,6 @@
-package br.com.alexpfx.irctest.app.mvp.model.irc;
+package br.com.alexpfx.irctest.app.ottobus;
 
-import br.com.alexpfx.irctest.app.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiList;
 
 /**
  * Created by alex on 12/07/2015.
@@ -12,7 +12,6 @@ public class WifiReceivedEvent {
     public WifiReceivedEvent(WifiList wifiList) {
         this.wifiList = wifiList;
     }
-
 
     public WifiList getWifiList() {
         return wifiList;

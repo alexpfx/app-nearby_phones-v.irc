@@ -1,11 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.SendMessageUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;
 
 /**
@@ -18,7 +18,6 @@ public class SendMessageUseCaseImpl implements SendMessageUseCase {
     private String user;
     private String message;
 
-
     @Override
     public void execute(String user, String message) {
         this.user = user;
@@ -28,7 +27,6 @@ public class SendMessageUseCaseImpl implements SendMessageUseCase {
 
     @Override
     public void run() {
-
 
     }
 }

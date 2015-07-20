@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app;
+package br.com.alexpfx.irctest.app.ottobus;
 
 import com.squareup.otto.Bus;
 

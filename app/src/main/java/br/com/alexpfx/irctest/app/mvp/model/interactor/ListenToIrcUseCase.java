@@ -5,14 +5,11 @@ package br.com.alexpfx.irctest.app.mvp.model.interactor;
  */
 public interface ListenToIrcUseCase {
 
-
     void registerListener(String filter, Callback callback);
-
 
     interface Callback {
         void onPrivateMessage(String sender, String message);
 
     }
-
 
 }

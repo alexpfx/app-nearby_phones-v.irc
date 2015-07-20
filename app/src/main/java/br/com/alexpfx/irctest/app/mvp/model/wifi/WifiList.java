@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app;
+package br.com.alexpfx.irctest.app.mvp.model.wifi;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,6 @@ import java.util.List;
  */
 public class WifiList {
     private List<WifiInfo> wifiInfoList = Collections.synchronizedList(new ArrayList<WifiInfo>());
-
 
     public synchronized void add(WifiInfo info) {
         final WifiInfo byBssid = getByBssid(info.getBssid());

@@ -1,11 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import com.ircclouds.irc.api.ApiException;
 import com.ircclouds.irc.api.IRCApi;
 

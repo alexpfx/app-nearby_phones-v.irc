@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.BusProvider;
-import br.com.alexpfx.irctest.app.WifiInfo;
-import br.com.alexpfx.irctest.app.WifiList;
-import br.com.alexpfx.irctest.app.mvp.model.irc.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiInfo;
+import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiList;
+import br.com.alexpfx.irctest.app.ottobus.BusProvider;
+import br.com.alexpfx.irctest.app.ottobus.WifiReceivedEvent;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -34,6 +34,5 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
         }
         bus.post(new WifiReceivedEvent(list));
     }
-
 
 }

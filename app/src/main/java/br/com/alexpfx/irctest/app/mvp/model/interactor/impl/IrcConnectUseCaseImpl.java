@@ -1,8 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
 import android.util.Log;
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCServiceUtils;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.Interactor;
@@ -10,6 +8,8 @@ import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCServiceUtils;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.state.IIRCState;
 

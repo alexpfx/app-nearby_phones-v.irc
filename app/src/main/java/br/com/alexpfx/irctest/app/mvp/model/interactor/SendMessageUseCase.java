@@ -7,5 +7,4 @@ public interface SendMessageUseCase extends Interactor {
 
     void execute(String user, String message);
 
-
 }

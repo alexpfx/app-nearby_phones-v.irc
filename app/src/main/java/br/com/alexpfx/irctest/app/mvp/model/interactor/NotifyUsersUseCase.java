@@ -15,5 +15,4 @@ public interface NotifyUsersUseCase extends Interactor {
 
     }
 
-
 }

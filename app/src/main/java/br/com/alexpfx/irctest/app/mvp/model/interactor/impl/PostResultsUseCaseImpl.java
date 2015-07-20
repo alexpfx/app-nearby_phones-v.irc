@@ -1,10 +1,10 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.WifiInfo;
-import br.com.alexpfx.irctest.app.WifiList;
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
+import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiInfo;
+import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiList;
 import com.ircclouds.irc.api.IRCApi;
 
 import java.util.Date;

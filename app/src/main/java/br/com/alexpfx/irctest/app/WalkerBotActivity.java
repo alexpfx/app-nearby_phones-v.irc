@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
@@ -19,6 +18,7 @@ import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
+import br.com.alexpfx.irctest.app.receivers.WifiScanResultBroadcastReceiver;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -51,13 +51,11 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     }
 
-
     @Override
     protected void onResume() {
         registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
     }
-
 
     @Override
     protected void onPause() {
@@ -85,8 +83,8 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
     public void btnConnectClick() {
         toast("Connection");
         final UserIdentity user = new UserIdentity.Builder().name("axnd").email("eays@com.com")
-                .nickname("bellairind")
-                .alternative("bellair").build();
+                                                            .nickname("bellairind")
+                                                            .alternative("bellair").build();
         ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();
         ircConnectionPresenter.connect(user, server);
 

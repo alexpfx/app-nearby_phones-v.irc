@@ -11,5 +11,4 @@ public interface HandshakeUseCase extends Interactor {
 
     }
 
-
 }

@@ -1,7 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.ListenToIrcUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.domain.messages.ChanPartMessage;
 import com.ircclouds.irc.api.domain.messages.UserPrivMsg;
@@ -12,7 +12,6 @@ import com.ircclouds.irc.api.listeners.VariousMessageListenerAdapter;
  */
 public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
     private IRCApi ircApi = IRCApiSingleton.INSTANCE.get();
-
 
     @Override
     public void registerListener(final String filterString, Callback callback) {
@@ -39,7 +38,6 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
             this.filter = filter;
             this.callback = callback;
         }
-
 
         @Override
         public void onUserPrivMessage(UserPrivMsg aMsg) {

@@ -1,6 +1,5 @@
 package br.com.alexpfx.irctest.app.mvp.model.interactor.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
@@ -8,6 +7,7 @@ import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.interactor.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.irc.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;
 import com.ircclouds.irc.api.domain.IRCChannel;
 import com.ircclouds.irc.api.domain.IRCUser;
@@ -75,7 +75,9 @@ public class JoinChannelUseCaseImpl implements JoinChannelUseCase {
 
                         List<UserIdentity> userList = new ArrayList<UserIdentity>();
                         for (IRCUser ircUser : ircUsers) {
-                            final UserIdentity user = new UserIdentity.Builder().name(ircUser.getIdent()).nickname(ircUser.getNick()).email(ircUser.getHostname()).build();
+                            final UserIdentity user = new UserIdentity.Builder().name(ircUser.getIdent())
+                                                                                .nickname(ircUser.getNick())
+                                                                                .email(ircUser.getHostname()).build();
                             userList.add(user);
                         }
                         return userList;

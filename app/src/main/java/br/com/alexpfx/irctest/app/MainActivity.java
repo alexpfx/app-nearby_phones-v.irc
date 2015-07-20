@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
     public static final int DURATION = 60;
+    private static final String TAG = MainActivity.class.getSimpleName();
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
 
@@ -36,11 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     @OnClick(R.id.btnInitialize)
-    void initializeApp (){
+    void initializeApp() {
         setupScanAlarm();
-
     }
 
     void setupScanAlarm() {
@@ -48,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
 
-    @OnClick(R.id.btnCancelWifiAlarm)
-    void onCancelWifiAlarmClick() {
+    @Override
+    protected void onDestroy() {
         alarmManager.cancel(pendingIntent);
+        super.onDestroy();
     }
-
 }
