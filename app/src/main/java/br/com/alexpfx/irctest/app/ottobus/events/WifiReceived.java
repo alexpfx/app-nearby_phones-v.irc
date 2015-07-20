@@ -5,11 +5,11 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 /**
  * Created by alex on 12/07/2015.
  */
-public class WifiReceivedEvent {
+public class WifiReceived {
 
     private WifiList wifiList;
 
-    public WifiReceivedEvent(WifiList wifiList) {
+    public WifiReceived(WifiList wifiList) {
         this.wifiList = wifiList;
     }
 

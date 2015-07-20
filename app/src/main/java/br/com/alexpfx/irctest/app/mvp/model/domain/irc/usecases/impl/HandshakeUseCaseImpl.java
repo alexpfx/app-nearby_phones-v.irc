@@ -5,7 +5,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.*;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
-import br.com.alexpfx.irctest.app.ottobus.events.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import com.squareup.otto.Subscribe;
 
 import java.util.Date;
@@ -56,7 +56,7 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     }
 
     @Subscribe
-    public void onWifiReceived(WifiReceivedEvent wifiReceived) {
+    public void onWifiReceived(WifiReceived wifiReceived) {
         if (postResultsUseCase == null) {
             return;
         }

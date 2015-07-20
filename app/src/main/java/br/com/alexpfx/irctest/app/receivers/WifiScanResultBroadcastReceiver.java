@@ -9,7 +9,7 @@ import android.widget.Toast;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
-import br.com.alexpfx.irctest.app.ottobus.events.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
             WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.level);
             list.add(wifiInfo);
         }
-        bus.post(new WifiReceivedEvent(list));
+        bus.post(new WifiReceived(list));
     }
 
 }
