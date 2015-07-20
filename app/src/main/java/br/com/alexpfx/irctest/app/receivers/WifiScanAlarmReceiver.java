@@ -10,9 +10,9 @@ import android.widget.Toast;
 /**
  * Created by alexandre on 06/07/15.
  */
-public class WifiScanScheduleBroadcastReceiver extends BroadcastReceiver {
+public class WifiScanAlarmReceiver extends BroadcastReceiver {
 
-    public WifiScanScheduleBroadcastReceiver() {
+    public WifiScanAlarmReceiver() {
         System.out.println();
     }
 

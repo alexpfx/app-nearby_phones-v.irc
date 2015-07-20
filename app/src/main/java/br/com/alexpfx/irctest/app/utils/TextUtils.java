@@ -3,7 +3,7 @@ package br.com.alexpfx.irctest.app.utils;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class StringUtils {
+public class TextUtils {
 
     public static final String concat(String sep, String... msgs) {
         StringBuilder sb = new StringBuilder();

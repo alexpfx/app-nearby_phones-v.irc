@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import br.com.alexpfx.irctest.app.receivers.WifiScanScheduleBroadcastReceiver;
+import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import org.apache.log4j.BasicConfigurator;
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         /* Log4j */
         BasicConfigurator.configure();
 
-        Intent intent = new Intent(getApplicationContext(), WifiScanScheduleBroadcastReceiver.class);
+        Intent intent = new Intent(getApplicationContext(), WifiScanAlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 

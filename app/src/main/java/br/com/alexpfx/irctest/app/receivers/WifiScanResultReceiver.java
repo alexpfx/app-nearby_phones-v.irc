@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Created by alexandre on 27/06/15.
  */
-public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
+public class WifiScanResultReceiver extends BroadcastReceiver {
 
     private Bus bus = BusProvider.INSTANCE.get();
 

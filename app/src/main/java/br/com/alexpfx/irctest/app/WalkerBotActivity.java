@@ -18,7 +18,7 @@ import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
-import br.com.alexpfx.irctest.app.receivers.WifiScanResultBroadcastReceiver;
+import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,7 +36,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
 
     private IrcConnectionPresenter ircConnectionPresenter;
     private IrcChannelPresenter ircChannelPresenter;
-    private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
+    private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class WalkerBotActivity extends AppCompatActivity implements IrcConnectio
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this);
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
 
-        wifiScanResultBroadcastReceiver = new WifiScanResultBroadcastReceiver();
+        wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
 
     }
 
