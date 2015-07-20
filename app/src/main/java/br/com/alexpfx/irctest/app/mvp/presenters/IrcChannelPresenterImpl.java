@@ -1,11 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.irctest.app.mvp.model.ChannelInfo;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.HandshakeUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.JoinChannelUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.ListenToIrcUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.NotifyUsersUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.*;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.HandshakeUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.JoinChannelUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.ListenToIrcUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.NotifyUsersUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 
 /**

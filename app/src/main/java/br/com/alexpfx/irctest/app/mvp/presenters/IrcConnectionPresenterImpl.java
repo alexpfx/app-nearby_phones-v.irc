@@ -1,11 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcConnectUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.IrcDisconnectUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.IrcConnectUseCaseImpl;
-import br.com.alexpfx.irctest.app.mvp.model.interactor.impl.IrcDisconnectUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcConnectUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcDisconnectUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcConnectUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcDisconnectUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**

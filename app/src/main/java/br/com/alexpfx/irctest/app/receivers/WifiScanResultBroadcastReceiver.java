@@ -6,10 +6,10 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiInfo;
-import br.com.alexpfx.irctest.app.mvp.model.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
-import br.com.alexpfx.irctest.app.ottobus.WifiReceivedEvent;
+import br.com.alexpfx.irctest.app.ottobus.events.WifiReceivedEvent;
 import com.squareup.otto.Bus;
 
 import java.util.List;
