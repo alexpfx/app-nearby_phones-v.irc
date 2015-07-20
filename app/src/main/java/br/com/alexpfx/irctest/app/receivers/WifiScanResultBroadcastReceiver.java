@@ -1,4 +1,4 @@
-package br.com.alexpfx.irctest.app.broadcastreceivers;
+package br.com.alexpfx.irctest.app.receivers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

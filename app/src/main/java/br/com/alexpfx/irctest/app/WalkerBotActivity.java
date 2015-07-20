@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.broadcastreceivers.WifiScanResultBroadcastReceiver;
+import br.com.alexpfx.irctest.app.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.irctest.app.mvp.model.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
