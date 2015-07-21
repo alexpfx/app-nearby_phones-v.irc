@@ -1,5 +1,12 @@
 package br.com.alexpfx.irctest.app.utils;
 
+import android.util.Log;
+import com.musicg.api.WhistleApi;
+import com.musicg.wave.Wave;
+
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.util.Enumeration;
 import java.util.regex.Pattern;
 
 /**
@@ -11,5 +18,22 @@ public class NetAddressUtils {
         Pattern p = Pattern.compile("^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$");
         final boolean matches = p.matcher(line.toUpperCase()).matches();
         return matches;
+    }
+
+    public static String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (inetAddress.isSiteLocalAddress()){
+                        return inetAddress.getHostAddress();
+                    }
+               }
+            }
+        } catch (Exception ex) {
+            Log.e("IP Address", ex.toString());
+        }
+        return null;
     }
 }

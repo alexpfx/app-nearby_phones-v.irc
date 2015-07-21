@@ -14,14 +14,18 @@ import java.util.Date;
 /**
  * Created by alex on 16/07/2015.
  */
-public class PostResultsUseCaseImpl implements PostResultsUseCase {
+public class PostResultsJsonImpl implements PostResultsUseCase {
     private String id;
     private String channel;
     private WifiList list;
     private Date eventTime;
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
-    private Json json = new GsonJsonImpl();
+    private Json json;
+
+    public PostResultsJsonImpl(Json json) {
+        this.json = json;
+    }
 
     @Override
     public void execute(String id, String channel, WifiList list, Date eventTime) {

@@ -9,4 +9,8 @@ import java.util.Date;
  */
 public interface PostResultsUseCase extends Interactor {
     void execute(String id, String channel, WifiList list, Date eventTime);
+
+    interface Callback {
+
+    }
 }

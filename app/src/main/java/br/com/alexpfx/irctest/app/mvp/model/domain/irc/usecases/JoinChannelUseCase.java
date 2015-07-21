@@ -9,7 +9,7 @@ public interface JoinChannelUseCase extends Interactor {
 
     void execute(String channel, Callback callback);
 
-    public interface Callback {
+    interface Callback {
         void onJoinChannelSuccess(ChannelInfo channelInfo);
 
         void onJoinChannelFail(Throwable t);

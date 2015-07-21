@@ -4,11 +4,6 @@ import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.*;
-import br.com.alexpfx.irctest.app.ottobus.BusProvider;
-import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
-import com.squareup.otto.Subscribe;
-
-import java.util.Date;
 
 /**
  * Created by alex on 12/07/2015.
@@ -33,7 +28,6 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
         notifyUsersUseCase = new NotifyUsersUseCaseImpl();
         sendMessageUseCase = new SendMessageUseCaseImpl();
         listenToIrcUseCase = new ListenToIrcUseCaseImpl();
-        postResultsUseCase = new PostResultsUseCaseImpl();
         threadExecutor.run(this);
     }
 
