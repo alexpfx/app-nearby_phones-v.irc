@@ -1,24 +1,18 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.HandshakeUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.JoinChannelUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.ListenToIrcUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.NotifyUsersUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.*;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.JoinChannelUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 
 /**
  * Created by alexandre on 05/07/15.
  */
-public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannelUseCase.Callback, NotifyUsersUseCase.Callback, ListenToIrcUseCase.Callback {
-    private JoinChannelUseCase joinChannelUseCase = new JoinChannelUseCaseImpl();
-    private NotifyUsersUseCase notifyUsersUseCase = new NotifyUsersUseCaseImpl();
-    private ListenToIrcUseCase listenToIrcUseCase = new ListenToIrcUseCaseImpl();
-    private HandshakeUseCase handshakeUseCase = new HandshakeUseCaseImpl();
-
-    private ChannelView channelView;
+public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannelUseCase.Callback {
     private String tag = IrcChannelPresenterImpl.class.getSimpleName();
+
+    private JoinChannelUseCase joinChannelUseCase = new JoinChannelUseCaseImpl();
+    private ChannelView channelView;
 
     public IrcChannelPresenterImpl(ChannelView channelView) {
         this.channelView = channelView;
@@ -26,8 +20,7 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
 
     @Override
     public void join(final String channel) {
-        handshakeUseCase.execute(channel, new HandshakeUseCase.Callback() {
-        });
+        joinChannelUseCase.execute(channel, this);
     }
 
     @Override
@@ -37,10 +30,7 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
 
     @Override
     public void onJoinChannelSuccess(ChannelInfo channelInfo) {
-        channelView.showChannelJoined(channelInfo.getChannelName() + channelInfo.getUsers().size());
-        listenToIrcUseCase.registerListener("cachorro quente", this);
-        notifyUsersUseCase.execute(channelInfo.getUsers(), this);
-
+        channelView.showChannelJoined(channelInfo.getChannelName());
     }
 
     @Override
@@ -48,10 +38,4 @@ public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannel
         channelView.showChannelJoinError(t.getMessage());
     }
 
-    @Override
-    public void onPrivateMessage(String sender, String message) {
-        if (message.contains("cachorro quente")) {
-            new SendMessageUseCaseImpl().execute(sender, "com mostarda...");
-        }
-    }
 }
