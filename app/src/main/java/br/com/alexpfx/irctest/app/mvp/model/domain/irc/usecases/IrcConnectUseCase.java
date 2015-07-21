@@ -11,9 +11,9 @@ public interface IrcConnectUseCase {
     void execute(UserIdentity userIdentity, ServerIdentity serverIdentity, Callback callback);
 
     interface Callback {
-        void onSuccess();
+        void onConnectionSuccess();
 
-        void onFailure(Throwable exception);
+        void onConnectionFailure(Throwable exception);
     }
 
 }

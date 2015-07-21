@@ -5,12 +5,12 @@ package br.com.alexpfx.irctest.app.mvp.view;
  */
 public interface IrcConnectionView {
 
-    void showConnectedToIrc();
+    void showConnectionSuccess();
 
     void showConnectionError(String message);
 
-    void showDisconnected();
+    void showDisconnectonSuccess();
 
-    void showNotConnected();
+    void showDisconnectionError(String message);
 
 }

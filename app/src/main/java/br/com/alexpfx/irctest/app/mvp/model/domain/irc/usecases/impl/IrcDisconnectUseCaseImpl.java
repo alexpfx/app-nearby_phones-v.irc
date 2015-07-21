@@ -44,7 +44,7 @@ public class IrcDisconnectUseCaseImpl implements IrcDisconnectUseCase, Interacto
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onFailure(e);
+                callback.onDisconnectionFailure(e);
             }
         });
     }
@@ -54,7 +54,7 @@ public class IrcDisconnectUseCaseImpl implements IrcDisconnectUseCase, Interacto
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onSuccess();
+                callback.onDisconnectionSuccess();
             }
         });
 

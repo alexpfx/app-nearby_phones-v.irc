@@ -7,9 +7,9 @@ public interface IrcDisconnectUseCase {
     void execute(String quitMessage, Callback callback);
 
     interface Callback {
-        void onSuccess();
+        void onDisconnectionSuccess();
 
-        void onFailure(Throwable e);
+        void onDisconnectionFailure(Throwable e);
     }
 
 }

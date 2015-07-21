@@ -24,9 +24,6 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     private String channel;
     private Callback callback;
 
-    {
-        BusProvider.INSTANCE.get().register(this);
-    }
 
     @Override
     public void execute(String channel, Callback callback) {
@@ -55,13 +52,4 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
 
     }
 
-    @Subscribe
-    public void onWifiReceived(WifiReceived wifiReceived) {
-        if (postResultsUseCase == null) {
-            return;
-        }
-        postResultsUseCase.execute("appid", channel, wifiReceived.getWifiList(), new Date());
-        Log.d("wifiReceived", wifiReceived.toString());
-
-    }
 }

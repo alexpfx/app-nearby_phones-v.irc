@@ -8,37 +8,48 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcConnectUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcDisconnectUseCaseImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.PostResultsUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
 import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
+import br.com.alexpfx.irctest.app.ottobus.BusProvider;
+import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
 import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.squareup.otto.Subscribe;
 import org.apache.log4j.BasicConfigurator;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView {
-
-    public static final int DURATION = 60;
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private static final int DURATION = 60;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
 
+    private IrcConnectionPresenter ircConnectionPresenter;
+
+    private String CHANNEL = "garbil";
+    private IrcChannelPresenter ircChannelPresenter;
+
     @Bind(R.id.edtLogStatus)
     EditText edtLogStatus;
-
-    private IrcConnectionPresenter ircConnectionPresenter;
-    private IrcChannelPresenter ircChannelPresenter;
-    private String CHANNEL = "garbil";
+    private PostResultsUseCase postResultsUseCase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +61,17 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
         /* Log4j */
         BasicConfigurator.configure();
 
+        BusProvider.INSTANCE.get().register(this);
+
         Intent intent = new Intent(getApplicationContext(), WifiScanAlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
         wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
 
-        ircConnectionPresenter = new IrcConnectionPresenterImpl(this);
+        ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
+        postResultsUseCase = new PostResultsUseCaseImpl();
 
         initializeApp();
 
@@ -105,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     }
 
     @Override
-    public void showConnectedToIrc() {
+    public void showConnectionSuccess() {
         appendLog("connected to irc \n");
         joinChannel();
 
@@ -118,13 +132,13 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     }
 
     @Override
-    public void showDisconnected() {
+    public void showDisconnectonSuccess() {
         appendLog("disconnected\n");
     }
 
     @Override
-    public void showNotConnected() {
-        appendLog("not connected\n");
+    public void showDisconnectionError(String message) {
+        appendLog(message);
     }
 
     @Override
@@ -136,4 +150,15 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     public void showChannelJoinError(String message) {
         appendLog("join error: " + message);
     }
+
+    @Subscribe
+    public void onWifiReceived(WifiReceived wifiReceived) {
+        if (postResultsUseCase == null) {
+            return;
+        }
+        postResultsUseCase.execute("appid", CHANNEL, wifiReceived.getWifiList(), new Date());
+        Log.d("wifiReceived", wifiReceived.toString());
+
+    }
+
 }

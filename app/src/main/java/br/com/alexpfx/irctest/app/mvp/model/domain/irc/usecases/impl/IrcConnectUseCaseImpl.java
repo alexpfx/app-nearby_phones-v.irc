@@ -66,7 +66,7 @@ public class IrcConnectUseCaseImpl implements Interactor, IrcConnectUseCase {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onFailure(aExc);
+                callback.onConnectionFailure(aExc);
             }
         });
 
@@ -76,7 +76,7 @@ public class IrcConnectUseCaseImpl implements Interactor, IrcConnectUseCase {
         mainThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onSuccess();
+                callback.onConnectionSuccess();
             }
         });
 
