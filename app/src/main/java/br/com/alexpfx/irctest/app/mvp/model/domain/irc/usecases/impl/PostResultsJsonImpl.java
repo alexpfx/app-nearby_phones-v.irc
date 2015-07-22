@@ -23,6 +23,7 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
     private WifiInfoJsonConverter wifiInfoJsonConverter;
+    private int SPLIT_LIST_SIZE = 10;
 
     public PostResultsJsonImpl(WifiInfoJsonConverter wifiInfoJsonConverter) {
         this.wifiInfoJsonConverter = wifiInfoJsonConverter;
@@ -39,7 +40,8 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
-        final List<List<SimpleWifiInfo>> splitedSimpleInfoList = list.getSplitedSimpleInfoList(10);
+
+        final List<List<SimpleWifiInfo>> splitedSimpleInfoList = list.getSplitedSimpleInfoList(SPLIT_LIST_SIZE);
         for (List<SimpleWifiInfo> simpleWifiInfos : splitedSimpleInfoList) {
             SimpleWifiInfoBag s = new SimpleWifiInfoBag(id, simpleWifiInfos);
             final String jsonString = this.wifiInfoJsonConverter.toJson(s);

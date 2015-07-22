@@ -6,19 +6,21 @@ import java.util.List;
  * Created by alexandre on 22/07/15.
  */
 public class SimpleWifiInfoBag {
-    private String appId;
-    private List<SimpleWifiInfo> simpleWifiInfoList;
+    /* app unique id */
+    private String id;
+    /* simpleWifiInfoList */
+    private List<SimpleWifiInfo> list;
 
-    public SimpleWifiInfoBag(String appId, List<SimpleWifiInfo> simpleWifiInfoList) {
-        this.appId = appId;
-        this.simpleWifiInfoList = simpleWifiInfoList;
+    public SimpleWifiInfoBag(String appUniqueId, List<SimpleWifiInfo> simpleWifiInfoList) {
+        this.id = appUniqueId;
+        this.list = simpleWifiInfoList;
     }
 
-    public List<SimpleWifiInfo> getSimpleWifiInfoList() {
-        return simpleWifiInfoList;
+    public List<SimpleWifiInfo> getList() {
+        return list;
     }
 
-    public String getAppId() {
-        return appId;
+    public String getId() {
+        return id;
     }
 }
