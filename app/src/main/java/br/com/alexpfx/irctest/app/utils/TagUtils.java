@@ -21,9 +21,18 @@ public class TagUtils {
         }
     }
 
+    public static String method(String addInfo) {
+        try {
+            return Thread.currentThread().getStackTrace()[3].getMethodName() + " " + addInfo;
+        } catch (RuntimeException e) {
+            return "error_method";
+        }
+    }
+
+
     public static String tag() {
         try {
-            return Thread.currentThread().getStackTrace()[3].getClass().getSimpleName();
+            return Thread.currentThread().getStackTrace()[3].getFileName();
         } catch (RuntimeException e) {
             return "error_tag";
         }

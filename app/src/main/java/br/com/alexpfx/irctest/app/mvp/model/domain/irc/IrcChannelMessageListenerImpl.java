@@ -35,12 +35,12 @@ public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener 
 
     @Override
     public void onChannelNotice(ChannelNotice aMsg) {
-        Log.d(tag(this), "onChannelNotice");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onChannelAction(ChannelActionMsg aMsg) {
-        Log.d(tag(this), "onChannelAction");
+        Log.d(tag(), method());
 
     }
 
@@ -51,7 +51,7 @@ public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener 
 
     @Override
     public void onTopicChange(TopicMessage aMsg) {
-        Log.d(tag(this), "onTopicChange");
+        Log.d(tag(), method());
     }
 
     @Override
@@ -61,62 +61,62 @@ public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener 
 
     @Override
     public void onUserNotice(UserNotice aMsg) {
-        Log.d(tag(this), "onUserNotice");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onUserAction(UserActionMsg aMsg) {
-        Log.d(tag(this), "onUserAction");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onServerNumericMessage(ServerNumericMessage aMsg) {
-        Log.d(tag(this), "onServerNumericMessage");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onServerNotice(ServerNotice aMsg) {
-        Log.d(tag(this), "onServerNotice");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onNickChange(NickMessage aMsg) {
-        Log.d(tag(this), "onNickChange");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onUserQuit(QuitMessage aMsg) {
-        Log.d(tag(this), "onUserQuit");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onError(ErrorMessage aMsg) {
-        Log.d(tag(this), "onError");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onChannelMode(ChannelModeMessage aMsg) {
-        Log.d(tag(this), "onChannelMode");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onUserPing(UserPing aMsg) {
-        Log.d(tag(this), "onUserPing");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onUserVersion(UserVersion aMsg) {
-        Log.d(tag(this), "onUserVersion");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onServerPing(ServerPing aMsg) {
-        Log.d(tag(this), "onServerPing");
+        Log.d(tag(), method());
     }
 
     @Override
     public void onMessage(IMessage aMessage) {
-        Log.d(tag(this), "onMessage");
+        Log.d(tag(), method(aMessage.toString()));
     }
 
     @Override

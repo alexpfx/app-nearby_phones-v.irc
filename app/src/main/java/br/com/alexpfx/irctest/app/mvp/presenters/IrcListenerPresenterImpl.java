@@ -7,6 +7,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.WifiListMessageFilterImpl
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.RegisterAsListenerUseCase;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 
+import static br.com.alexpfx.irctest.app.utils.TagUtils.method;
 import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 
 /**
@@ -40,7 +41,6 @@ public class IrcListenerPresenterImpl implements IrcListenerPresenter, RegisterA
 
     @Override
     public void onFilteredMessage(String channel, String user, String message) {
-        final String tag = tag(getClass());
-        Log.i(tag, message);
+        Log.d(tag(), method(user));
     }
 }
