@@ -38,25 +38,19 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int DURATION = 60;
+    @Bind(R.id.edtLogStatus)
+    EditText edtLogStatus;
+    @Bind(R.id.txtIpAddress)
+    TextView txtIpAddress;
+    AudioRecord audioRecord;
+    byte[] buffer;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
-
     private IrcConnectionPresenter ircConnectionPresenter;
     private SendMessagePresenter sendMessagePresenter;
-
     private String CHANNEL = "garbil";
     private IrcChannelPresenter ircChannelPresenter;
-
-    @Bind(R.id.edtLogStatus)
-    EditText edtLogStatus;
-
-    @Bind(R.id.txtIpAddress)
-    TextView txtIpAddress;
-
-    AudioRecord audioRecord;
-
-    byte[] buffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Override
     public void showChannelJoined(String channel) {
-       appendLog("joined: " + channel);
+        appendLog("joined: " + channel);
     }
 
     @Override
@@ -161,7 +155,8 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
-        sendMessagePresenter.sendWifiList(wifiReceived.getWifiList(), ((App) getApplication()).getUniqueId(), CHANNEL, new Date());
+        sendMessagePresenter
+                .sendWifiList(wifiReceived.getWifiList(), ((App) getApplication()).getUniqueId(), CHANNEL, new Date());
     }
 
 }

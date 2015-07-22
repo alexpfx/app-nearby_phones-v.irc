@@ -24,10 +24,10 @@ public class NetAddressUtils {
                 NetworkInterface intf = en.nextElement();
                 for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (inetAddress.isSiteLocalAddress()){
+                    if (inetAddress.isSiteLocalAddress()) {
                         return inetAddress.getHostAddress();
                     }
-               }
+                }
             }
         } catch (Exception ex) {
             Log.e("IP Address", ex.toString());

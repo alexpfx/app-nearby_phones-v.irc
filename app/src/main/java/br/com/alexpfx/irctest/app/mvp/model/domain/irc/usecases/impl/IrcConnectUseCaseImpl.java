@@ -1,13 +1,13 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
 import android.util.Log;
+import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThread;
+import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThreadImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcConnectUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThread;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThreadImpl;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCServiceUtils;
 import com.ircclouds.irc.api.IRCApi;

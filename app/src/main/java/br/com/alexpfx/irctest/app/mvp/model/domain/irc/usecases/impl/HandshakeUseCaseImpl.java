@@ -1,8 +1,8 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
 import android.util.Log;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ChannelInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.*;
 
 /**
@@ -18,7 +18,6 @@ public class HandshakeUseCaseImpl implements HandshakeUseCase, JoinChannelUseCas
     ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
     private String channel;
     private Callback callback;
-
 
     @Override
     public void execute(String channel, Callback callback) {

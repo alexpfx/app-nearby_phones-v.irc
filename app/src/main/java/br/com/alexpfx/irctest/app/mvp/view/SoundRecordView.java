@@ -5,7 +5,6 @@ package br.com.alexpfx.irctest.app.mvp.view;
  */
 public interface SoundRecordView {
 
-    void playRecordedSound (byte [] sound);
-
+    void playRecordedSound(byte[] sound);
 
 }

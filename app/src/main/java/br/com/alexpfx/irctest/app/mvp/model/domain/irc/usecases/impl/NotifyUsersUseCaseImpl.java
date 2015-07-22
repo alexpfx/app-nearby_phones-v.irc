@@ -1,11 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.NotifyUsersUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.Executor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThread;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThreadImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.NotifyUsersUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;
 
