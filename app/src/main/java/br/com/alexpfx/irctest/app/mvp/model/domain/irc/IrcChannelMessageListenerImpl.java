@@ -8,9 +8,14 @@ import com.ircclouds.irc.api.domain.messages.interfaces.IMessage;
  */
 public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener {
 
+    private MessageFilter dispatcher;
+
     @Override
     public void onChannelMessage(ChannelPrivMsg aMsg) {
-
+        if (dispatcher == null) {
+            return;
+        }
+        dispatcher.rawMessage(aMsg.getChannelName(), aMsg.getSource().getNick(), aMsg.getText());
     }
 
     @Override
@@ -106,6 +111,10 @@ public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener 
     @Override
     public void onMessage(IMessage aMessage) {
 
+    }
 
+    @Override
+    public void setMessageFilter(MessageFilter dispatcher) {
+        this.dispatcher = dispatcher;
     }
 }

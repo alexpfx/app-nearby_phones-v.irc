@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioRecord;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +19,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonCon
 import br.com.alexpfx.irctest.app.mvp.presenters.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
+import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 import br.com.alexpfx.irctest.app.mvp.view.SendMessageView;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
 import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
@@ -34,7 +34,7 @@ import org.apache.log4j.BasicConfigurator;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView {
+public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView, IrcListenerView {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int DURATION = 60;
@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     EditText edtLogStatus;
     @Bind(R.id.txtIpAddress)
     TextView txtIpAddress;
-    AudioRecord audioRecord;
-    byte[] buffer;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
     private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
@@ -51,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     private SendMessagePresenter sendMessagePresenter;
     private String CHANNEL = "garbil";
     private IrcChannelPresenter ircChannelPresenter;
+    private IrcListenerPresenter ircListenerPresenter;
+    private String uniqueId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +64,11 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
         BusProvider.INSTANCE.get().register(this);
 
+        uniqueId = ((App) getApplication()).getUniqueId();
+
         Intent intent = new Intent(getApplicationContext(), WifiScanAlarmReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-
         wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
 
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
@@ -88,6 +89,11 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     void initializeApp() {
         setupScanAlarm();
         connectToServer();
+        registerListener();
+    }
+
+    private void registerListener() {
+        ircListenerPresenter.register(uniqueId);
     }
 
     private void joinChannel() {
@@ -155,8 +161,13 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
+
         sendMessagePresenter
-                .sendWifiList(wifiReceived.getWifiList(), ((App) getApplication()).getUniqueId(), CHANNEL, new Date());
+                .sendWifiList(wifiReceived.getWifiList(), uniqueId, CHANNEL, new Date());
     }
 
+    @Override
+    public void showRegisterSuccess() {
+
+    }
 }
