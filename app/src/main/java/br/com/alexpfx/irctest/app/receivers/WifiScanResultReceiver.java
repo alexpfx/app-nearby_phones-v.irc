@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
-import br.com.alexpfx.irctest.app.mvp.model.domain.json.Json;
-import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonJsonImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
+import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
@@ -22,7 +22,7 @@ import java.util.List;
 public class WifiScanResultReceiver extends BroadcastReceiver {
 
     private Bus bus = BusProvider.INSTANCE.get();
-    private Json json = new GsonJsonImpl();
+    private WifiInfoJsonConverter wifiInfoJsonConverter = new GsonWifiInfoJsonConverterImpl();
 
     @Override
     public void onReceive(Context context, Intent intent) {

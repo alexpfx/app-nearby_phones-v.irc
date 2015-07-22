@@ -3,13 +3,13 @@ package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
-import br.com.alexpfx.irctest.app.mvp.model.domain.json.Json;
-import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonJsonImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import com.ircclouds.irc.api.IRCApi;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by alex on 16/07/2015.
@@ -21,10 +21,10 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
     private Date eventTime;
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
-    private Json json;
+    private WifiInfoJsonConverter wifiInfoJsonConverter;
 
-    public PostResultsJsonImpl(Json json) {
-        this.json = json;
+    public PostResultsJsonImpl(WifiInfoJsonConverter wifiInfoJsonConverter) {
+        this.wifiInfoJsonConverter = wifiInfoJsonConverter;
     }
 
     @Override
@@ -38,10 +38,10 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
-        final String jsonString = this.json.toJson(list.getWifiInfoList());
-        StringBuilder sb = new StringBuilder();
-        sb.append(jsonString);
-        api.message("#" + channel, sb.toString());
-
+        final List<List<WifiInfo.SimpleWifiInfo>> splitedSimpleInfoList = list.getSplitedSimpleInfoList(10);
+        for (List<WifiInfo.SimpleWifiInfo> simpleWifiInfos : splitedSimpleInfoList) {
+            final String jsonString = this.wifiInfoJsonConverter.toJson(simpleWifiInfos);
+            api.message("#" + channel, jsonString);
+        }
     }
 }

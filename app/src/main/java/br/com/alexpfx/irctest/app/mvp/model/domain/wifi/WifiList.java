@@ -1,7 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.wifi;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.ListUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -46,7 +50,31 @@ public class WifiList {
         return false;
     }
 
-    public List<WifiInfo> getWifiInfoList() {
-        return wifiInfoList;
+    public Iterator<WifiInfo> iterator() {
+        return wifiInfoList.iterator();
     }
+
+    public List<WifiInfo.SimpleWifiInfo> getSimpleInfoList() {
+        List<WifiInfo.SimpleWifiInfo> s = new ArrayList<WifiInfo.SimpleWifiInfo>();
+        synchronized (wifiInfoList) {
+            for (WifiInfo wifiInfo : wifiInfoList) {
+                WifiInfo.SimpleWifiInfo si = new WifiInfo.SimpleWifiInfo();
+                si.b = wifiInfo.getBssid();
+                si.r = wifiInfo.getRssid();
+                s.add(si);
+            }
+        }
+        return s;
+    }
+
+    public List<List<WifiInfo.SimpleWifiInfo>> getSplitedSimpleInfoList(int size) {
+        return ListUtils.partition(getSimpleInfoList(), size);
+    }
+
+    public int getSize() {
+        synchronized (wifiInfoList) {
+            return wifiInfoList.size();
+        }
+    }
+
 }
