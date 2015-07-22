@@ -22,7 +22,7 @@ public class RegisterAsListenerUseCaseImpl implements RegisterAsListenerUseCase 
     }
 
     @Override
-    public void register(Callback callback) {
+    public void execute(Callback callback) {
         this.callback = callback;
         threadExecutor.run(this);
     }
