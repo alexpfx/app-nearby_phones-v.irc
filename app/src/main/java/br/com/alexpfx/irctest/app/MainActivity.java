@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
-        sendMessagePresenter.sendWifiList(wifiReceived.getWifiList(), "id", CHANNEL, new Date());
+        sendMessagePresenter.sendWifiList(wifiReceived.getWifiList(), ((App) getApplication()).getUniqueId(), CHANNEL, new Date());
     }
 
 }
