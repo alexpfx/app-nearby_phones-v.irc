@@ -9,8 +9,8 @@ import java.util.List;
  */
 public interface WifiInfoJsonConverter {
 
-    String toJson(List list);
+    String toJson(Object object);
 
-    List fromJson(String json);
+    Object fromJson(String json);
 
 }
