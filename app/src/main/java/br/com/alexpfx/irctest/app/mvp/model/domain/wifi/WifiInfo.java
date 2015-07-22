@@ -38,9 +38,4 @@ public class WifiInfo {
         this.rssid = rssid;
     }
 
-    public static class SimpleWifiInfo {
-        public String b;
-        public int r;
-    }
-
 }
