@@ -15,6 +15,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcConnectUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcDisconnectUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.PostResultsJsonImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.RegisterAsListenerUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.presenters.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
         sendMessagePresenter = new SendMessagePresenterImpl(this, new PostResultsJsonImpl(new GsonWifiInfoJsonConverterImpl()));
+        ircListenerPresenter = new IrcListenerPresenterImpl(this, new RegisterAsListenerUseCaseImpl());
         initializeApp();
 
     }
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     void initializeApp() {
         setupScanAlarm();
         connectToServer();
-        registerListener();
+
     }
 
     private void registerListener() {
@@ -130,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     public void showConnectionSuccess() {
         appendLog("connected to irc \n");
         joinChannel();
+        registerListener();
 
     }
 

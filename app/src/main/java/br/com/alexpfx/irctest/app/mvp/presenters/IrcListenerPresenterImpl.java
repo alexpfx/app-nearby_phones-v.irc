@@ -40,6 +40,7 @@ public class IrcListenerPresenterImpl implements IrcListenerPresenter, RegisterA
 
     @Override
     public void onFilteredMessage(String channel, String user, String message) {
-        Log.i(tag(getClass()), message);
+        final String tag = tag(getClass());
+        Log.i(tag, message);
     }
 }

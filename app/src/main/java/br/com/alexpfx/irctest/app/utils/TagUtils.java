@@ -9,4 +9,24 @@ public class TagUtils {
         return clazz.getSimpleName();
     }
 
+    public static String tag(Object o) {
+        return o.getClass().getSimpleName();
+    }
+
+    public static String method() {
+        try {
+            return Thread.currentThread().getStackTrace()[3].getMethodName();
+        } catch (RuntimeException e) {
+            return "error_method";
+        }
+    }
+
+    public static String tag() {
+        try {
+            return Thread.currentThread().getStackTrace()[3].getClass().getSimpleName();
+        } catch (RuntimeException e) {
+            return "error_tag";
+        }
+    }
+
 }
