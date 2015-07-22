@@ -1,8 +1,6 @@
 package br.com.alexpfx.irctest.app.utils;
 
 import android.util.Log;
-import com.musicg.api.WhistleApi;
-import com.musicg.wave.Wave;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
