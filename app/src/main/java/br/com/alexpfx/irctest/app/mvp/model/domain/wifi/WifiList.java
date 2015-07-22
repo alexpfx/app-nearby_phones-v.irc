@@ -11,6 +11,7 @@ import java.util.List;
  * Created by alexandre on 28/06/15.
  */
 public class WifiList {
+    /*nao precisa mais ser synchronized. */
     private List<WifiInfo> wifiInfoList = Collections.synchronizedList(new ArrayList<WifiInfo>());
 
     public synchronized void add(WifiInfo info) {
@@ -21,10 +22,6 @@ public class WifiList {
         } else {
             wifiInfoList.add(info);
         }
-    }
-
-    public void clear() {
-        wifiInfoList.clear();
     }
 
     public WifiInfo getByBssid(String bssid) {
