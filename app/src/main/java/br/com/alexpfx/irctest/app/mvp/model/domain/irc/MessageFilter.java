@@ -9,13 +9,9 @@ public interface MessageFilter {
 
     void setListener(OnFilteredMessageListener listener);
 
-    SimpleWifiInfoBag extract(String channel, String user, String message);
-
     void rawMessage(String channel, String user, String message);
 
-    void filteredMessage(String channel, String user, String originalMessage, SimpleWifiInfoBag bag);
-
     interface OnFilteredMessageListener {
-        void onFilteredMessage(String channel, String user, String originalMessage, SimpleWifiInfoBag bag);
+        void onFilteredMessage(String channel, String user, String uniqueId, SimpleWifiInfoBag bag);
     }
 }

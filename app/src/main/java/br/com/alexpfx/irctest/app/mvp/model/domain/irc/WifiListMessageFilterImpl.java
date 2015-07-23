@@ -1,15 +1,16 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc;
 
+import android.util.Log;
 import br.com.alexpfx.irctest.app.exceptions.JsonFromStringConvertException;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBagImpl;
+import br.com.alexpfx.irctest.app.utils.TagUtils;
 
 /**
  * Created by alexandre on 22/07/15.
  */
-public class WifiListMessageFilterImpl extends BaseMessageFilter {
+public class WifiListMessageFilterImpl implements MessageFilter {
     private WifiInfoJsonConverter converter = new GsonWifiInfoJsonConverterImpl();
     private String appUid;
 
@@ -25,26 +26,22 @@ public class WifiListMessageFilterImpl extends BaseMessageFilter {
     }
 
     @Override
-    public SimpleWifiInfoBag extract(String channel, String user, String message) {
-        final SimpleWifiInfoBagImpl simpleWifiInfoBagImpl;
+    public void rawMessage(String channel, String user, String message) {
+        final SimpleWifiInfoBag simpleWifiInfoBag;
         try {
-            simpleWifiInfoBagImpl = converter.fromJson(message, SimpleWifiInfoBagImpl.class);
-            final String id = simpleWifiInfoBagImpl.getId();
-            if (!acceptId(id)) {
-                return SimpleWifiInfoBag.NULL;
+            simpleWifiInfoBag = converter.fromJson(message, SimpleWifiInfoBag.class);
+            if (acceptId(simpleWifiInfoBag.getId())) {
+                notifyListener(channel, user, message, simpleWifiInfoBag);
             }
         } catch (JsonFromStringConvertException e) {
-            return SimpleWifiInfoBag.NULL;
+            Log.d(TagUtils.tag(), "it's not a json structured message");
         }
-        return simpleWifiInfoBagImpl;
     }
 
-    @Override
-    public void filteredMessage(String channel, String user, String originalMessage, SimpleWifiInfoBag bag) {
-        if (listener == null) {
-            return;
+    public void notifyListener(String channel, String user, String originalMessage, SimpleWifiInfoBag bag) {
+        if (listener != null) {
+            listener.onFilteredMessage(channel, user, originalMessage, bag);
         }
-        listener.onFilteredMessage(channel, user, originalMessage, bag);
     }
 
     private boolean acceptId(String id) {
