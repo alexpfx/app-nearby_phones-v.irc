@@ -35,16 +35,17 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView, IrcListenerView {
-    private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final int DURATION = 60;
+    private static final int SCAN_ALARM_WAKE_UP_INTERVAL = 60;
+
     @Bind(R.id.edtLogStatus)
     EditText edtLogStatus;
     @Bind(R.id.txtIpAddress)
     TextView txtIpAddress;
+
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
-    private WifiScanResultReceiver wifiScanResultBroadcastReceiver;
+    private WifiScanResultReceiver wifiScanResultReceiver;
     private IrcConnectionPresenter ircConnectionPresenter;
     private SendMessagePresenter sendMessagePresenter;
     private String CHANNEL = "garbil";
@@ -56,41 +57,35 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ButterKnife.bind(this);
-
-        /* Log4j */
-//        BasicConfigurator.configure();
-
-        BusProvider.INSTANCE.get().register(this);
-
         uniqueId = ((App) getApplication()).getUniqueId();
+        setupThirdParty();
+        initPresenters();
 
-        Intent intent = new Intent(getApplicationContext(), WifiScanAlarmReceiver.class);
-        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        wifiScanResultBroadcastReceiver = new WifiScanResultReceiver();
+        setupWifiScan();
+        connectToServer();
 
+    }
+
+    private void setupThirdParty() {
+        ButterKnife.bind(this);
+        BusProvider.INSTANCE.get().register(this);
+        /* Log4j */
+//       BasicConfigurator.configure();
+    }
+
+    private void initPresenters() {
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
         sendMessagePresenter = new SendMessagePresenterImpl(new PostResultsJsonImpl(new GsonWifiInfoJsonConverterImpl()));
         ircListenerPresenter = new IrcListenerPresenterImpl(this, new RegisterAsListenerUseCaseImpl(), uniqueId);
-        initializeApp();
-
     }
 
     @Override
     protected void onStart() {
         final String localIpAddress = NetAddressUtils.getLocalIpAddress();
         txtIpAddress.setText(localIpAddress);
-        registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        registerReceiver(wifiScanResultReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onStart();
-    }
-
-    void initializeApp() {
-        setupScanAlarm();
-        connectToServer();
-
     }
 
     private void registerListener() {
@@ -110,26 +105,35 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     }
 
-    void setupScanAlarm() {
-        final long interval = TimeUnit.SECONDS.toMillis(DURATION);
+    void setupWifiScan() {
+        setupScanAlarm();
+
+        wifiScanResultReceiver = new WifiScanResultReceiver();
+    }
+
+    private void setupScanAlarm() {
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getApplicationContext(), WifiScanAlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        long interval = TimeUnit.SECONDS.toMillis(SCAN_ALARM_WAKE_UP_INTERVAL);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
     }
 
     @Override
     protected void onDestroy() {
         alarmManager.cancel(pendingIntent);
-        unregisterReceiver(wifiScanResultBroadcastReceiver);
+        unregisterReceiver(wifiScanResultReceiver);
         ircConnectionPresenter.disconnect();
         super.onDestroy();
     }
 
     private void appendLog(String text) {
-        edtLogStatus.getText().append(text);
+        edtLogStatus.getText().append(text).append("\n");
     }
 
     @Override
     public void showConnectionSuccess() {
-        appendLog("connected to irc \n");
+        appendLog("connected to irc");
         joinChannel();
         registerListener();
 
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Override
     public void showDisconnectonSuccess() {
-        appendLog("disconnected\n");
+        appendLog("disconnected");
     }
 
     @Override
@@ -170,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Override
     public void showRegisterSuccess() {
-        appendLog("registered\n");
+        appendLog("registered");
 
     }
 }
