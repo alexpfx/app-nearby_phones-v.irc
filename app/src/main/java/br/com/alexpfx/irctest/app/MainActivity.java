@@ -30,7 +30,6 @@ import br.com.alexpfx.irctest.app.utils.NetAddressUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.otto.Subscribe;
-import org.apache.log4j.BasicConfigurator;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
         ButterKnife.bind(this);
 
         /* Log4j */
-        BasicConfigurator.configure();
+//        BasicConfigurator.configure();
 
         BusProvider.INSTANCE.get().register(this);
 
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
         sendMessagePresenter = new SendMessagePresenterImpl(new PostResultsJsonImpl(new GsonWifiInfoJsonConverterImpl()));
-        ircListenerPresenter = new IrcListenerPresenterImpl(this, new RegisterAsListenerUseCaseImpl());
+        ircListenerPresenter = new IrcListenerPresenterImpl(this, new RegisterAsListenerUseCaseImpl(), uniqueId);
         initializeApp();
 
     }
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     }
 
     private void registerListener() {
-        ircListenerPresenter.register(uniqueId);
+        ircListenerPresenter.register();
     }
 
     private void joinChannel() {
@@ -171,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Override
     public void showRegisterSuccess() {
+        appendLog("registered\n");
 
     }
 }

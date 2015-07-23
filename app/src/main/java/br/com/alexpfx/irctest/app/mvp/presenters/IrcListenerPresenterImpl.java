@@ -1,11 +1,13 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
+import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.IrcChannelMessageListener;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.MessageFilter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.WifiListMessageFilterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.RegisterAsListenerUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
+import br.com.alexpfx.irctest.app.utils.TagUtils;
 
 /**
  * Created by alexandre on 22/07/15.
@@ -13,14 +15,16 @@ import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 public class IrcListenerPresenterImpl implements IrcListenerPresenter, RegisterAsListenerUseCase.Callback, MessageFilter.OnFilteredMessageListener {
     private IrcListenerView ircListenerView;
     private RegisterAsListenerUseCase registerAsListenerUseCase;
+    private String appUid;
 
-    public IrcListenerPresenterImpl(IrcListenerView ircListenerView, RegisterAsListenerUseCase registerAsListenerUseCase) {
+    public IrcListenerPresenterImpl(IrcListenerView ircListenerView, RegisterAsListenerUseCase registerAsListenerUseCase, String appUid) {
         this.ircListenerView = ircListenerView;
         this.registerAsListenerUseCase = registerAsListenerUseCase;
+        this.appUid = appUid;
     }
 
     @Override
-    public void register(String appUid) {
+    public void register() {
         registerAsListenerUseCase.execute(this);
     }
 
@@ -31,13 +35,14 @@ public class IrcListenerPresenterImpl implements IrcListenerPresenter, RegisterA
 
     @Override
     public void onRegisterSuccess(IrcChannelMessageListener listener) {
-        final WifiListMessageFilterImpl filter = new WifiListMessageFilterImpl();
+        ircListenerView.showRegisterSuccess();
+        final WifiListMessageFilterImpl filter = new WifiListMessageFilterImpl(appUid);
         filter.setListener(this);
         listener.setMessageFilter(filter);
     }
 
     @Override
     public void onFilteredMessage(String channel, String user, String originalMessage, SimpleWifiInfoBag bag) {
-        System.out.println(bag);
+        Log.d(TagUtils.tag(), bag.toString());
     }
 }

@@ -11,8 +11,13 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBagImpl;
  */
 public class WifiListMessageFilterImpl extends BaseMessageFilter {
     private WifiInfoJsonConverter converter = new GsonWifiInfoJsonConverterImpl();
+    private String appUid;
 
     private OnFilteredMessageListener listener;
+
+    public WifiListMessageFilterImpl(String appUid) {
+        this.appUid = appUid;
+    }
 
     @Override
     public void setListener(OnFilteredMessageListener listener) {
@@ -43,7 +48,7 @@ public class WifiListMessageFilterImpl extends BaseMessageFilter {
     }
 
     private boolean acceptId(String id) {
-        return id != null;
+        return id != null && !id.equals(appUid);
     }
 
 }
