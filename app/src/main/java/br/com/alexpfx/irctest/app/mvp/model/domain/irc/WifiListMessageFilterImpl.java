@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc;
 
-import br.com.alexpfx.irctest.app.exceptions.JsonSyntaxRuntimeException;
+import br.com.alexpfx.irctest.app.exceptions.JsonFromStringConvertException;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
@@ -28,7 +28,7 @@ public class WifiListMessageFilterImpl extends BaseMessageFilter {
             if (!acceptId(id)) {
                 return SimpleWifiInfoBag.NULL;
             }
-        } catch (JsonSyntaxRuntimeException e) {
+        } catch (JsonFromStringConvertException e) {
             return SimpleWifiInfoBag.NULL;
         }
         return simpleWifiInfoBagImpl;

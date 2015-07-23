@@ -40,7 +40,6 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
 
     @Override
     public void run() {
-
         final List<List<SimpleWifiInfo>> splitedSimpleInfoList = list.getSplitedSimpleInfoList(SPLIT_LIST_SIZE);
         for (List<SimpleWifiInfo> simpleWifiInfos : splitedSimpleInfoList) {
             SimpleWifiInfoBagImpl s = new SimpleWifiInfoBagImpl(id, simpleWifiInfos);

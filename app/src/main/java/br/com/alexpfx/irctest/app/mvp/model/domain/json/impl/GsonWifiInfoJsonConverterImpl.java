@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.json.impl;
 
-import br.com.alexpfx.irctest.app.exceptions.JsonSyntaxRuntimeException;
+import br.com.alexpfx.irctest.app.exceptions.JsonFromStringConvertException;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,8 +17,12 @@ public class GsonWifiInfoJsonConverterImpl implements WifiInfoJsonConverter {
     }
 
     @Override
-    public <T> T fromJson(String json, Class<T> type) throws JsonSyntaxRuntimeException {
-        return gson.fromJson(json, type);
+    public <T> T fromJson(String json, Class<T> type) throws JsonFromStringConvertException {
+        try {
+            return gson.fromJson(json, type);
+        } catch (RuntimeException e) {
+            throw new JsonFromStringConvertException();
+        }
     }
 
 }
