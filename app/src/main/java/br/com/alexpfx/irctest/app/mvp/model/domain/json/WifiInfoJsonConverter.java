@@ -1,12 +1,14 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.json;
 
+import br.com.alexpfx.irctest.app.exceptions.JsonSyntaxRuntimeException;
+
 /**
  * Created by alexandre on 20/07/15.
  */
 public interface WifiInfoJsonConverter {
 
-    String toJson(Object object);
+    <T> String toJson(T object);
 
-    Object fromJson(String json);
+    <T> T fromJson(String json, Class<T> type) throws JsonSyntaxRuntimeException;
 
 }

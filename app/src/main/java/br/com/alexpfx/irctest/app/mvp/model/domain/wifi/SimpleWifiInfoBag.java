@@ -5,22 +5,20 @@ import java.util.List;
 /**
  * Created by alexandre on 22/07/15.
  */
-public class SimpleWifiInfoBag {
-    /* app unique id */
-    private String id;
-    /* simpleWifiInfoList */
-    private List<SimpleWifiInfo> list;
+public interface SimpleWifiInfoBag {
+    SimpleWifiInfoBag NULL = new SimpleWifiInfoBag() {
+        @Override
+        public List<SimpleWifiInfo> getList() {
+            return null;
+        }
 
-    public SimpleWifiInfoBag(String appUniqueId, List<SimpleWifiInfo> simpleWifiInfoList) {
-        this.id = appUniqueId;
-        this.list = simpleWifiInfoList;
-    }
+        @Override
+        public String getId() {
+            return null;
+        }
+    };
 
-    public List<SimpleWifiInfo> getList() {
-        return list;
-    }
+    List<SimpleWifiInfo> getList();
 
-    public String getId() {
-        return id;
-    }
+    String getId();
 }

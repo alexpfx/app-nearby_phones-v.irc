@@ -1,14 +1,11 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.IrcChannelMessageListener;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.MessageFilter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.WifiListMessageFilterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.RegisterAsListenerUseCase;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
-
-import static br.com.alexpfx.irctest.app.utils.TagUtils.method;
-import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 
 /**
  * Created by alexandre on 22/07/15.
@@ -40,7 +37,7 @@ public class IrcListenerPresenterImpl implements IrcListenerPresenter, RegisterA
     }
 
     @Override
-    public void onFilteredMessage(String channel, String user, String message) {
-        Log.d(tag(), method(user));
+    public void onFilteredMessage(String channel, String user, String originalMessage, SimpleWifiInfoBag bag) {
+        System.out.println(bag);
     }
 }

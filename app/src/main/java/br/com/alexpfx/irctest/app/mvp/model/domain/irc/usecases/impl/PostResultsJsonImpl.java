@@ -5,7 +5,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCa
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfo;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBagImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
 import com.ircclouds.irc.api.IRCApi;
 
@@ -43,7 +43,7 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
 
         final List<List<SimpleWifiInfo>> splitedSimpleInfoList = list.getSplitedSimpleInfoList(SPLIT_LIST_SIZE);
         for (List<SimpleWifiInfo> simpleWifiInfos : splitedSimpleInfoList) {
-            SimpleWifiInfoBag s = new SimpleWifiInfoBag(id, simpleWifiInfos);
+            SimpleWifiInfoBagImpl s = new SimpleWifiInfoBagImpl(id, simpleWifiInfos);
             final String jsonString = this.wifiInfoJsonConverter.toJson(s);
             api.message("#" + channel, jsonString);
         }

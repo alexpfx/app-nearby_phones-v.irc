@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
         ircConnectionPresenter = new IrcConnectionPresenterImpl(this, new IrcConnectUseCaseImpl(), new IrcDisconnectUseCaseImpl());
         ircChannelPresenter = new IrcChannelPresenterImpl(this);
-        sendMessagePresenter = new SendMessagePresenterImpl(this, new PostResultsJsonImpl(new GsonWifiInfoJsonConverterImpl()));
+        sendMessagePresenter = new SendMessagePresenterImpl(this, new PostResultsJsonImpl(new GsonWifiInfoJsonConverterImpl(typeParamterClass)));
         ircListenerPresenter = new IrcListenerPresenterImpl(this, new RegisterAsListenerUseCaseImpl());
         initializeApp();
 
