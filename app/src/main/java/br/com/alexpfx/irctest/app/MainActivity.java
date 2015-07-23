@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     }
 
     @Override
-    public void showWifiReceivedFromIrc(String channel, String user, String uuid, SimpleWifiInfoBag wifiBag) {
+    public void showWifiReceivedFromIrc(String channel, String user, SimpleWifiInfoBag wifiBag) {
 
 
     }

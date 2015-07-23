@@ -7,5 +7,5 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
  */
 public interface IrcListenerView {
     void showRegisterSuccess();
-    void showWifiReceivedFromIrc (String channel, String user, String uuid, SimpleWifiInfoBag wifiBag);
+    void showWifiReceivedFromIrc(String channel, String user, SimpleWifiInfoBag wifiBag);
 }
