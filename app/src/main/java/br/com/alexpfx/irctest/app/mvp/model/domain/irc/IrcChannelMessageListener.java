@@ -5,7 +5,7 @@ import com.ircclouds.irc.api.listeners.IVariousMessageListener;
 /**
  * Created by alexandre on 22/07/15.
  */
-public interface IrcChannelMessageListener extends IVariousMessageListener{
+public interface IrcChannelMessageListener extends IVariousMessageListener {
 
     void setMessageFilter(MessageFilter dispatcher);
 

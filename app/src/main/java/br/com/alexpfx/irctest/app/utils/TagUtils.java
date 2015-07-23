@@ -29,7 +29,6 @@ public class TagUtils {
         }
     }
 
-
     public static String tag() {
         try {
             return Thread.currentThread().getStackTrace()[3].getFileName();
