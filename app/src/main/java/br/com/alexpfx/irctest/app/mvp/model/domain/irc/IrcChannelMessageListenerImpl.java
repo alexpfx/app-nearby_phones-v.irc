@@ -24,7 +24,6 @@ public class IrcChannelMessageListenerImpl implements IrcChannelMessageListener 
 
     @Override
     public void onChannelJoin(ChanJoinMessage aMsg) {
-        final StackTraceElement stackTraceElement = Thread.currentThread().getStackTrace()[0];
         Log.d(tag(), method());
     }
 

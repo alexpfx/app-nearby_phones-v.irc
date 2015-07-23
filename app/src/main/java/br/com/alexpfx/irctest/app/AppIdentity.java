@@ -1,11 +1,13 @@
 package br.com.alexpfx.irctest.app;
 
 import android.content.Context;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 /**
@@ -35,15 +37,15 @@ public class AppIdentity {
         byte[] bytes = new byte[(int) f.length()];
         randomAccessFile.readFully(bytes);
         randomAccessFile.close();
-        return new String(bytes);
+        return StringUtils.toEncodedString(bytes, Charset.defaultCharset());
     }
 
     private void writeToFile(UUID uuid, File f) throws IOException {
         FileOutputStream out = new FileOutputStream(f);
         String suuid = uuid.toString();
-        out.write(suuid.getBytes());
-        out.close();
+        out.write(suuid.getBytes(Charset.defaultCharset().name()));
 
+        out.close();
     }
 
 }

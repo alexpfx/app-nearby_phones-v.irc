@@ -9,8 +9,6 @@ import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
  * Created by alexandre on 05/07/15.
  */
 public class IrcChannelPresenterImpl implements IrcChannelPresenter, JoinChannelUseCase.Callback {
-    private String tag = IrcChannelPresenterImpl.class.getSimpleName();
-
     private JoinChannelUseCase joinChannelUseCase = new JoinChannelUseCaseImpl();
     private ChannelView channelView;
 

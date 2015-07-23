@@ -1,5 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
+import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
@@ -11,6 +12,8 @@ import com.ircclouds.irc.api.IRCApi;
 
 import java.util.Date;
 import java.util.List;
+
+import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 
 /**
  * Created by alex on 16/07/2015.
@@ -45,6 +48,8 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
             SimpleWifiInfoBagImpl s = new SimpleWifiInfoBagImpl(id, simpleWifiInfos);
             final String jsonString = this.wifiInfoJsonConverter.toJson(s);
             api.message("#" + channel, jsonString);
+            Log.i(tag(), eventTime.toString());
+
         }
     }
 }

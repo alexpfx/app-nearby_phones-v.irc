@@ -30,7 +30,7 @@ public class ListenToIrcUseCaseImpl implements ListenToIrcUseCase {
         boolean catchMessage(String searchString);
     }
 
-    class MessageListener extends VariousMessageListenerAdapter {
+    static class MessageListener extends VariousMessageListenerAdapter {
         private MessageFilter filter;
         private Callback callback;
 
