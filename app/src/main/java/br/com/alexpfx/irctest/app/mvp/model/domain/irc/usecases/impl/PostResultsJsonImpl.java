@@ -48,8 +48,6 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
             SimpleWifiInfoBagImpl s = new SimpleWifiInfoBagImpl(id, simpleWifiInfos);
             final String jsonString = this.wifiInfoJsonConverter.toJson(s);
             api.message("#" + channel, jsonString);
-            Log.i(tag(), eventTime.toString());
-
         }
     }
 }
