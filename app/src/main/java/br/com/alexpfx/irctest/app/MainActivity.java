@@ -17,6 +17,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcDisconne
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.PostResultsJsonImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.RegisterAsListenerUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
 import br.com.alexpfx.irctest.app.mvp.presenters.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
@@ -167,7 +168,6 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
-
         sendMessagePresenter
                 .sendWifiList(wifiReceived.getWifiList(), uniqueId, CHANNEL, new Date());
     }
@@ -175,6 +175,11 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     @Override
     public void showRegisterSuccess() {
         appendLog("registered");
+
+    }
+
+    @Override
+    public void showWifiReceivedFromIrc(String channel, String user, String uuid, SimpleWifiInfoBag wifiBag) {
 
     }
 }
