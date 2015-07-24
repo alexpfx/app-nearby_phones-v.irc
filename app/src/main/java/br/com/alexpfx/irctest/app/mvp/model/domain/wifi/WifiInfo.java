@@ -38,4 +38,19 @@ public class WifiInfo {
         this.rssid = rssid;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WifiInfo wifiInfo = (WifiInfo) o;
+
+        return bssid.equals(wifiInfo.bssid);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return bssid.hashCode();
+    }
 }
