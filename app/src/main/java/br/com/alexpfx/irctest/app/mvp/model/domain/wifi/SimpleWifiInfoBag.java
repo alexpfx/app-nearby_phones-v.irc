@@ -6,6 +6,7 @@ import java.util.List;
  * Created by alexandre on 22/07/15.
  */
 public interface SimpleWifiInfoBag {
+
     SimpleWifiInfoBag NULL = new SimpleWifiInfoBag() {
         @Override
         public List<SimpleWifiInfo> getList() {

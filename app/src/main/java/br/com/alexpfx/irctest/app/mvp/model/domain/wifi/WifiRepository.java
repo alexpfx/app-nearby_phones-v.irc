@@ -28,7 +28,6 @@ public final class WifiRepository {
         }
     }
 
-
     public void addAll(WifiInfoBag list) {
         final Iterator<WifiInfo> iterator = list.iterator();
         while (iterator.hasNext()) {

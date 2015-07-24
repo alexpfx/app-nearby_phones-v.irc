@@ -12,8 +12,6 @@ import com.ircclouds.irc.api.IRCApi;
 import java.util.Date;
 import java.util.List;
 
-import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
-
 /**
  * Created by alex on 16/07/2015.
  */

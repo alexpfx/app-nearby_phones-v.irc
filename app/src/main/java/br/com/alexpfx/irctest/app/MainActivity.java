@@ -38,8 +38,8 @@ import com.squareup.otto.Subscribe;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static br.com.alexpfx.irctest.app.utils.TagUtils.*;
 import static br.com.alexpfx.irctest.app.utils.TagUtils.method;
+import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 
 public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView, IrcListenerView {
 
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
         sendMessagePresenter
                 .sendWifiList(wifiInfoBag, uniqueId, CHANNEL, new Date());
         wifiRepository.addAll(wifiInfoBag);
-        Log.d(tag(), method("repository size: "+wifiRepository.getSize()));
+        Log.d(tag(), method("repository size: " + wifiRepository.getSize()));
     }
 
     @Override
@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Override
     public void showWifiReceivedFromIrc(String channel, String user, SimpleWifiInfoBag wifiBag) {
-
 
     }
 }
