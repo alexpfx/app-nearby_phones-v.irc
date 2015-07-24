@@ -36,4 +36,9 @@ public final class WifiRepository {
         }
     }
 
+    public int getSize (){
+        return list.size();
+    }
+
+
 }
