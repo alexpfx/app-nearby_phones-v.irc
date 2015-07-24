@@ -19,7 +19,7 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.PostResults
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.RegisterAsListenerUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiRepository;
 import br.com.alexpfx.irctest.app.mvp.presenters.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
@@ -31,7 +31,6 @@ import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
 import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import br.com.alexpfx.irctest.app.utils.NetAddressUtils;
-import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.otto.Subscribe;
@@ -177,10 +176,10 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
-        final WifiList wifiList = wifiReceived.getWifiList();
+        final WifiInfoBag wifiInfoBag = wifiReceived.getWifiInfoBag();
         sendMessagePresenter
-                .sendWifiList(wifiList, uniqueId, CHANNEL, new Date());
-        wifiRepository.addAll(wifiList);
+                .sendWifiList(wifiInfoBag, uniqueId, CHANNEL, new Date());
+        wifiRepository.addAll(wifiInfoBag);
         Log.d(tag(), method("repository size: "+wifiRepository.getSize()));
     }
 

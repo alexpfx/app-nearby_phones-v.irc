@@ -1,7 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
 
 import java.util.Date;
 
@@ -16,8 +16,8 @@ public class SendMessagePresenterImpl implements SendMessagePresenter {
     }
 
     @Override
-    public void sendWifiList(WifiList wifiList, String id, String channel, Date date) {
-        postResultsUseCase.execute(id, channel, wifiList, date);
+    public void sendWifiList(WifiInfoBag wifiInfoBag, String id, String channel, Date date) {
+        postResultsUseCase.execute(id, channel, wifiInfoBag, date);
 
     }
 }

@@ -1,13 +1,12 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
-import android.util.Log;
 import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.WifiInfoJsonConverter;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBagImpl;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
 import com.ircclouds.irc.api.IRCApi;
 
 import java.util.Date;
@@ -21,7 +20,7 @@ import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 public class PostResultsJsonImpl implements PostResultsUseCase {
     private String id;
     private String channel;
-    private WifiList list;
+    private WifiInfoBag list;
     private Date eventTime;
     private IRCApi api = IRCApiSingleton.INSTANCE.get();
     private ThreadExecutor threadExecutor = ThreadExecutor.ThreadExecutorSingleton.INSTANCE.get();
@@ -33,7 +32,7 @@ public class PostResultsJsonImpl implements PostResultsUseCase {
     }
 
     @Override
-    public void execute(String id, String channel, WifiList list, Date eventTime) {
+    public void execute(String id, String channel, WifiInfoBag list, Date eventTime) {
         this.id = id;
         this.channel = channel;
         this.list = list;

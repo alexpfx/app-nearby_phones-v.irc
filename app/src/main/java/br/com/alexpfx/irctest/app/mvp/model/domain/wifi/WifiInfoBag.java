@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by alexandre on 28/06/15.
  */
-public class WifiList {
+public class WifiInfoBag {
     private List<WifiInfo> wifiInfoList = new ArrayList<WifiInfo>();
 
     public void add(WifiInfo info) {

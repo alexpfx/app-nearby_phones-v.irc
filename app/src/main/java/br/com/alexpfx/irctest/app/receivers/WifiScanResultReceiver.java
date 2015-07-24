@@ -7,7 +7,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
 import br.com.alexpfx.irctest.app.ottobus.BusProvider;
 import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import com.squareup.otto.Bus;
@@ -26,7 +26,7 @@ public class WifiScanResultReceiver extends BroadcastReceiver {
         Toast.makeText(context, "onReceive", Toast.LENGTH_SHORT).show();
         final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         final List<ScanResult> scanResults = wifiManager.getScanResults();
-        WifiList list = new WifiList();
+        WifiInfoBag list = new WifiInfoBag();
         for (ScanResult scanResult : scanResults) {
             WifiInfo wifiInfo = WifiInfo.newInstance(scanResult.BSSID, scanResult.SSID, scanResult.level);
             list.add(wifiInfo);
