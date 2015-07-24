@@ -1,1 +1,6 @@
-criar onCreate para classes do tipo Interactor.
+ao entrar no app:
+
+1. startar agendamento de scan de wifi.
+2. conectar ao servidor.
+3. entrar no canal.
+4. habilitar listeners.

@@ -16,7 +16,7 @@ public final class WifiRepository {
 
     }
 
-    /* não permite Wifis repetidos. um wifi repetido possui o mesmo BSSID, mesmo que tenha SSID diferentes*/
+    /* nao permite Wifis repetidos. um wifi repetido possui o mesmo BSSID, mesmo que tenha SSID diferentes*/
     /* ver metodo equals de WifiInfo */
     public void add(WifiInfo wifiInfo) {
         cleanUp();

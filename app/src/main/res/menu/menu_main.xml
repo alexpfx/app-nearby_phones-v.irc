@@ -2,8 +2,17 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".MainActivity">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
-          android:orderInCategory="100"
-          app:showAsAction="never"/>
+      <group android:checkableBehavior="single">
+            <item android:id="@+id/drawer_home"
+                  android:checked="true"
+                  android:icon="@drawable/ic_flight_takeoff_white_48dp"
+                  android:title="home"/>
+
+            <item android:id="@+id/drawer_settings"
+                  android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+                  android:title="settings"/>
+
+      </group>
+
+
 </menu>
