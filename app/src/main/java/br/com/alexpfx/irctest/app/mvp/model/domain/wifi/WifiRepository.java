@@ -1,6 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.wifi;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,12 +16,24 @@ public final class WifiRepository {
 
     }
 
+    /* não permite Wifis repetidos. um wifi repetido possui o mesmo BSSID, mesmo que tenha SSID diferentes*/
+    /* ver metodo equals de WifiInfo */
     public void add(WifiInfo wifiInfo) {
         cleanUp();
         synchronized (this) {
             TimedOut<WifiInfo> to = new TimedOutObject<WifiInfo>(120, wifiInfo);
+            /*sempre remove ele mesmo da lista para: atualizar o timeout, o RSSID e o SSID */
             list.remove(to);
             list.add(to);
+        }
+    }
+
+
+    public void addAll(WifiList list) {
+        final Iterator<WifiInfo> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            final WifiInfo wifiInfo = iterator.next();
+            add(wifiInfo);
         }
     }
 
@@ -36,9 +49,8 @@ public final class WifiRepository {
         }
     }
 
-    public int getSize (){
+    public int getSize() {
         return list.size();
     }
-
 
 }

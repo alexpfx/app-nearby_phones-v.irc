@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
@@ -18,6 +19,8 @@ import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.PostResults
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.RegisterAsListenerUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.json.impl.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiList;
+import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiRepository;
 import br.com.alexpfx.irctest.app.mvp.presenters.*;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
@@ -28,12 +31,16 @@ import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
 import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import br.com.alexpfx.irctest.app.utils.NetAddressUtils;
+import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.otto.Subscribe;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static br.com.alexpfx.irctest.app.utils.TagUtils.*;
+import static br.com.alexpfx.irctest.app.utils.TagUtils.method;
 
 public class MainActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView, IrcListenerView {
 
@@ -53,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     private IrcChannelPresenter ircChannelPresenter;
     private IrcListenerPresenter ircListenerPresenter;
     private String uniqueId;
+    private WifiRepository wifiRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
     }
 
     void setupWifiScan() {
+        wifiRepository = new WifiRepository();
         setupScanAlarm();
 
         wifiScanResultReceiver = new WifiScanResultReceiver();
@@ -168,8 +177,11 @@ public class MainActivity extends AppCompatActivity implements IrcConnectionView
 
     @Subscribe
     public void onWifiReceived(WifiReceived wifiReceived) {
+        final WifiList wifiList = wifiReceived.getWifiList();
         sendMessagePresenter
-                .sendWifiList(wifiReceived.getWifiList(), uniqueId, CHANNEL, new Date());
+                .sendWifiList(wifiList, uniqueId, CHANNEL, new Date());
+        wifiRepository.addAll(wifiList);
+        Log.d(tag(), method("repository size: "+wifiRepository.getSize()));
     }
 
     @Override
