@@ -53,5 +53,6 @@ dependencies {
     compile 'com.squareup:otto:1.3.8'
     compile 'com.ircclouds.irc:irc-api:1.0-0014'
     compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.support:design:22.2.0'
 
 }
