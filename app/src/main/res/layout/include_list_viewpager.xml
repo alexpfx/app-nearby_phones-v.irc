@@ -22,10 +22,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -35,5 +31,6 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="8dp"
         android:src="@drawable/abc_ic_search_api_mtrl_alpha"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

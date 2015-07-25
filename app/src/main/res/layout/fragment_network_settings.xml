@@ -3,13 +3,24 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context="br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment"
+    android:background="@color/md_white_1000" android:layout_marginTop="64dp">
 
-    android:background="@color/md_grey_600">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:layout_height="wrap_content">
+
+        <MultiAutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="irc.freenode.org"
+            android:id="@+id/tvIrcServers"
+            android:hint="Server"
+            android:selectAllOnFocus="true"
+            android:layout_gravity="center"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
 
 </FrameLayout>
