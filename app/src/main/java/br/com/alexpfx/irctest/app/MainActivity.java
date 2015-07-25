@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         final ActionBar supportActionBar = getSupportActionBar();
-        supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         supportActionBar.setDisplayHomeAsUpEnabled(true);
 
         setupDrawerContent();
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new BlankFragment(), "fragmento exemplo");
+        adapter.addFragment(new BlankFragment(), "Fragmento exemplo");
 
         viewPager.setAdapter(adapter);
 
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getGroupId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
