@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -13,7 +14,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.TableLayout;
+import br.com.alexpfx.irctest.app.fragments.ConnectionSettingsFragment;
+import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
+import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -31,12 +34,6 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.navigation_view)
     NavigationView navigationView;
 
-    @Bind(R.id.viewpager)
-    ViewPager viewPager;
-
-    @Bind(R.id.tabs)
-    TabLayout tabLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,18 +47,8 @@ public class MainActivity extends AppCompatActivity {
         supportActionBar.setDisplayHomeAsUpEnabled(true);
 
         setupDrawerContent();
-        setupViewPager();
-
-        tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void setupViewPager() {
-        Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(new BlankFragment(), "Fragmento exemplo");
-
-        viewPager.setAdapter(adapter);
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -74,14 +61,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent() {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                drawerLayout.closeDrawers();
-                return true;
+        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
+
+    }
+
+    class NavigationItemSelectedHandle implements NavigationView.OnNavigationItemSelectedListener {
+        private FragmentManager fragmentManager;
+
+        public NavigationItemSelectedHandle(FragmentManager fragmentManager) {
+            this.fragmentManager = fragmentManager;
+        }
+
+        @Override
+        public boolean onNavigationItemSelected(MenuItem menuItem) {
+            menuItem.setChecked(true);
+            drawerLayout.closeDrawers();
+            handleSelections(menuItem);
+            return true;
+        }
+
+        private void handleSelections(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.nav_home:
+
+                    ;
+                case R.id.nav_identity:
+                    IdentitySettingsFragment isf = new IdentitySettingsFragment();
+                    changeFragment(isf);
+                case R.id.nav_network:
+                    ConnectionSettingsFragment csf = new ConnectionSettingsFragment();
+                    changeFragment(csf);
+                case R.id.nav_settings:
+                    OtherSettingsFragment ocs = new OtherSettingsFragment();
+                    changeFragment(ocs);
             }
-        });
+        }
+
+        private void changeFragment(Fragment fragment) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     static class Adapter extends FragmentPagerAdapter {
