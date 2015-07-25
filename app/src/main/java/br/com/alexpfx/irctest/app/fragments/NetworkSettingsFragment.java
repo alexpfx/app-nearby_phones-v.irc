@@ -11,9 +11,9 @@ import br.com.alexpfx.irctest.app.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ConnectionSettingsFragment extends Fragment {
+public class NetworkSettingsFragment extends Fragment {
 
-    public ConnectionSettingsFragment() {
+    public NetworkSettingsFragment() {
         // Required empty public constructor
     }
 
@@ -21,7 +21,7 @@ public class ConnectionSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_connection_settings, container, false);
+        return inflater.inflate(R.layout.fragment_network_settings, container, false);
     }
 
 }

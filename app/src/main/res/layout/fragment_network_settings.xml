@@ -2,7 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context="br.com.alexpfx.irctest.app.fragments.ConnectionSettingsFragment"
+             tools:context="br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment"
 
     android:background="@color/md_grey_600">
 

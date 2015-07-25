@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import br.com.alexpfx.irctest.app.fragments.ConnectionSettingsFragment;
+import br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.HomeFragment;
 import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     IdentitySettingsFragment isf = new IdentitySettingsFragment();
                     return changeFragment(isf);
                 case R.id.nav_network:
-                    ConnectionSettingsFragment csf = new ConnectionSettingsFragment();
+                    NetworkSettingsFragment csf = new NetworkSettingsFragment();
                     return changeFragment(csf);
                 case R.id.nav_settings:
                     OtherSettingsFragment ocs = new OtherSettingsFragment();
