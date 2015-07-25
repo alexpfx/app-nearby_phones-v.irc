@@ -2,21 +2,22 @@ package br.com.alexpfx.irctest.app;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import br.com.alexpfx.irctest.app.fragments.ConnectionSettingsFragment;
+import br.com.alexpfx.irctest.app.fragments.HomeFragment;
 import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
+import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent();
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -80,27 +80,30 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
-        private void handleSelections(MenuItem menuItem) {
+        private int handleSelections(MenuItem menuItem) {
+            Log.i(TagUtils.tag(), String.valueOf(menuItem.getItemId()));
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
-
-                    ;
+                    HomeFragment hf = new HomeFragment();
+                    return changeFragment(hf);
                 case R.id.nav_identity:
                     IdentitySettingsFragment isf = new IdentitySettingsFragment();
-                    changeFragment(isf);
+                    return changeFragment(isf);
                 case R.id.nav_network:
                     ConnectionSettingsFragment csf = new ConnectionSettingsFragment();
-                    changeFragment(csf);
+                    return changeFragment(csf);
                 case R.id.nav_settings:
                     OtherSettingsFragment ocs = new OtherSettingsFragment();
-                    changeFragment(ocs);
+                    return changeFragment(ocs);
+                default:
+                    throw new IllegalArgumentException("Fragmento não existe");
             }
         }
 
-        private void changeFragment(Fragment fragment) {
+        private int changeFragment(Fragment fragment) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.content, fragment);
-            fragmentTransaction.commit();
+            return fragmentTransaction.commit();
         }
     }
 
