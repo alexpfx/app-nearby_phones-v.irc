@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.TableLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -40,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
         setSupportActionBar(toolbar);
 
         final ActionBar supportActionBar = getSupportActionBar();
@@ -49,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         setupDrawerContent();
         setupViewPager();
 
-        ButterKnife.bind(this);
-
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     private void setupViewPager() {
