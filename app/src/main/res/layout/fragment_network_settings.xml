@@ -1,26 +1,66 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment"
-    android:background="@color/md_white_1000" android:layout_marginTop="64dp">
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:id="@+id/content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <MultiAutoCompleteTextView
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <MultiAutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="irc.freenode.org"
+                android:id="@+id/edtIrcServer"
+                android:hint="@string/server"
+                android:selectAllOnFocus="true"
+                android:layout_gravity="center"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtChannelName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/channel"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="irc.freenode.org"
-            android:id="@+id/tvIrcServers"
-            android:hint="Server"
-            android:selectAllOnFocus="true"
-            android:layout_gravity="center"/>
-
-    </android.support.design.widget.TextInputLayout>
+            android:hint="@string/register_channel"
+            android:checked="false"
+            />
 
 
+    </LinearLayout>
 
 
-</FrameLayout>
+</android.support.v4.widget.NestedScrollView>
