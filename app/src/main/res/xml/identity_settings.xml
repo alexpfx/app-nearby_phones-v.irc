@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/server_settings">
+        <EditTextPreference
+            android:title="@string/server"
+            android:key="ircServer"
+            android:summary="@string/summary_provide_server"/>
+        <EditTextPreference
+            android:title="@string/channel"
+            android:key="ircChannel"
+            android:summary="@string/summary_provide_channel"/>
+
+        <EditTextPreference
+            android:title="@string/channel_password"
+            android:key="ircChannelPassword"
+            android:summary="@string/summary_provide_channel_password"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/identity_settings">
+        <EditTextPreference
+            android:title="@string/nickname"
+            android:key="ircNickname"
+            android:summary="@string/summary_provide_nickname"/>
+
+        <EditTextPreference
+            android:title="@string/alternative_nickname"
+            android:key="ircAlternativeNickname"
+            android:summary="@string/summary_provide_alternative_nickname"/>
+
+        <EditTextPreference
+            android:title="@string/realname"
+            android:key="ircName"
+            android:summary="@string/summary_provide_name"/>
+
+        <EditTextPreference
+            android:title="@string/email"
+            android:key="ircEmail"
+            android:summary="@string/summary_provide_email"/>
+
+        <EditTextPreference
+            android:title="@string/userPassword"
+            android:key="ircUserPassword"
+            android:summary="@string/summary_provide_password"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,6 +1,7 @@
 package br.com.alexpfx.irctest.app.fragments;
 
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import br.com.alexpfx.irctest.app.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OtherSettingsFragment extends Fragment {
+public class OtherSettingsFragment extends PreferenceFragment {
 
     public OtherSettingsFragment() {
     }

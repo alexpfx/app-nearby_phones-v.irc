@@ -20,7 +20,7 @@
                 android:id="@+id/edtNickName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nickName"
+                android:hint="@string/nickname"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -42,7 +42,7 @@
             android:id="@+id/chkTryRegisterNick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/try_register_nick"
+            android:hint="@string/register_nickname"
 
             />
 
@@ -54,7 +54,7 @@
                 android:id="@+id/edtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/name"
+                android:hint="@string/realname"
                 />
 
         </android.support.design.widget.TextInputLayout>
@@ -81,7 +81,7 @@
                 android:id="@+id/edtNickPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nickPassword"
+                android:hint="@string/userPassword"
                 />
 
         </android.support.design.widget.TextInputLayout>

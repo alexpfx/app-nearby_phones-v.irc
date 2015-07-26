@@ -1,11 +1,13 @@
 package br.com.alexpfx.irctest.app;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.design.widget.*;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -14,9 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.HomeFragment;
 import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
+import br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
 import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupToolbar();
-        setupCollapsingToolbarLayout ();
+        setupCollapsingToolbarLayout();
         setupDrawerContent();
     }
 
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupDrawerContent() {
-        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
+        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getFragmentManager()));
 
     }
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    static class Adapter extends FragmentPagerAdapter {
+    static class Adapter extends android.support.v13.app.FragmentPagerAdapter {
         private final List<Fragment> fragments = new ArrayList<>();
         private final List<String> fragmentTitles = new ArrayList<>();
 

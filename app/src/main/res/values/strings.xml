@@ -13,10 +13,22 @@
     <string name="channel">Channel Name</string>
     <string name="register_channel">Try to Register Channel</string>
     <string name="password">Password</string>
-    <string name="name">Name</string>
+    <string name="realname">Real Name</string>
     <string name="email">E-mail</string>
-    <string name="nickPassword">Password</string>
+    <string name="userPassword">Password</string>
     <string name="alternative_nickname">Alternative Nickname</string>
-    <string name="nickName">Nickname</string>
-    <string name="try_register_nick">Try to register nickname</string>
+    <string name="nickname">Nickname</string>
+    <string name="register_nickname">Register nickname</string>
+    <string name="summary_provide_nickname">Forneça o nickname</string>
+    <string name="summary_provide_alternative_nickname">Forneça um nick alternativo caso o nickname que você escolheu já esteja sendo usado</string>
+    <string name="summary_register_nickname">Try register nickname (you need to provide a password and a valid email address)</string>
+    <string name="summary_provide_name">Provide you real name</string>
+    <string name="summary_provide_email">Provide a email address</string>
+    <string name="summary_provide_password">If your nick is registered provide the password</string>
+    <string name="identity_settings">Identity Settings</string>
+    <string name="server_settings">Server Settings</string>
+    <string name="summary_provide_server">Provide Irc Server Host / Ipaddress</string>
+    <string name="summary_provide_channel">Provide the channel name</string>
+    <string name="channel_password">Channel password</string>
+    <string name="summary_provide_channel_password">Provide channel password if needed</string>
 </resources>
