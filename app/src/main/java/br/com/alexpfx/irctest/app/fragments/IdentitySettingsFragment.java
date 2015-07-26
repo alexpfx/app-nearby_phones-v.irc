@@ -11,7 +11,6 @@ import br.com.alexpfx.irctest.app.R;
 public class IdentitySettingsFragment extends PreferenceFragment {
 
     public IdentitySettingsFragment() {
-        // Required empty public constructor
     }
 
     @Override

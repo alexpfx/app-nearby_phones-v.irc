@@ -44,16 +44,31 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
         setupToolbar();
         setCollapsingBartitle("Gerbil");
         setupDrawerContent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void hideNavBar() {
+        final View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     private void setCollapsingBartitle(String title) {
@@ -103,13 +118,13 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
                     HomeFragment hf = new HomeFragment();
-                    return changeFragment(hf, "Home");
+                    return changeFragment(hf, getString(R.string.home));
                 case R.id.nav_identity:
                     IdentitySettingsFragment isf = new IdentitySettingsFragment();
-                    return changeFragment(isf, "Opções de Identidade");
+                    return changeFragment(isf, getString(R.string.identity_options));
                 case R.id.nav_settings:
                     OtherSettingsFragment ocs = new OtherSettingsFragment();
-                    return changeFragment(ocs, "Opções do aplicativo");
+                    return changeFragment(ocs, getString(R.string.app_options));
                 default:
                     throw new IllegalArgumentException("Fragmento nao existe");
             }
@@ -146,11 +161,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //TODO: unused
     public void onFabButtonClick(View view) {
-
         final Snackbar bar = Snackbar.make(findViewById(R.id.action_bar_root), "Connected", Snackbar.LENGTH_LONG);
         bar.show();
-
     }
 
 

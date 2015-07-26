@@ -11,12 +11,12 @@
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/root_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="112dp"
+            android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             >
 
@@ -52,6 +52,7 @@
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 
+    <!-- barra de menu lateral do aplicativo -->
     <android.support.design.widget.NavigationView
         android:id="@+id/navigation_view"
         android:layout_height="match_parent"
