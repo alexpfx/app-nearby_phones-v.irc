@@ -18,12 +18,10 @@ import android.view.MenuItem;
 import android.view.View;
 import br.com.alexpfx.irctest.app.fragments.HomeFragment;
 import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
-import br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
 import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +52,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupToolbar();
-        setupCollapsingToolbarLayout();
+        setCollapsingBartitle("Gerbil");
         setupDrawerContent();
     }
 
-    private void setupCollapsingToolbarLayout() {
-        collapsingToolbarLayout.setTitle("Titulo");
+    private void setCollapsingBartitle(String title) {
+        collapsingToolbarLayout.setTitle(title);
     }
 
 
@@ -104,22 +103,19 @@ public class MainActivity extends AppCompatActivity {
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
                     HomeFragment hf = new HomeFragment();
-                    return changeFragment(hf);
+                    return changeFragment(hf, "Home");
                 case R.id.nav_identity:
                     IdentitySettingsFragment isf = new IdentitySettingsFragment();
-                    return changeFragment(isf);
-                case R.id.nav_network:
-                    NetworkSettingsFragment csf = new NetworkSettingsFragment();
-                    return changeFragment(csf);
+                    return changeFragment(isf, "Opções de Identidade");
                 case R.id.nav_settings:
                     OtherSettingsFragment ocs = new OtherSettingsFragment();
-                    return changeFragment(ocs);
+                    return changeFragment(ocs, "Opções do aplicativo");
                 default:
                     throw new IllegalArgumentException("Fragmento nao existe");
             }
         }
 
-        private int changeFragment(Fragment fragment) {
+        private int changeFragment(Fragment fragment, String title) {
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.content, fragment);
             return fragmentTransaction.commit();
@@ -150,8 +146,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    @OnClick(R.id.fab)
     public void onFabButtonClick(View view) {
 
         final Snackbar bar = Snackbar.make(findViewById(R.id.action_bar_root), "Connected", Snackbar.LENGTH_LONG);
