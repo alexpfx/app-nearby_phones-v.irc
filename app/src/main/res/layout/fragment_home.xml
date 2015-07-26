@@ -14,7 +14,7 @@
         android:scrollbars="horizontal"
         android:layout_below="@+id/toolbar"
         android:background="?attr/colorPrimary"
-
+        app:layout_scrollFlags="scroll|enterAlways"
 
         />
 

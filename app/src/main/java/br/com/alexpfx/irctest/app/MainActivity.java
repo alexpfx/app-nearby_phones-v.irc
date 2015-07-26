@@ -1,9 +1,7 @@
 package br.com.alexpfx.irctest.app;
 
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.*;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -30,14 +28,20 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-//    @Bind(R.id.drawer_layout)
-//    DrawerLayout drawerLayout;
+    @Bind(value = R.id.root_layout)
+    CoordinatorLayout coordinatorLayout;
+
+    @Bind(R.id.drawer_layout)
+    DrawerLayout drawerLayout;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-//    @Bind(R.id.navigation_view)
-//    NavigationView navigationView;
+    @Bind(R.id.collapsing_toolbar_layout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
+    @Bind(R.id.navigation_view)
+    NavigationView navigationView;
 
 
 
@@ -48,7 +52,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupToolbar();
+        setupCollapsingToolbarLayout ();
         setupDrawerContent();
+    }
+
+    private void setupCollapsingToolbarLayout() {
+        collapsingToolbarLayout.setTitle("Titulo");
     }
 
 
@@ -63,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-//                drawerLayout.openDrawer(GravityCompat.START);
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setupDrawerContent() {
-//        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
+        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
 
     }
 
@@ -84,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem menuItem) {
             menuItem.setChecked(true);
-//            drawerLayout.closeDrawers();
+            drawerLayout.closeDrawers();
             handleSelections(menuItem);
             return true;
         }
