@@ -2,6 +2,8 @@ package br.com.alexpfx.irctest.app;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import br.com.alexpfx.irctest.app.fragments.NetworkSettingsFragment;
 import br.com.alexpfx.irctest.app.fragments.HomeFragment;
 import br.com.alexpfx.irctest.app.fragments.IdentitySettingsFragment;
@@ -20,20 +23,23 @@ import br.com.alexpfx.irctest.app.fragments.OtherSettingsFragment;
 import br.com.alexpfx.irctest.app.utils.TagUtils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Bind(R.id.drawer_layout)
-    DrawerLayout drawerLayout;
+//    @Bind(R.id.drawer_layout)
+//    DrawerLayout drawerLayout;
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
-    @Bind(R.id.navigation_view)
-    NavigationView navigationView;
+//    @Bind(R.id.navigation_view)
+//    NavigationView navigationView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +47,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
+        setupToolbar();
+        setupDrawerContent();
+    }
 
-        final ActionBar supportActionBar = getSupportActionBar();
+
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
+        ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-
-        setupDrawerContent();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                drawerLayout.openDrawer(GravityCompat.START);
+//                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void setupDrawerContent() {
-        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
+//        navigationView.setNavigationItemSelectedListener(new NavigationItemSelectedHandle(getSupportFragmentManager()));
 
     }
 
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(MenuItem menuItem) {
             menuItem.setChecked(true);
-            drawerLayout.closeDrawers();
+//            drawerLayout.closeDrawers();
             handleSelections(menuItem);
             return true;
         }
@@ -96,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                     OtherSettingsFragment ocs = new OtherSettingsFragment();
                     return changeFragment(ocs);
                 default:
-                    throw new IllegalArgumentException("Fragmento não existe");
+                    throw new IllegalArgumentException("Fragmento nao existe");
             }
         }
 
@@ -130,5 +139,15 @@ public class MainActivity extends AppCompatActivity {
             return fragments.size();
         }
     }
+
+
+    @OnClick(R.id.fab)
+    public void onFabButtonClick(View view) {
+
+        final Snackbar bar = Snackbar.make(findViewById(R.id.action_bar_root), "Connected", Snackbar.LENGTH_LONG);
+        bar.show();
+
+    }
+
 
 }
