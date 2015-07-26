@@ -13,4 +13,10 @@
     <string name="channel">Channel Name</string>
     <string name="register_channel">Try to Register Channel</string>
     <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="nickPassword">Password</string>
+    <string name="alternative_nickname">Alternative Nickname</string>
+    <string name="nickName">Nickname</string>
+    <string name="try_register_nick">Try to register nickname</string>
 </resources>
