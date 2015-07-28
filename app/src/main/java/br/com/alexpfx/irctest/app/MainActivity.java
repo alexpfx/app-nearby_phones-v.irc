@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         setupToolbar();
-        setCollapsingBartitle("Gerbil");
+        setCollapsingBarTitle("Gerbil");
         setupDrawerContent();
     }
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
-    private void setCollapsingBartitle(String title) {
+    private void setCollapsingBarTitle(String title) {
         collapsingToolbarLayout.setTitle(title);
     }
 
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         private int changeFragment(Fragment fragment, String title) {
+            setCollapsingBarTitle(title);
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.replace(R.id.content, fragment);
             return fragmentTransaction.commit();

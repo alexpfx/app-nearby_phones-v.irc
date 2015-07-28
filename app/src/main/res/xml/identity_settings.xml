@@ -42,6 +42,11 @@
             android:key="ircUserPassword"
             android:summary="@string/summary_provide_password"/>
 
+        <Preference android:title="" android:key="x" android:summary=""/>
+        <Preference android:title="" android:key="y" android:summary=""/>
+        <Preference android:title="" android:key="z" android:summary=""/>
+
+
     </PreferenceCategory>
 
 </PreferenceScreen>
