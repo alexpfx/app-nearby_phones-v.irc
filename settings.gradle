@@ -1,1 +1,5 @@
 include ':app'
+include ':base'
+include ':network'
+project (':base').projectDir = new File("../lib-android-base/lib_base/")
+project (':network').projectDir = new File ("../lib-android-network/lib/")
