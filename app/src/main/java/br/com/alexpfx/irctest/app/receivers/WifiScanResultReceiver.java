@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.widget.Toast;
+
+import br.com.alexpfx.android.lib.base.provider.BusProvider;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfo;
 import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
-import br.com.alexpfx.irctest.app.ottobus.BusProvider;
 import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import com.squareup.otto.Bus;
 
@@ -19,7 +20,7 @@ import java.util.List;
  */
 public class WifiScanResultReceiver extends BroadcastReceiver {
 
-    private Bus bus = BusProvider.INSTANCE.get();
+    private Bus bus = BusProvider.getInstance();
 
     @Override
     public void onReceive(Context context, Intent intent) {

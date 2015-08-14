@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.IrcChannelMessageListenerImpl;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.RegisterAsListenerUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;

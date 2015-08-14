@@ -1,5 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases;
 
+import br.com.alexpfx.android.lib.base.mvpbase.executor.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
 
 import java.util.List;

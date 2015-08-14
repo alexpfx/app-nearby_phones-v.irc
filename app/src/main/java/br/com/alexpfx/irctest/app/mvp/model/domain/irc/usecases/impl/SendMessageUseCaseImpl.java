@@ -1,9 +1,9 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.Executor;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThread;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThreadImpl;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.Executor;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.MainThread;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.MainThreadImpl;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.ThreadExecutor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.SendMessageUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import com.ircclouds.irc.api.IRCApi;

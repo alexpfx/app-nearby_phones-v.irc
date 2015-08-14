@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import br.com.alexpfx.android.lib.base.provider.BusProvider;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl.IrcConnectUseCaseImpl;
@@ -28,12 +30,10 @@ import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 import br.com.alexpfx.irctest.app.mvp.view.SendMessageView;
-import br.com.alexpfx.irctest.app.ottobus.BusProvider;
 import br.com.alexpfx.irctest.app.ottobus.events.WifiReceived;
 import br.com.alexpfx.irctest.app.receivers.WifiScanAlarmReceiver;
 import br.com.alexpfx.irctest.app.receivers.WifiScanResultReceiver;
 import br.com.alexpfx.irctest.app.utils.NetAddressUtils;
-import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.otto.Subscribe;
 
@@ -78,7 +78,7 @@ public class IrcActivity extends AppCompatActivity implements IrcConnectionView,
 
     private void setupThirdPartyTools() {
         ButterKnife.bind(this);
-        BusProvider.INSTANCE.get().register(this);
+        BusProvider.getInstance().register(this);
         /* Log4j */
 //       BasicConfigurator.configure();
     }

@@ -1,15 +1,15 @@
 package br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.impl;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThread;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.MainThreadImpl;
-import br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.Interactor;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.MainThread;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.MainThreadImpl;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.ThreadExecutor;
+import br.com.alexpfx.android.lib.base.mvpbase.executor.Interactor;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.model.domain.irc.utils.IRCApiSingleton;
 import com.ircclouds.irc.api.ApiException;
 import com.ircclouds.irc.api.IRCApi;
 
-import static br.com.alexpfx.irctest.app.mvp.model.domain.executor.ThreadExecutor.ThreadExecutorSingleton;
+import static br.com.alexpfx.android.lib.base.mvpbase.executor.ThreadExecutor.ThreadExecutorSingleton;
 
 /**
  * Created by alexandre on 05/07/15.
