@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.view;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
+import br.com.alexpfx.android.lib.network.wifi.SimpleWifiInfoBag;
 
 /**
  * Created by alexandre on 22/07/15.

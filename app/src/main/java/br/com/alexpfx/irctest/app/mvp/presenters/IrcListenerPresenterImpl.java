@@ -1,10 +1,10 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.IrcChannelMessageListener;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.MessageFilter;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.WifiListMessageFilterImpl;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.RegisterAsListenerUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.SimpleWifiInfoBag;
+import br.com.alexpfx.android.lib.network.irc.IrcChannelMessageListener;
+import br.com.alexpfx.android.lib.network.irc.MessageFilter;
+import br.com.alexpfx.android.lib.network.wifi.WifiListMessageFilterImpl;
+import br.com.alexpfx.android.lib.network.irc.RegisterAsListenerUseCase;
+import br.com.alexpfx.android.lib.network.wifi.SimpleWifiInfoBag;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 
 /**

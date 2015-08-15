@@ -1,7 +1,7 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.PostResultsUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.wifi.WifiInfoBag;
+import br.com.alexpfx.android.lib.network.irc.PostResultsUseCase;
+import br.com.alexpfx.android.lib.network.wifi.WifiInfoBag;
 
 import java.util.Date;
 

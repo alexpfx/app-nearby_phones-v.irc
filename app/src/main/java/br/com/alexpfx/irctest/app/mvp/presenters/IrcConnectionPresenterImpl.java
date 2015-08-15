@@ -1,9 +1,9 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.ServerIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.UserIdentity;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcConnectUseCase;
-import br.com.alexpfx.irctest.app.mvp.model.domain.irc.usecases.IrcDisconnectUseCase;
+import br.com.alexpfx.android.lib.network.irc.ServerIdentity;
+import br.com.alexpfx.android.lib.network.irc.UserIdentity;
+import br.com.alexpfx.android.lib.network.irc.IrcConnectUseCase;
+import br.com.alexpfx.android.lib.network.irc.IrcDisconnectUseCase;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 
 /**
