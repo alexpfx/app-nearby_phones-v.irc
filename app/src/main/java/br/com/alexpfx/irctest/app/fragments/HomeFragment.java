@@ -20,7 +20,7 @@ public class HomeFragment extends Fragment {
     TabLayout tabLayout;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
     @Override

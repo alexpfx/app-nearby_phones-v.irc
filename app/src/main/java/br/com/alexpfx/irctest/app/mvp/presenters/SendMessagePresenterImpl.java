@@ -1,6 +1,6 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.android.lib.network.irc.PostResultsUseCase;
+import br.com.alexpfx.android.lib.network.irc.interactor.PostResultsUseCase;
 import br.com.alexpfx.android.lib.network.wifi.WifiInfoBag;
 
 import java.util.Date;

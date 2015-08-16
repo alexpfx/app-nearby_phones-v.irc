@@ -1,8 +1,8 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.android.lib.network.irc.ChannelInfo;
-import br.com.alexpfx.android.lib.network.irc.JoinChannelUseCase;
-import br.com.alexpfx.android.lib.network.irc.JoinChannelUseCaseImpl;
+import br.com.alexpfx.android.lib.network.irc.interactor.JoinChannelUseCase;
+import br.com.alexpfx.android.lib.network.irc.interactor.JoinChannelUseCaseImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 
 /**
