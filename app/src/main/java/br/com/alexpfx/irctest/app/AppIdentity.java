@@ -1,6 +1,7 @@
 package br.com.alexpfx.irctest.app;
 
 import android.content.Context;
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;

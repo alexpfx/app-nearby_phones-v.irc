@@ -1,8 +1,8 @@
 package br.com.alexpfx.irctest.app.mvp.presenters;
 
-import br.com.alexpfx.android.lib.network.wifi.WifiInfoBag;
-
 import java.util.Date;
+
+import br.com.alexpfx.android.lib.network.wifi.WifiInfoBag;
 
 /**
  * Created by alexandre on 21/07/15.

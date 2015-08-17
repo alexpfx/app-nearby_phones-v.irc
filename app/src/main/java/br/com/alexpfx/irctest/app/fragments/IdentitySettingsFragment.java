@@ -3,6 +3,7 @@ package br.com.alexpfx.irctest.app.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
 import br.com.alexpfx.irctest.app.R;
 
 /**

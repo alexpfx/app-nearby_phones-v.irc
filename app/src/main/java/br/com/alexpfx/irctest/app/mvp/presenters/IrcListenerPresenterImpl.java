@@ -2,9 +2,9 @@ package br.com.alexpfx.irctest.app.mvp.presenters;
 
 import br.com.alexpfx.android.lib.network.irc.IrcChannelMessageListener;
 import br.com.alexpfx.android.lib.network.irc.MessageFilter;
-import br.com.alexpfx.android.lib.network.wifi.WifiListMessageFilterImpl;
 import br.com.alexpfx.android.lib.network.irc.interactor.RegisterAsListenerUseCase;
 import br.com.alexpfx.android.lib.network.wifi.SimpleWifiInfoBag;
+import br.com.alexpfx.android.lib.network.wifi.WifiListMessageFilterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 
 /**

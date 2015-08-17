@@ -14,6 +14,11 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.squareup.otto.Subscribe;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import br.com.alexpfx.android.lib.base.provider.BusProvider;
 import br.com.alexpfx.android.lib.network.irc.ServerIdentity;
 import br.com.alexpfx.android.lib.network.irc.UserIdentity;
@@ -24,21 +29,24 @@ import br.com.alexpfx.android.lib.network.irc.interactor.RegisterAsListenerUseCa
 import br.com.alexpfx.android.lib.network.wifi.GsonWifiInfoJsonConverterImpl;
 import br.com.alexpfx.android.lib.network.wifi.SimpleWifiInfoBag;
 import br.com.alexpfx.android.lib.network.wifi.WifiInfoBag;
+import br.com.alexpfx.android.lib.network.wifi.WifiReceived;
 import br.com.alexpfx.android.lib.network.wifi.WifiRepository;
-import br.com.alexpfx.irctest.app.mvp.presenters.*;
+import br.com.alexpfx.android.lib.network.wifi.WifiScanAlarmReceiver;
+import br.com.alexpfx.android.lib.network.wifi.WifiScanResultReceiver;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcChannelPresenterImpl;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcConnectionPresenterImpl;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcListenerPresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.IrcListenerPresenterImpl;
+import br.com.alexpfx.irctest.app.mvp.presenters.SendMessagePresenter;
+import br.com.alexpfx.irctest.app.mvp.presenters.SendMessagePresenterImpl;
 import br.com.alexpfx.irctest.app.mvp.view.ChannelView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcConnectionView;
 import br.com.alexpfx.irctest.app.mvp.view.IrcListenerView;
 import br.com.alexpfx.irctest.app.mvp.view.SendMessageView;
-import br.com.alexpfx.android.lib.network.wifi.WifiReceived;
-import br.com.alexpfx.android.lib.network.wifi.WifiScanAlarmReceiver;
-import br.com.alexpfx.android.lib.network.wifi.WifiScanResultReceiver;
 import br.com.alexpfx.irctest.app.utils.NetAddressUtils;
 import butterknife.ButterKnife;
-import com.squareup.otto.Subscribe;
-
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import static br.com.alexpfx.irctest.app.utils.TagUtils.method;
 import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
@@ -46,9 +54,9 @@ import static br.com.alexpfx.irctest.app.utils.TagUtils.tag;
 public class IrcActivity extends AppCompatActivity implements IrcConnectionView, ChannelView, SendMessageView, IrcListenerView {
     private static final int SCAN_ALARM_WAKE_UP_INTERVAL = 60;
 
-//    @Bind(R.id.edtLogStatus)
+    //    @Bind(R.id.edtLogStatus)
     EditText edtLogStatus;
-//    @Bind(R.id.txtIpAddress)
+    //    @Bind(R.id.txtIpAddress)
     TextView txtIpAddress;
 
     private AlarmManager alarmManager;
@@ -100,8 +108,8 @@ public class IrcActivity extends AppCompatActivity implements IrcConnectionView,
 
     private void connectToServer() {
         final UserIdentity user = new UserIdentity.Builder().name("axnd").email("eays@com.com")
-                                                            .nickname("bellairind")
-                                                            .alternative("bellairx").build();
+                .nickname("bellairind")
+                .alternative("bellairx").build();
         ServerIdentity server = new ServerIdentity.Builder().ircServer("irc.freenode.org").build();
         ircConnectionPresenter.connect(user, server);
 
