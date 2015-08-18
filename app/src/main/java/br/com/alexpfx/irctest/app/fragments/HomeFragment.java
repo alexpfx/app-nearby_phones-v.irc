@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import br.com.alexpfx.irctest.app.R;
 import butterknife.Bind;
@@ -28,7 +29,8 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-        setupTabs();
+        Toast.makeText(getActivity().getApplicationContext(), "Home fragment", Toast.LENGTH_SHORT).show();
+//        setupTabs();
 
         return view;
     }
